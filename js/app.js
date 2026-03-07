@@ -4,31 +4,20 @@
   const SHORT_DAYS=['Lun','Mar','Mer','Jeu','Ven'];
   const state={weekNum:null, mode:null, recipes:null, extras:null, index:null, nutrition:null, generated:{}};
 
-  // ─── PROFILS NUTRITIONNELS ────────────────────────────────────────────────
-  // Répartition journalière : 35% dîner / 35% lunchbox / 20% petit-déj / 10% goûter
-  // Macros cibles dîner calculées depuis les objectifs journaliers (profil nutrition)
+  // ─── PROFILS v3 ──────────────────────────────────────────────────────────────
+  // Portions fixes : recette ÷ portions_base → grammes réels par personne
+  // Repas complet = plat + fromage 30g + dessert (yaourt/fruit) — non ajusté au ratio
   const PROFILS = {
-    julien: {
-      label:'Julien', emoji:'👨', color:'#F5A623', kcal_jour:2150, lunchbox:true,
-      diner_kcal:753,  lb_kcal:753,
-      prot_diner:53,  gluc_diner:98,  lip_diner:25, fibres_diner:11
-    },
-    ac: {
-      label:'AC', emoji:'👩', color:'#E91E8C', kcal_jour:1850, lunchbox:true,
-      diner_kcal:648,  lb_kcal:648,
-      prot_diner:46,  gluc_diner:84,  lip_diner:22, fibres_diner:9
-    },
-    lucas: {
-      label:'Lucas', emoji:'🧒', color:'#4EA8DE', kcal_jour:2350, lunchbox:false,
-      diner_kcal:823,  lb_kcal:0,
-      prot_diner:58,  gluc_diner:107, lip_diner:27, fibres_diner:12
-    },
-    tim: {
-      label:'Tim', emoji:'👦', color:'#4CAF50', kcal_jour:1800, lunchbox:false,
-      diner_kcal:630,  lb_kcal:0,
-      prot_diner:44,  gluc_diner:82,  lip_diner:21, fibres_diner:9
-    },
+    julien: { label:'Julien', emoji:'\u{1F468}', color:'#F5A623', lunchbox:true  },
+    ac:     { label:'AC',     emoji:'\u{1F469}', color:'#E91E8C', lunchbox:true  },
+    lucas:  { label:'Lucas',  emoji:'\u{1F9D2}', color:'#4EA8DE', lunchbox:false },
+    tim:    { label:'Tim',    emoji:'\u{1F466}', color:'#4CAF50', lunchbox:false },
   };
+  // Complément repas fixe par personne (fromage + dessert)
+  const COMPLEMENT_REPAS = [
+    { ingredient:'fromage',      quantite:30,  unite:'g', label:'\u{1F9C0} Fromage' },
+    { ingredient:'yaourt_nature',quantite:125, unite:'g', label:'\u{1F95B} Yaourt' },
+  ];
 
   // ─── HELPERS ─────────────────────────────────────────────────────────────
   function slugMode(type){return type==='avec'?'enfants':'sans_enfants';}
@@ -99,39 +88,47 @@
   }
 
   // ─── CALCUL MACROS ────────────────────────────────────────────────────────
-  // Calcule les macros d'UNE portion de base (recette ÷ portions_base)
-  function calcMacrosRecette(recette){
+  // Calcule les macros d'UNE portion (recette ÷ portions_base) — grammes fixes
+  function calcMacrosPortion(recette){
     const nutri=state.nutrition;
-    const nb = recette.portions_base || 4; // diviser par le nombre de portions de base
+    const nb = recette.portions_base || 4;
     let kcal=0, prot=0, gluc=0, lip=0, fib=0;
     recette.ingredients.forEach(ing=>{
       const n=nutri[ing.ingredient];
       if(!n || ing.unite!=='g') return;
-      const f=(ing.quantite/nb)/100; // quantité PAR portion de base
+      const f=(ing.quantite/nb)/100;
+      kcal+=n.kcal*f; prot+=n.proteines*f; gluc+=n.glucides*f; lip+=n.lipides*f; fib+=(n.fibres||0)*f;
+    });
+    // Ajouter le complément repas (fromage + yaourt)
+    COMPLEMENT_REPAS.forEach(c=>{
+      const n=nutri[c.ingredient];
+      if(!n||c.unite!=='g') return;
+      const f=c.quantite/100;
       kcal+=n.kcal*f; prot+=n.proteines*f; gluc+=n.glucides*f; lip+=n.lipides*f; fib+=(n.fibres||0)*f;
     });
     return {kcal:Math.round(kcal), prot:Math.round(prot), gluc:Math.round(gluc), lip:Math.round(lip), fib:Math.round(fib)};
   }
+  // Alias pour compatibilité showMeal
+  function calcMacrosRecette(recette){ return calcMacrosPortion(recette); }
 
-  // Calcule la portion d'un profil pour une recette
-  // Base = quantité par portion (recette ÷ portions_base)
-  // Ratio = kcal_cible_profil / kcal_par_portion_base → ajuste les grammes
+  // Retourne la portion fixe d'un profil (grammes réels = recette ÷ portions_base)
+  // Pas de ratio calorique — on mange ce que la recette prévoit
   function calcPortionProfil(recette, profilKey, isLunchbox){
-    const profil=PROFILS[profilKey];
     const nb = recette.portions_base || 4;
-    const macros=calcMacrosRecette(recette); // macros pour 1 portion de base
-    if(macros.kcal===0) return null;
-    const cible = isLunchbox ? profil.lb_kcal : profil.diner_kcal;
-    const ratio = cible / macros.kcal;
+    const macros = calcMacrosPortion(recette);
+    // Ingrédients du plat
+    const ings = recette.ingredients.map(ing=>({
+      ...ing, quantite: Math.round((ing.quantite / nb) * 10) / 10
+    }));
+    // Ajouter fromage + dessert seulement pour le dîner (pas lunchbox)
+    const extras = isLunchbox ? [] : COMPLEMENT_REPAS.map(c=>({...c}));
     return {
-      ingredients: recette.ingredients.map(ing=>({
-        ...ing, quantite: Math.round((ing.quantite / nb) * ratio * 10) / 10
-      })),
-      kcal: Math.round(macros.kcal * ratio),
-      prot: Math.round(macros.prot * ratio),
-      gluc: Math.round(macros.gluc * ratio),
-      lip:  Math.round(macros.lip  * ratio),
-      fib:  Math.round(macros.fib  * ratio),
+      ingredients: [...ings, ...extras],
+      kcal: macros.kcal,
+      prot: macros.prot,
+      gluc: macros.gluc,
+      lip:  macros.lip,
+      fib:  macros.fib,
     };
   }
 
@@ -281,6 +278,82 @@
   }
 
   // ─── BOÎTES PAR PROFIL ────────────────────────────────────────────────────
+  function renderBoites(){
+    const container=document.getElementById('boites-container');
+    if(!container) return;
+    const type=currentType();
+    const week=getGeneratedWeek(type);
+    const isEnfants=(type==='avec');
+    const profilsActifs=isEnfants ? ['julien','ac','lucas','tim'] : ['julien','ac'];
+
+    const wb=document.getElementById('week-banner-boites');
+    if(wb) wb.textContent=`Semaine ${state.weekNum} \u00b7 ${prettyMode(type)}`;
+
+    let html='';
+    week.forEach((recette,idx)=>{
+      const hasLunchbox=(idx<5);
+      html+=`<div style="margin-bottom:28px;">
+        <div style="font-size:14px;font-weight:700;color:var(--amber);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--border);">
+          \ud83e\udd61 ${escapeHtml(recette.nom)}
+          <span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:8px;">${DAY_LABELS[idx]}</span>
+        </div>`;
+
+      // Dîner — tous les profils actifs
+      html+=`<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">\ud83c\udf7d\ufe0f D\u00eener</div>`;
+      html+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:10px;margin-bottom:14px;">`;
+      profilsActifs.forEach(pk=>{
+        const portion=calcPortionProfil(recette, pk, false);
+        if(portion) html+=renderCarteBoite(PROFILS[pk], portion, false);
+      });
+      html+=`</div>`;
+
+      // Lunchbox — Julien + AC seulement, sauf samedi
+      if(hasLunchbox){
+        const nextJour=DAY_LABELS[idx+1] ? DAY_LABELS[idx+1].split(' ')[0] : '';
+        html+=`<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">\ud83e\udd61 Lunchbox \u2192 ${nextJour}</div>`;
+        html+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:10px;margin-bottom:8px;">`;
+        ['julien','ac'].forEach(pk=>{
+          const portion=calcPortionProfil(recette, pk, true);
+          if(portion) html+=renderCarteBoite(PROFILS[pk], portion, true);
+        });
+        html+=`</div>`;
+      }
+
+      html+=`</div>`;
+    });
+    container.innerHTML=html;
+  }
+
+  function renderCarteBoite(profilKey, portion, isLb){
+    const profil = PROFILS[profilKey];
+    const c = profil.color;
+    // Séparer ingrédients plat et complément repas
+    const compNames = COMPLEMENT_REPAS.map(x=>x.ingredient);
+    const plat = portion.ingredients.filter(it=>!compNames.includes(it.ingredient) && it.quantite>=0.5);
+    const compl = portion.ingredients.filter(it=>compNames.includes(it.ingredient));
+    const platHtml = plat.map(it=>`<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;border-bottom:1px solid #ffffff08;">
+        <span style="color:var(--muted);">${humanIngredient(it.ingredient)}</span>
+        <span style="color:var(--text);font-weight:600;">${displayQty(it)}</span>
+      </div>`).join('');
+    const complHtml = compl.length ? `<div style="margin-top:6px;padding:4px 6px;background:#ffffff08;border-radius:3px;font-size:10px;color:var(--muted);">
+        ${compl.map(it=>`${it.label||humanIngredient(it.ingredient)} ${displayQty(it)}`).join(' · ')}
+      </div>` : '';
+    return `<div style="background:var(--s2);border:1px solid ${c}33;border-left:3px solid ${c};border-radius:6px;padding:10px;">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+        <span style="font-size:15px;">${profil.emoji}</span>
+        <span style="font-size:12px;font-weight:700;color:${c};">${profil.label}</span>
+        ${isLb?'<span style="font-size:10px;color:var(--muted);margin-left:auto;">🥡 lunch</span>':''}
+      </div>
+      <div style="margin-bottom:4px;">${platHtml}</div>
+      ${complHtml}
+      <div style="background:var(--bg);border-radius:4px;padding:5px 7px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:10px;color:var(--muted);">Total repas</span>
+        <span style="font-size:13px;font-weight:700;color:${c};">${portion.kcal} kcal</span>
+        <span style="font-size:10px;color:var(--muted);">P ${portion.prot}g · G ${portion.gluc}g · L ${portion.lip}g</span>
+      </div>
+    </div>`;
+  }
+
   function renderBoites(){
     const container=document.getElementById('boites-container');
     if(!container) return;
