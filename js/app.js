@@ -1,740 +1,430 @@
-/**
- * app.js
- * Logique applicative principale du planificateur de repas.
- * Dépend de : menu_engine.js (window.getISOWeek, window.generateWeekFromRecipes)
- *
- * Architecture :
- *   state       — état centralisé unique
- *   DataLoader  — chargement des JSON via fetch()
- *   Formatter   — fonctions de formatage et d'affichage
- *   ShoppingList— calcul et rendu de la liste de courses
- *   Renderer    — rendu des sections UI
- *   App         — initialisation et câblage des événements
- */
 
-'use strict';
+(function(){
+  const DAY_LABELS=['LUN soir','MAR soir','MER soir','JEU soir','VEN soir','SAM soir'];
+  const SHORT_DAYS=['Lun','Mar','Mer','Jeu','Ven'];
+  const state={weekNum:null, mode:null, recipes:null, extras:null, index:null, nutrition:null, generated:{}};
 
-(function () {
-  /* ═══════════════════════════════════════════════
-     ÉTAT CENTRALISÉ
-     Toutes les données de l'application passent par ici.
-     Jamais de variables globales éparpillées.
-  ═══════════════════════════════════════════════ */
-  const state = {
-    weekNum: null,      // numéro ISO de la semaine courante
-    mode: null,         // 'enfants' | 'sans_enfants'
-    recipes: null,      // tableau des recettes
-    extras: null,       // repas_hors_diners.json
-    index: null,        // recettes_index.json
-    nutrition: null,    // nutrition_ingredients.json
-    generated: {},      // cache : { 'enfants': [...], 'sans_enfants': [...] }
-  };
-
-  /* ═══════════════════════════════════════════════
-     CONSTANTES UI
-  ═══════════════════════════════════════════════ */
-  const DAY_LABELS = ['LUN soir', 'MAR soir', 'MER soir', 'JEU soir', 'VEN soir', 'SAM soir'];
-  const SHORT_DAYS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven'];
-
-  // Ordre des rayons pour la liste de courses
-  const RAYONS_ORDER = [
-    '🥕 Légumes',
-    '🍎 Fruits',
-    '🥩 Viandes',
-    '🐟 Poissons',
-    '🥚 Œufs & Produits laitiers',
-    '🌾 Féculents',
-    '🥫 Épicerie salée',
-    '🍯 Épicerie sucrée',
-    '🧂 Condiments',
-    '🧺 Divers',
-  ];
-
-  /* ═══════════════════════════════════════════════
-     HELPERS — SÉMANTIQUE
-  ═══════════════════════════════════════════════ */
-  /** 'avec' → 'enfants' ; 'sans' → 'sans_enfants' */
-  function slugMode(type) {
-    return type === 'avec' ? 'enfants' : 'sans_enfants';
-  }
-
-  /** 'avec' | 'sans' | 'enfants' | 'sans_enfants' → label lisible */
-  function prettyMode(type) {
-    const normalized = type === 'avec' || type === 'enfants' ? 'avec' : 'sans';
-    return normalized === 'avec' ? 'Avec enfants' : 'Sans enfants';
-  }
-
-  /** Retourne le type court de la semaine courante ('avec' | 'sans') */
-  function currentType() {
-    return state.mode === 'enfants' ? 'avec' : 'sans';
-  }
-
-  /** Facteur de quantité selon le mode (×1.5 avec enfants) */
-  function recipeScale(type) {
-    return type === 'avec' || type === 'enfants' ? 1.5 : 1;
-  }
-
-  /** Index de rotation (0–3) basé sur la semaine */
-  function getRotationIndex() {
-    return ((state.weekNum || 1) - 1) % 4;
-  }
-
-  /** Sécurisation HTML simple */
-  function escapeHtml(str) {
-    return String(str).replace(
-      /[&<>"]/g,
-      (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m])
-    );
-  }
-
-  /* ═══════════════════════════════════════════════
-     FORMATTER — AFFICHAGE DES QUANTITÉS
-  ═══════════════════════════════════════════════ */
-  const Formatter = {
-    /**
-     * Formate une quantité avec son unité.
-     * Règle spéciale : les œufs sont toujours en pièces, jamais en grammes.
-     */
-    qty(item) {
-      const q = item.quantite;
-      const u = item.unite;
-      const name = item.ingredient || '';
-
-      // Règle œuf — jamais en grammes
-      if (name === 'oeuf' || name === 'oeuf_dur') {
-        const n = u === 'g' ? Math.max(1, Math.round(q / 60)) : Math.round(q);
-        return n === 1 ? '1 œuf' : `${n} œufs`;
-      }
-
-      // Unités comptables
-      const unitLabels = {
-        piece: (n) => `${n} pièce${n > 1 ? 's' : ''}`,
-        pot: (n) => `${n} pot${n > 1 ? 's' : ''}`,
-        pain: (n) => `${n} pain${n > 1 ? 's' : ''}`,
-        paquet: (n) => `${n} paquet${n > 1 ? 's' : ''}`,
-        bouteille: (n) => `${n} bouteille${n > 1 ? 's' : ''}`,
-        tranche: (n) => `${n} tranche${n > 1 ? 's' : ''}`,
-      };
-
-      if (unitLabels[u]) {
-        return unitLabels[u](Math.round(q));
-      }
-
-      // Grandeur numérique avec unité (g, ml, kg, l…)
-      return `${Math.round(q * 10) / 10}${u}`;
+  // ─── PROFILS NUTRITIONNELS ────────────────────────────────────────────────
+  // Répartition journalière : 35% dîner / 35% lunchbox / 20% petit-déj / 10% goûter
+  // Macros cibles dîner calculées depuis les objectifs journaliers (profil nutrition)
+  const PROFILS = {
+    julien: {
+      label:'Julien', emoji:'👨', color:'#F5A623', kcal_jour:2150, lunchbox:true,
+      diner_kcal:753,  lb_kcal:753,
+      prot_diner:53,  gluc_diner:98,  lip_diner:25, fibres_diner:11
     },
-
-    /**
-     * Transforme un nom d'ingrédient snake_case en libellé lisible.
-     * oeuf → Œuf, pain_complet → Pain complet, etc.
-     */
-    ingredientLabel(name) {
-      return name
-        .replace(/_/g, ' ')
-        .replace(/\b\w/g, (c) => c.toUpperCase())
-        .replace(/\bOeuf\b/g, 'Œuf')
-        .replace(/\bOeufs\b/g, 'Œufs');
+    ac: {
+      label:'AC', emoji:'👩', color:'#E91E8C', kcal_jour:1850, lunchbox:true,
+      diner_kcal:648,  lb_kcal:648,
+      prot_diner:46,  gluc_diner:84,  lip_diner:22, fibres_diner:9
+    },
+    lucas: {
+      label:'Lucas', emoji:'🧒', color:'#4EA8DE', kcal_jour:2350, lunchbox:false,
+      diner_kcal:823,  lb_kcal:0,
+      prot_diner:58,  gluc_diner:107, lip_diner:27, fibres_diner:12
+    },
+    tim: {
+      label:'Tim', emoji:'👦', color:'#4CAF50', kcal_jour:1800, lunchbox:false,
+      diner_kcal:630,  lb_kcal:0,
+      prot_diner:44,  gluc_diner:82,  lip_diner:21, fibres_diner:9
     },
   };
 
-  /* ═══════════════════════════════════════════════
-     RAYON — CLASSEMENT DES INGRÉDIENTS PAR RAYON
-  ═══════════════════════════════════════════════ */
-  function getRayon(name) {
-    const n = name.toLowerCase();
-    if (/poulet|boeuf|bœuf|veau|jambon|chorizo|viande|porc|saucisse|lardons/.test(n))
-      return '🥩 Viandes';
-    if (/saumon|cabillaud|colin|thon|crevette|daurade|maquereau|sardine|poisson/.test(n))
-      return '🐟 Poissons';
-    if (/oeuf|yaourt|fromage|lait|feta|mozzarella|emmental|ricotta|burrata|beurre|creme|quark|kefir/.test(n))
-      return '🥚 Œufs & Produits laitiers';
-    if (/pomme|banane|kiwi|orange|poire|raisin|mangue|fruit|ananas|cerise|fraise|myrtille|abricot|peche|prune|citron/.test(n))
-      return '🍎 Fruits';
-    if (/courgette|carotte|brocoli|oignon|tomate|champignon|courge|patate|pomme_de_terre|poivron|epinard|haricot_vert|chou|ail|poireau|navet|betterave|celeri|aubergine|fenouil|radis|asperge|artichaut|avocat|concombre|salade|laitue/.test(n))
-      return '🥕 Légumes';
-    if (/riz|quinoa|pate|farine|pain|galette|semoule|boulgour|polenta|fecule|chapelure|biscottes|mais/.test(n))
-      return '🌾 Féculents';
-    if (/lentille|pois_chiche|haricot_rouge|haricot_blanc|tofu|houmous|boite|conserve|bouillon|sauce_soja|miso|soupe/.test(n))
-      return '🥫 Épicerie salée';
-    if (/miel|sucre|confiture|chocolat|compote|biscuit|sirop|vanille|cacao|farine_de_riz/.test(n))
-      return '🍯 Épicerie sucrée';
-    if (/huile|vinaigre|sauce|curry|paprika|gingembre|curcuma|cumin|herbe|epice|sel|poivre|moutarde|mayonnaise|ketchup/.test(n))
-      return '🧂 Condiments';
-    return '🧺 Divers';
+  // ─── HELPERS ─────────────────────────────────────────────────────────────
+  function slugMode(type){return type==='avec'?'enfants':'sans_enfants';}
+  function prettyMode(type){return type==='avec'?'Avec enfants':'Sans enfants';}
+  function currentType(){return state.mode==='enfants'?'avec':'sans';}
+  function getRotationIndex(){return ((state.weekNum||1)-1)%4;}
+  function recipeScale(type){return type==='avec'?1.5:1;}
+  function escapeHtml(str){return String(str).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+
+  function displayQty(item){
+    const q=item.quantite, u=item.unite;
+    if(item.ingredient==='oeuf') return Math.round(q)<=1?'1 \u0153uf':`${Math.round(q)} \u0153ufs`;
+    if(u==='piece')   return `${Math.round(q)} pi\u00e8ce${q>1?'s':''}`;
+    if(u==='pot')     return `${Math.round(q)} pot${q>1?'s':''}`;
+    if(u==='pain')    return `${Math.round(q)} pain${q>1?'s':''}`;
+    if(u==='paquet')  return `${Math.round(q)} paquet${q>1?'s':''}`;
+    if(u==='bouteille') return `${Math.round(q)} bouteille${q>1?'s':''}`;
+    return `${Math.round(q*10)/10}${u}`;
   }
 
-  /* ═══════════════════════════════════════════════
-     SHOPPING LIST — CALCUL DES COURSES
-  ═══════════════════════════════════════════════ */
-  const ShoppingList = {
-    /**
-     * Agrège une liste d'items dans une map {ingredient → {quantite, unite}}.
-     * @param items   — tableau d'ingrédients [{ingredient, quantite, unite}]
-     * @param map     — objet de cumul (modifié en place)
-     * @param factor  — multiplicateur de quantité (ex : 1.5 avec enfants)
-     */
-    aggregate(items, map, factor = 1) {
-      items.forEach((item) => {
-        const key = item.ingredient;
-        if (!map[key]) {
-          map[key] = { ingredient: key, quantite: 0, unite: item.unite };
-        }
-        map[key].quantite += item.quantite * factor;
-      });
-    },
+  function humanIngredient(name){
+    return name.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())
+      .replace('Oeuf','\u0152uf').replace('Pain Complet','Pain complet').replace('Yaourt Nature','Yaourt nature');
+  }
 
-    /**
-     * Calcule la liste de courses complète pour un type de semaine.
-     * Inclut : dîners + lunchboxes (via factor) + petits-déj + goûters + brunch.
-     */
-    compute(type) {
-      const week = App.getGeneratedWeek(type);
-      const factor = recipeScale(type);
-      const extras = getExtras(type);
-      const totals = {};
+  function getRayon(name){
+    const n=name.toLowerCase();
+    if(/poulet|boeuf|veau|jambon|chorizo/.test(n)) return '\ud83e\udd69 Viandes';
+    if(/saumon|cabillaud|colin/.test(n)) return '\ud83d\udc1f Poissons';
+    if(/yaourt|fromage|lait|feta|mozzarella|emmental|ricotta|burrata|beurre/.test(n)) return '\ud83e\udd5b Produits frais';
+    if(/pomme|banane|kiwi|orange|poire|raisin|fruit/.test(n)) return '\ud83c\udf4e Fruits';
+    if(/courgette|carotte|brocoli|oignon|tomate|champignon|courge|patate|poivron|citron/.test(n)) return '\ud83e\udd55 L\u00e9gumes';
+    if(/riz|quinoa|pate|farine|pain|galette/.test(n)) return '\ud83c\udf3e F\u00e9culents';
+    if(/lentille|pois|haricot|tofu|houmous/.test(n)) return '\ud83e\udd6b \u00c9picerie sal\u00e9e';
+    if(/miel|sucre|confiture|chocolat|compote|biscuit|sirop/.test(n)) return '\ud83c\udf6f \u00c9picerie sucr\u00e9e';
+    if(/huile|sauce|curry|paprika|gingembre/.test(n)) return '\ud83e\uddc2 Assaisonnements';
+    return '\ud83e\uddf5 Divers';
+  }
 
-      // Dîners et lunchboxes (les quantités des recettes couvrent déjà les 2)
-      week.forEach((r) => ShoppingList.aggregate(r.ingredients, totals, factor));
+  function aggregateItems(items, map, factor=1){
+    items.forEach(item=>{
+      const key=item.ingredient;
+      if(!map[key]) map[key]={ingredient:key, quantite:0, unite:item.unite};
+      map[key].quantite += item.quantite * factor;
+    });
+  }
 
-      // Petits-déjeuners
-      ShoppingList.aggregate(extras.petits_dej_items, totals, 1);
-
-      // Goûters (uniquement semaine avec enfants)
-      if (extras.gouters_items && extras.gouters_items.length > 0) {
-        ShoppingList.aggregate(extras.gouters_items, totals, 1);
-      }
-
-      // Brunch dimanche
-      ShoppingList.aggregate(extras.brunch_items, totals, 1);
-
-      return totals;
-    },
-
-    /**
-     * Groupe les ingrédients par rayon et retourne un objet trié.
-     */
-    groupByRayon(totals) {
-      const byRayon = {};
-      Object.values(totals).forEach((item) => {
-        const rayon = getRayon(item.ingredient);
-        if (!byRayon[rayon]) byRayon[rayon] = [];
-        byRayon[rayon].push(item);
-      });
-      // Trier chaque rayon par nom
-      Object.keys(byRayon).forEach((rayon) => {
-        byRayon[rayon].sort((a, b) =>
-          Formatter.ingredientLabel(a.ingredient).localeCompare(
-            Formatter.ingredientLabel(b.ingredient),
-            'fr'
-          )
-        );
-      });
-      return byRayon;
-    },
-
-    /**
-     * Génère le texte brut de la liste (pour export Gmail).
-     */
-    toText(byRayon, weekNum, type) {
-      let txt = `🛒 LISTE DE COURSES — Semaine ${weekNum}\n${prettyMode(type)}\n`;
-      txt += `Inclut : dîners + lunchboxes + petits-déj + goûters + brunch\n\n`;
-
-      RAYONS_ORDER.forEach((rayon) => {
-        const items = byRayon[rayon] || [];
-        if (!items.length) return;
-        txt += `${rayon}\n`;
-        items.forEach((item) => {
-          txt += `□ ${Formatter.ingredientLabel(item.ingredient)} — ${Formatter.qty(item)}\n`;
-        });
-        txt += '\n';
-      });
-      return txt;
-    },
-
-    /**
-     * Rend la liste de courses dans le modal.
-     */
-    render(type) {
-      const totals = ShoppingList.compute(type);
-      const byRayon = ShoppingList.groupByRayon(totals);
-      const weekNum = state.weekNum;
-
-      // Mise à jour du titre
-      const titleEl = document.getElementById('courses-title');
-      if (titleEl)
-        titleEl.textContent = `Semaine ${weekNum} — ${prettyMode(type)}`;
-
-      // Rendu du contenu
-      const content = document.getElementById('courses-content');
-      if (!content) return;
-      content.innerHTML = '';
-
-      RAYONS_ORDER.forEach((rayon) => {
-        const items = byRayon[rayon] || [];
-        if (!items.length) return;
-
-        const section = document.createElement('div');
-        section.className = 'courses-rayon';
-
-        const header = document.createElement('div');
-        header.className = 'courses-rayon-title';
-        header.textContent = rayon;
-        section.appendChild(header);
-
-        items.forEach((item) => {
-          const row = document.createElement('label');
-          row.className = 'courses-row';
-          row.innerHTML = `
-            <input type="checkbox" class="courses-check">
-            <span class="courses-item-name">${Formatter.ingredientLabel(item.ingredient)}</span>
-            <span class="courses-item-qty">${Formatter.qty(item)}</span>
-          `;
-          section.appendChild(row);
-        });
-
-        content.appendChild(section);
-      });
-
-      // Bouton Gmail
-      const txt = ShoppingList.toText(byRayon, weekNum, type);
-      const btnGmail = document.getElementById('btn-gmail');
-      if (btnGmail) {
-        const subject = encodeURIComponent(`Courses Semaine ${weekNum} — ${prettyMode(type)}`);
-        const body = encodeURIComponent(txt);
-        btnGmail.href = `https://mail.google.com/mail/?view=cm&fs=1&su=${subject}&body=${body}`;
-      }
-
-      // Afficher le modal
-      const modal = document.getElementById('courses-modal');
-      if (modal) modal.style.display = 'flex';
-    },
-  };
-
-  /* ═══════════════════════════════════════════════
-     EXTRAS — ACCÈS AUX REPAS HORS DÎNERS
-  ═══════════════════════════════════════════════ */
-  function getExtras(type) {
-    const normalizedSlug = type === 'avec' || type === 'enfants' ? 'enfants' : 'sans_enfants';
-    const bucket = state.extras[normalizedSlug];
-    if (!bucket) {
-      console.error(`Extras introuvables pour le mode "${normalizedSlug}"`);
-      return { petits_dej_labels: [], petits_dej_items: [], brunch_label: '', brunch_items: [], gouters_labels: [], gouters_items: [] };
-    }
-    const rot = getRotationIndex();
-    const hasGouters = normalizedSlug === 'enfants' && bucket.gouters_rotations;
+  function getExtras(type){
+    const bucket=state.extras[slugMode(type)];
+    const rot=getRotationIndex();
     return {
-      petits_dej_labels: bucket.petits_dej_labels || [],
-      petits_dej_items: bucket.petits_dej_items || [],
-      brunch_label: bucket.brunch_label || '',
-      brunch_items: bucket.brunch_items || [],
-      gouters_labels: hasGouters ? (bucket.gouters_rotations[rot]?.labels || []) : [],
-      gouters_items: hasGouters ? (bucket.gouters_rotations[rot]?.items || []) : [],
+      petits_dej_labels: bucket.petits_dej_labels,
+      petits_dej_items:  bucket.petits_dej_items,
+      brunch_label:      bucket.brunch_label,
+      brunch_items:      bucket.brunch_items,
+      gouters_labels: type==='avec' ? bucket.gouters_rotations[rot].labels : [],
+      gouters_items:  type==='avec' ? bucket.gouters_rotations[rot].items  : []
     };
   }
 
-  /* ═══════════════════════════════════════════════
-     APP — GESTION DU CACHE ET DE LA GÉNÉRATION
-  ═══════════════════════════════════════════════ */
-  const App = {
-    /**
-     * Retourne la semaine générée pour un type, avec mise en cache.
-     * Utilise toujours un weekNum "canonique" (pair pour sans_enfants,
-     * impair pour enfants) afin de garantir la cohérence.
-     */
-    getGeneratedWeek(type) {
-      const slug = type === 'avec' || type === 'enfants' ? 'enfants' : 'sans_enfants';
-      if (state.generated[slug]) return state.generated[slug];
+  function getGeneratedWeek(type){
+    if(state.generated[type]) return state.generated[type];
+    const weekSeed = type==='avec'
+      ? (state.weekNum%2===1 ? state.weekNum : state.weekNum+1)
+      : (state.weekNum%2===0 ? state.weekNum : state.weekNum+1);
+    state.generated[type]=window.generateWeekFromRecipes(state.recipes, slugMode(type), weekSeed);
+    return state.generated[type];
+  }
 
-      // Forcer un seed pair/impair selon le mode
-      let seed;
-      if (slug === 'enfants') {
-        seed = state.weekNum % 2 === 1 ? state.weekNum : state.weekNum + 1;
-      } else {
-        seed = state.weekNum % 2 === 0 ? state.weekNum : state.weekNum + 1;
-      }
+  // ─── CALCUL MACROS ────────────────────────────────────────────────────────
+  function calcMacrosRecette(recette){
+    const nutri=state.nutrition;
+    let kcal=0, prot=0, gluc=0, lip=0, fib=0;
+    recette.ingredients.forEach(ing=>{
+      const n=nutri[ing.ingredient];
+      if(!n || ing.unite!=='g') return;
+      const f=ing.quantite/100;
+      kcal+=n.kcal*f; prot+=n.proteines*f; gluc+=n.glucides*f; lip+=n.lipides*f; fib+=(n.fibres||0)*f;
+    });
+    return {kcal:Math.round(kcal), prot:Math.round(prot), gluc:Math.round(gluc), lip:Math.round(lip), fib:Math.round(fib)};
+  }
 
-      state.generated[slug] = window.generateWeekFromRecipes(
-        state.recipes,
-        slug,
-        seed
-      );
-      return state.generated[slug];
-    },
-  };
+  // Calcule la portion d'un profil pour une recette
+  // Ratio = kcal_cible_profil / kcal_total_recette → appliqué à chaque ingrédient
+  function calcPortionProfil(recette, profilKey, isLunchbox){
+    const profil=PROFILS[profilKey];
+    const macros=calcMacrosRecette(recette);
+    if(macros.kcal===0) return null;
+    const cible = isLunchbox ? profil.lb_kcal : profil.diner_kcal;
+    const ratio = cible / macros.kcal;
+    return {
+      ingredients: recette.ingredients.map(ing=>({
+        ...ing, quantite: Math.round(ing.quantite * ratio * 10) / 10
+      })),
+      kcal: Math.round(macros.kcal * ratio),
+      prot: Math.round(macros.prot * ratio),
+      gluc: Math.round(macros.gluc * ratio),
+      lip:  Math.round(macros.lip  * ratio),
+      fib:  Math.round(macros.fib  * ratio),
+    };
+  }
 
-  /* ═══════════════════════════════════════════════
-     RENDERER — RENDU DES SECTIONS UI
-  ═══════════════════════════════════════════════ */
-  const Renderer = {
-    /**
-     * Met à jour tous les bandeaux d'information de la semaine.
-     */
-    banners() {
-      const week = App.getGeneratedWeek(currentType());
-      const text = `Semaine ${state.weekNum} · ${prettyMode(currentType())} · ${week[0]?.nom || ''}`;
-      const sub = 'Menus générés automatiquement — stables toute la semaine';
+  // ─── LISTE DE COURSES ─────────────────────────────────────────────────────
+  function computeCourses(type){
+    const week=getGeneratedWeek(type);
+    const totals={};
+    const factor=recipeScale(type);
+    week.forEach(r=> aggregateItems(r.ingredients, totals, factor));
+    const extras=getExtras(type);
+    aggregateItems(extras.petits_dej_items, totals, 1);
+    aggregateItems(extras.brunch_items, totals, 1);
+    aggregateItems(extras.gouters_items, totals, 1);
+    return totals;
+  }
 
-      const ids = ['week-banner-text', 'week-banner-sub', 'header-week-badge'];
-      const vals = [text, sub, `Semaine ${state.weekNum} — ${prettyMode(currentType())}`];
-      ids.forEach((id, i) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = vals[i];
+  function renderCoursesModal(type){
+    const totals=computeCourses(type);
+    const byRayon={};
+    Object.values(totals).forEach(item=>{
+      const rayon=getRayon(item.ingredient);
+      (byRayon[rayon]||(byRayon[rayon]=[])).push(item);
+    });
+    const order=['\ud83e\udd55 L\u00e9gumes','\ud83c\udf4e Fruits','\ud83e\udd69 Viandes','\ud83d\udc1f Poissons','\ud83e\udd5b Produits frais','\ud83c\udf3e F\u00e9culents','\ud83e\udd6b \u00c9picerie sal\u00e9e','\ud83c\udf6f \u00c9picerie sucr\u00e9e','\ud83e\uddc2 Assaisonnements','\ud83e\uddf5 Divers'];
+    document.getElementById('courses-title').textContent=`\ud83d\uded2 Courses Semaine ${state.weekNum} \u2014 ${prettyMode(type)}`;
+    const content=document.getElementById('courses-content');
+    content.innerHTML='';
+    let txt=`\ud83d\uded2 LISTE DE COURSES \u2014 Semaine ${state.weekNum}\n${prettyMode(type)}\n\n`;
+    order.forEach(rayon=>{
+      const items=(byRayon[rayon]||[]).sort((a,b)=>humanIngredient(a.ingredient).localeCompare(humanIngredient(b.ingredient),'fr'));
+      if(!items.length) return;
+      txt+=`${rayon}\n`;
+      const wrap=document.createElement('div');
+      wrap.style.marginBottom='14px';
+      wrap.innerHTML=`<div style="font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1px;padding:6px 0;margin-bottom:4px;border-bottom:1px solid var(--border);">${rayon}</div>`;
+      items.forEach(item=>{
+        const label=humanIngredient(item.ingredient);
+        const qty=displayQty(item);
+        txt+=`\u25a1 ${label} \u2014 ${qty}\n`;
+        const row=document.createElement('div');
+        row.style.cssText='display:flex;align-items:center;gap:8px;padding:4px 0 4px 10px;border-bottom:1px solid var(--border);font-size:12px;';
+        row.innerHTML=`<input type="checkbox" style="accent-color:var(--green);width:13px;height:13px;flex-shrink:0;"><span style="flex:1;color:var(--text);">${label}</span><span style="color:var(--green);font-weight:700;font-size:12px;">${qty}</span>`;
+        wrap.appendChild(row);
       });
-    },
+      content.appendChild(wrap);
+    });
+    document.getElementById('btn-gmail').onclick=()=>{
+      const subject=encodeURIComponent(`Courses Semaine ${state.weekNum} \u2014 ${prettyMode(type)}`);
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&su=${subject}&body=${encodeURIComponent(txt)}`,'_blank');
+    };
+    document.getElementById('courses-modal').style.display='flex';
+  }
 
-    /**
-     * Rend le tableau de menus pour un type ('avec' | 'sans').
-     */
-    menuTable(type) {
-      const week = App.getGeneratedWeek(type);
-      const extras = getExtras(type);
-      const bodyId = type === 'avec' ? 'menu-avec-body' : 'menu-sans-body';
-      const labelId = type === 'avec' ? 'week-label-avec' : 'week-label-sans';
-      const body = document.getElementById(bodyId);
-      const label = document.getElementById(labelId);
-      if (!body) return;
+  // ─── MENU TABLE ───────────────────────────────────────────────────────────
+  function renderMenuTable(type){
+    const week=getGeneratedWeek(type);
+    const extras=getExtras(type);
+    const body=document.getElementById(type==='avec'?'menu-avec-body':'menu-sans-body');
+    const label=document.getElementById(type==='avec'?'week-label-avec':'week-label-sans');
+    if(!body) return;
+    body.innerHTML='';
+    week.forEach((r,idx)=>{
+      const tr=document.createElement('tr');
+      const conserv = idx<=2 ? '\u2744\ufe0f Frigo' : '\ud83e\uddca Cong\u00e9lateur';
+      const lb = idx<5 ? `\u2192 Lunchbox ${DAY_LABELS[idx+1].split(' ')[0]}` : '\u2014';
+      const pdej = extras.petits_dej_labels[idx] || '\u2014';
+      tr.innerHTML=`<td style="padding:6px 10px;font-weight:600;color:var(--amber);font-size:11px;white-space:nowrap;">${DAY_LABELS[idx]}</td>
+        <td style="padding:6px 10px;font-size:12px;color:var(--text);cursor:pointer;">${escapeHtml(r.nom)}</td>
+        <td style="padding:6px 10px;font-size:11px;color:var(--muted);">${escapeHtml(pdej)}</td>
+        <td style="padding:6px 10px;font-size:11px;color:var(--text);">${lb}</td>
+        <td style="padding:6px 10px;font-size:11px;color:${idx<=2?'var(--green)':'var(--blue,#4EA8DE)'};white-space:nowrap;">${conserv}</td>`;
+      tr.children[1].onclick=()=>window.showMeal(r.nom, type);
+      body.appendChild(tr);
+    });
+    if(label) label.textContent=`Semaine ${state.weekNum} \u00b7 ${type==='avec'?'Avec enfants':'Sans enfants'} \u00b7 g\u00e9n\u00e9ration automatique`;
+  }
 
-      body.innerHTML = '';
-      week.forEach((r, idx) => {
-        const conserv = idx <= 2 ? '❄️ Frigo' : '🧊 Congélateur';
-        const lb = idx < 5 ? `→ Lunchbox ${DAY_LABELS[idx + 1].split(' ')[0]}` : '—';
-        const pdej = extras.petits_dej_labels[idx] || '—';
+  function renderGouters(){
+    const tbody=document.getElementById('gouters-body');
+    if(!tbody) return;
+    tbody.innerHTML='';
+    getExtras('avec').gouters_labels.forEach((g,i)=>{
+      const row=document.createElement('div');
+      row.style.cssText='display:flex;gap:8px;padding:4px 0;border-bottom:1px solid var(--border);';
+      row.innerHTML=`<span style="min-width:28px;font-weight:600;color:var(--orange);font-size:11px;">${SHORT_DAYS[i]}</span><span style="font-size:12px;color:var(--text);">${escapeHtml(g)}</span>`;
+      tbody.appendChild(row);
+    });
+  }
 
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="menu-day">${DAY_LABELS[idx]}</td>
-          <td class="menu-recette" data-recipe="${escapeHtml(r.nom)}" data-type="${type}">${escapeHtml(r.nom)}</td>
-          <td class="menu-pdej">${escapeHtml(pdej)}</td>
-          <td class="menu-lb">${lb}</td>
-          <td class="menu-conserv ${idx <= 2 ? 'conserv-frigo' : 'conserv-congel'}">${conserv}</td>
-        `;
-        tr.querySelector('.menu-recette').addEventListener('click', (e) => {
-          Renderer.mealModal(e.target.dataset.recipe, e.target.dataset.type);
+  // ─── LUNDI PREP — ORDRE DYNAMIQUE PAR CUISSON ────────────────────────────
+  function renderPrepTab(){
+    const type=currentType();
+    const menu=getGeneratedWeek(type);
+    const container=document.getElementById('prep-repas');
+    if(!container) return;
+
+    container.innerHTML = menu.map((r,idx)=>`
+      <div onclick="showMeal('${String(r.nom).replace(/'/g,"\\'")}','${type}')"
+        style="cursor:pointer;padding:10px 14px;border:1px solid var(--border);border-radius:4px;margin-bottom:6px;background:var(--s2);display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;color:var(--text);font-weight:500;">${DAY_LABELS[idx]} \u2014 ${escapeHtml(r.nom)}</span>
+        <span style="font-size:10px;color:var(--muted);">voir ingr\u00e9dients \u2192</span>
+      </div>`).join('');
+
+    const ordre=document.getElementById('prep-ordre-cuisson');
+    if(!ordre) return;
+
+    const BASE_LABELS = {riz:'Riz', quinoa:'Quinoa', lentilles:'Lentilles', pate:'P\u00e2tes', legumes_rotis:'L\u00e9gumes r\u00f4tis'};
+
+    const groupes = {
+      feculents:  {label:'\u23f1\ufe0f \u00c9TAPE 1 \u2014 F\u00e9culents (simultan\u00e9, ~20 min)', color:'#F5A623', items:[]},
+      four:       {label:'\ud83d\udd25 \u00c9TAPE 2 \u2014 Four (pendant les f\u00e9culents, ~25 min)',  color:'#E53935', items:[]},
+      poele:      {label:'\ud83c\udf73 \u00c9TAPE 3 \u2014 Po\u00eale (encha\u00eener)',                   color:'#FF9800', items:[]},
+      mijote:     {label:'\ud83e\uded5 \u00c9TAPE 4 \u2014 Mijot\u00e9s & Soupes (~30 min)',           color:'#4CAF50', items:[]},
+      assemblage: {label:'\ud83e\udd61 \u00c9TAPE 5 \u2014 Assemblage & Conditionnement',              color:'#4EA8DE', items:[]},
+    };
+
+    // Collecter les féculents avec déduplications
+    const feculentsMap = {};
+    menu.forEach((r,idx)=>{
+      const jour=DAY_LABELS[idx].split(' ')[0];
+      if(r.base_cuisson && BASE_LABELS[r.base_cuisson]){
+        const bl=BASE_LABELS[r.base_cuisson];
+        if(!feculentsMap[bl]) feculentsMap[bl]=[];
+        feculentsMap[bl].push(jour);
+      }
+      if(r.base_cuisson==='legumes_rotis') groupes.four.items.push(`L\u00e9gumes r\u00f4tis <span style="color:var(--muted)">(${jour})</span>`);
+      const tp=r.type_plat;
+      if(tp==='four')   groupes.four.items.push(`${escapeHtml(r.nom)} <span style="color:var(--muted)">(${jour})</span>`);
+      else if(tp==='poele')  groupes.poele.items.push(`${escapeHtml(r.nom)} <span style="color:var(--muted)">(${jour})</span>`);
+      else if(tp==='mijote'||tp==='soupe') groupes.mijote.items.push(`${escapeHtml(r.nom)} <span style="color:var(--muted)">(${jour})</span>`);
+      else groupes.assemblage.items.push(`${escapeHtml(r.nom)} <span style="color:var(--muted)">(${jour})</span>`);
+    });
+    groupes.feculents.items = Object.entries(feculentsMap).map(([b,jours])=>
+      `${b} <span style="color:var(--muted)">(${jours.join(', ')})</span>`);
+    groupes.assemblage.items.push('Portionner d\u00eener / lunchbox / cong\u00e9lation');
+    groupes.assemblage.items.push('\u00c9tiqueter les bo\u00eetes cong\u00e9lateur avec le jour destination');
+
+    let html=`<div style="font-size:11px;color:var(--muted);margin-bottom:14px;">Ordre optimis\u00e9 pour la semaine \u00b7 tout cuisiner en parall\u00e8le le lundi</div>`;
+    Object.values(groupes).forEach(g=>{
+      if(!g.items.length) return;
+      html+=`<div style="margin-bottom:14px;">
+        <div style="font-size:11px;font-weight:700;color:${g.color};text-transform:uppercase;letter-spacing:1px;padding:5px 0;margin-bottom:6px;border-bottom:1px solid var(--border);">${g.label}</div>
+        ${g.items.map(item=>`<div style="font-size:12px;color:var(--text);padding:3px 0 3px 12px;border-left:2px solid ${g.color}55;margin-bottom:3px;">\u2192 ${item}</div>`).join('')}
+      </div>`;
+    });
+    ordre.innerHTML=html;
+  }
+
+  // ─── BOÎTES PAR PROFIL ────────────────────────────────────────────────────
+  function renderBoites(){
+    const container=document.getElementById('boites-container');
+    if(!container) return;
+    const type=currentType();
+    const week=getGeneratedWeek(type);
+    const isEnfants=(type==='avec');
+    const profilsActifs=isEnfants ? ['julien','ac','lucas','tim'] : ['julien','ac'];
+
+    const wb=document.getElementById('week-banner-boites');
+    if(wb) wb.textContent=`Semaine ${state.weekNum} \u00b7 ${prettyMode(type)}`;
+
+    let html='';
+    week.forEach((recette,idx)=>{
+      const hasLunchbox=(idx<5);
+      html+=`<div style="margin-bottom:28px;">
+        <div style="font-size:14px;font-weight:700;color:var(--amber);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--border);">
+          \ud83e\udd61 ${escapeHtml(recette.nom)}
+          <span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:8px;">${DAY_LABELS[idx]}</span>
+        </div>`;
+
+      // Dîner — tous les profils actifs
+      html+=`<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">\ud83c\udf7d\ufe0f D\u00eener</div>`;
+      html+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:10px;margin-bottom:14px;">`;
+      profilsActifs.forEach(pk=>{
+        const portion=calcPortionProfil(recette, pk, false);
+        if(portion) html+=renderCarteBoite(PROFILS[pk], portion, false);
+      });
+      html+=`</div>`;
+
+      // Lunchbox — Julien + AC seulement, sauf samedi
+      if(hasLunchbox){
+        const nextJour=DAY_LABELS[idx+1] ? DAY_LABELS[idx+1].split(' ')[0] : '';
+        html+=`<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">\ud83e\udd61 Lunchbox \u2192 ${nextJour}</div>`;
+        html+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:10px;margin-bottom:8px;">`;
+        ['julien','ac'].forEach(pk=>{
+          const portion=calcPortionProfil(recette, pk, true);
+          if(portion) html+=renderCarteBoite(PROFILS[pk], portion, true);
         });
-        body.appendChild(tr);
-      });
-
-      if (label)
-        label.textContent = `Semaine ${state.weekNum} · ${prettyMode(type)} · génération automatique`;
-    },
-
-    /**
-     * Rend la liste des goûters (section Planning).
-     */
-    gouters() {
-      const tbody = document.getElementById('gouters-body');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      const labels = getExtras('avec').gouters_labels;
-      labels.forEach((g, i) => {
-        const row = document.createElement('div');
-        row.className = 'gouter-row';
-        row.innerHTML = `<span class="gouter-day">${SHORT_DAYS[i]}</span><span class="gouter-label">${escapeHtml(g)}</span>`;
-        tbody.appendChild(row);
-      });
-    },
-
-    /**
-     * Rend la section Lundi Prep.
-     */
-    prepTab() {
-      const week = App.getGeneratedWeek(currentType());
-
-      // Bandeau
-      const title = document.getElementById('prep-title');
-      const sub = document.getElementById('prep-subtitle');
-      if (title) title.textContent = `LUNDI — MEAL PREP · Semaine ${state.weekNum}`;
-      if (sub) sub.textContent = `${prettyMode(currentType())} · ${week.length} repas à préparer`;
-
-      // Liste des repas
-      const container = document.getElementById('prep-repas');
-      if (container) {
-        container.innerHTML = week
-          .map((r, idx) => `
-            <div class="prep-repas-row" data-recipe="${escapeHtml(r.nom)}" data-type="${currentType()}">
-              <span class="prep-repas-label">${DAY_LABELS[idx]} — ${escapeHtml(r.nom)}</span>
-              <span class="prep-repas-hint">voir ingrédients →</span>
-            </div>
-          `)
-          .join('');
-        container.querySelectorAll('.prep-repas-row').forEach((el) => {
-          el.addEventListener('click', () =>
-            Renderer.mealModal(el.dataset.recipe, el.dataset.type)
-          );
-        });
+        html+=`</div>`;
       }
 
-      // Ordre de préparation
-      const ordre = document.getElementById('prep-ordre-cuisson');
-      if (ordre) {
-        ordre.innerHTML = `
-          <div class="prep-ordre-text">
-            1. Sors tous les ingrédients et contenants.<br>
-            2. Lance d'abord les féculents mutualisables (riz, quinoa, pâtes).<br>
-            3. Enchaîne les plats frigo (lun→mer), puis les plats congélation (jeu→sam).<br>
-            4. Portionne immédiatement : dîner / lunchbox / congélation.
-          </div>
-        `;
-      }
+      html+=`</div>`;
+    });
+    container.innerHTML=html;
+  }
 
-      // Goûters (si semaine avec enfants)
-      const gSection = document.getElementById('prep-gouters-section');
-      const gContainer = document.getElementById('prep-gouters');
-      const gOrdre = document.getElementById('prep-gouters-ordre');
-      if (state.mode === 'enfants') {
-        const labels = getExtras('avec').gouters_labels;
-        if (gSection) gSection.style.display = 'block';
-        if (gOrdre) gOrdre.style.display = 'block';
-        if (gContainer) {
-          gContainer.innerHTML = labels
-            .map((g, i) => `
-              <div class="gouter-prep-row">
-                <span class="gouter-day">${SHORT_DAYS[i]}</span>
-                <span>${escapeHtml(g)}</span>
-              </div>
-            `)
-            .join('');
-        }
-      } else {
-        if (gSection) gSection.style.display = 'none';
-        if (gOrdre) gOrdre.style.display = 'none';
-      }
-    },
+  function renderCarteBoite(profil, portion, isLunchbox){
+    const c=profil.color;
+    const bar=(val,max,col)=>{
+      const pct=Math.min(100,Math.round(val/max*100));
+      return `<div style="background:var(--border);border-radius:3px;height:3px;margin-top:2px;"><div style="width:${pct}%;background:${col};height:3px;border-radius:3px;"></div></div>`;
+    };
+    const ings=portion.ingredients.filter(it=>it.quantite>=0.5)
+      .map(it=>`<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;border-bottom:1px solid #ffffff08;">
+        <span style="color:var(--muted);">${humanIngredient(it.ingredient)}</span>
+        <span style="color:var(--text);font-weight:600;">${displayQty(it)}</span>
+      </div>`).join('');
+    return `<div style="background:var(--s2);border:1px solid ${c}33;border-left:3px solid ${c};border-radius:6px;padding:10px;">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+        <span style="font-size:15px;">${profil.emoji}</span>
+        <span style="font-size:12px;font-weight:700;color:${c};">${profil.label}</span>
+        ${isLunchbox?`<span style="font-size:10px;color:var(--muted);margin-left:auto;">\ud83e\udd61 lunch</span>`:''}
+      </div>
+      <div style="margin-bottom:8px;">${ings}</div>
+      <div style="background:var(--bg);border-radius:4px;padding:6px;margin-top:6px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-size:10px;color:var(--muted);">\u00c9nergie</span>
+          <span style="font-size:13px;font-weight:700;color:${c};">${portion.kcal} kcal</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:10px;">
+          <div><div style="display:flex;justify-content:space-between;color:var(--muted);"><span>Prot\u00e9ines</span><span style="color:var(--text);font-weight:600;">${portion.prot}g</span></div>${bar(portion.prot,profil.prot_diner,'#4CAF50')}</div>
+          <div><div style="display:flex;justify-content:space-between;color:var(--muted);"><span>Glucides</span><span style="color:var(--text);font-weight:600;">${portion.gluc}g</span></div>${bar(portion.gluc,profil.gluc_diner,'#F5A623')}</div>
+          <div><div style="display:flex;justify-content:space-between;color:var(--muted);"><span>Lipides</span><span style="color:var(--text);font-weight:600;">${portion.lip}g</span></div>${bar(portion.lip,profil.lip_diner,'#E91E8C')}</div>
+          <div><div style="display:flex;justify-content:space-between;color:var(--muted);"><span>Fibres</span><span style="color:var(--text);font-weight:600;">${portion.fib}g</span></div>${bar(portion.fib,profil.fibres_diner,'#4EA8DE')}</div>
+        </div>
+      </div>
+    </div>`;
+  }
 
-    /**
-     * Rend la section Boîtes (détail ingrédients par repas).
-     */
-    boites() {
-      const container = document.getElementById('boites-container');
-      if (!container) return;
+  // ─── BANNERS & MODALS ─────────────────────────────────────────────────────
+  function updateBanners(){
+    const menu=getGeneratedWeek(currentType());
+    const bannerText=document.getElementById('week-banner-text');
+    const bannerSub=document.getElementById('week-banner-sub');
+    const headerBadge=document.getElementById('header-week-badge');
+    if(bannerText) bannerText.textContent=`Semaine ${state.weekNum} \u00b7 ${prettyMode(currentType())} \u00b7 ${menu[0].nom}`;
+    if(bannerSub) bannerSub.textContent='Menus g\u00e9n\u00e9r\u00e9s automatiquement \u2014 stables toute la semaine';
+    if(headerBadge) headerBadge.textContent=`Semaine ${state.weekNum} \u2014 ${prettyMode(currentType())}`;
+  }
 
-      const type = currentType();
-      const factor = recipeScale(type);
-      const week = App.getGeneratedWeek(type);
-
-      const wb = document.getElementById('week-banner-boites');
-      if (wb) wb.textContent = `Semaine ${state.weekNum} · ${prettyMode(type)}`;
-
-      container.innerHTML = week
-        .map((r, idx) => {
-          const items = r.ingredients
-            .map((it) => {
-              const qty = Formatter.qty({
-                ingredient: it.ingredient,
-                quantite: Math.round(it.quantite * factor * 10) / 10,
-                unite: it.unite,
-              });
-              return `
-                <div class="boite-ingredient-row">
-                  <span class="boite-ingredient-name">${Formatter.ingredientLabel(it.ingredient)}</span>
-                  <span class="boite-ingredient-qty">${qty}</span>
-                </div>
-              `;
-            })
-            .join('');
-
-          return `
-            <div class="boite-card" data-recipe="${escapeHtml(r.nom)}" data-type="${type}">
-              <div class="boite-header">
-                <span class="boite-title">🥡 ${escapeHtml(r.nom)}</span>
-                <span class="boite-day">${DAY_LABELS[idx]}</span>
-              </div>
-              <div class="boite-ingredients">${items}</div>
-            </div>
-          `;
-        })
-        .join('');
-
-      container.querySelectorAll('.boite-card').forEach((el) => {
-        el.addEventListener('click', () =>
-          Renderer.mealModal(el.dataset.recipe, el.dataset.type)
-        );
-      });
-    },
-
-    /**
-     * Ouvre le modal de détail d'un repas.
-     */
-    mealModal(mealName, type = currentType()) {
-      const week = App.getGeneratedWeek(type);
-      const recipe =
-        week.find((r) => r.nom === mealName) ||
-        state.recipes.find((r) => r.nom === mealName);
-      if (!recipe) return;
-
-      const factor = recipeScale(type);
-      const portions = type === 'avec' || type === 'enfants' ? 6 : 4;
-
-      const titleEl = document.getElementById('meal-title');
-      const bodyEl = document.getElementById('meal-body');
-      if (!titleEl || !bodyEl) return;
-
-      titleEl.textContent = recipe.nom;
-      bodyEl.innerHTML = `
-        <div class="meal-meta">${recipe.categorie} · ${recipe.type_plat} · ${recipe.conservation} · ${portions} portions</div>
-        ${recipe.ingredients
-          .map((it) => {
-            const qty = Formatter.qty({
-              ingredient: it.ingredient,
-              quantite: Math.round(it.quantite * factor * 10) / 10,
-              unite: it.unite,
-            });
-            return `
-              <div class="meal-ingredient-row">
-                <span class="meal-ingredient-name">${Formatter.ingredientLabel(it.ingredient)}</span>
-                <span class="meal-ingredient-qty">${qty}</span>
-              </div>
-            `;
-          })
-          .join('')}
-      `;
-
-      const modal = document.getElementById('meal-modal');
-      if (modal) modal.style.display = 'flex';
-    },
-
-    /**
-     * Synchronise l'affichage des semaines avec/sans selon le mode courant.
-     */
-    weekToggle() {
-      const isSans = state.mode === 'sans_enfants';
-      const sansEl = document.getElementById('week-sans');
-      const avecEl = document.getElementById('week-avec');
-      if (sansEl) sansEl.style.display = isSans ? 'block' : 'none';
-      if (avecEl) avecEl.style.display = !isSans ? 'block' : 'none';
-
-      document.querySelectorAll('.wt-btn').forEach((btn) =>
-        btn.classList.remove('active')
-      );
-      const activeIdx = isSans ? 0 : 1;
-      const btns = document.querySelectorAll('.week-toggle .wt-btn');
-      if (btns[activeIdx]) btns[activeIdx].classList.add('active');
-    },
+  window.showMeal=function(mealName, type=currentType()){
+    const week=getGeneratedWeek(type);
+    const recipe=week.find(r=>r.nom===mealName)||state.recipes.find(r=>r.nom===mealName);
+    if(!recipe) return;
+    const factor=recipeScale(type);
+    const macros=calcMacrosRecette(recipe);
+    const title=document.getElementById('meal-title');
+    const body=document.getElementById('meal-body');
+    title.textContent=recipe.nom;
+    body.innerHTML=`<div style="font-size:11px;color:var(--muted);margin-bottom:10px;">${recipe.categorie} \u00b7 ${recipe.type_plat} \u00b7 ${recipe.conservation} \u00b7 ${type==='avec'?6:4} portions</div>`
+      +recipe.ingredients.map(it=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;">
+          <span style="color:var(--text);">${humanIngredient(it.ingredient)}</span>
+          <span style="color:var(--green);font-weight:700;">${displayQty({ingredient:it.ingredient,quantite:Math.round(it.quantite*factor*10)/10,unite:it.unite})}</span>
+        </div>`).join('')
+      +`<div style="margin-top:10px;padding:8px;background:var(--s2);border-radius:4px;font-size:11px;color:var(--muted);">
+          Total recette \u00b7 ${macros.kcal} kcal \u00b7 P ${macros.prot}g \u00b7 G ${macros.gluc}g \u00b7 L ${macros.lip}g \u00b7 F ${macros.fib}g
+        </div>`;
+    document.getElementById('meal-modal').style.display='flex';
   };
 
-  /* ═══════════════════════════════════════════════
-     API PUBLIQUE (window.*) — Appelée depuis le HTML
-  ═══════════════════════════════════════════════ */
-  window.showSection = function (id, btn) {
-    document.querySelectorAll('.section').forEach((s) => s.classList.remove('active'));
-    document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
-    const section = document.getElementById(id);
-    if (section) section.classList.add('active');
-    if (btn) btn.classList.add('active');
+  window.openShoppingList=function(){ renderCoursesModal(currentType()); };
+  window.openShoppingListFor=function(type){ renderCoursesModal(type); };
+  window.closeShoppingList=function(){ const m=document.getElementById('courses-modal'); if(m) m.style.display='none'; };
 
-    // Lazy render des sections lourdes
-    if (id === 'boites') Renderer.boites();
-    if (id === 'prep') Renderer.prepTab();
-  };
+  function patchWeekToggleDefault(){
+    document.getElementById('week-sans').style.display=state.mode==='sans_enfants'?'flex':'none';
+    document.getElementById('week-avec').style.display=state.mode==='enfants'?'flex':'none';
+    document.querySelectorAll('.wt-btn').forEach(btn=>btn.classList.remove('active'));
+    const btns=document.querySelectorAll('.week-header .wt-btn');
+    if(state.mode==='sans_enfants'&&btns[0]) btns[0].classList.add('active');
+    if(state.mode==='enfants'&&btns[1]) btns[1].classList.add('active');
+  }
 
-  window.showWeek = function (type, btn) {
-    document.querySelectorAll('.wt-btn').forEach((b) => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-    const sansEl = document.getElementById('week-sans');
-    const avecEl = document.getElementById('week-avec');
-    if (sansEl) sansEl.style.display = type === 'sans' ? 'block' : 'none';
-    if (avecEl) avecEl.style.display = type === 'avec' ? 'block' : 'none';
-  };
+  function disableLegacyInfluence(){
+    document.querySelectorAll('#week-indicator-avec, #week-indicator-sans')
+      .forEach(el=>{ if(el) el.style.display=''; });
+  }
 
-  window.openShoppingList = function () {
-    ShoppingList.render(currentType());
-  };
-
-  window.openShoppingListFor = function (type) {
-    ShoppingList.render(type);
-  };
-
-  window.closeShoppingList = function () {
-    const m = document.getElementById('courses-modal');
-    if (m) m.style.display = 'none';
-  };
-
-  window.closeMealModal = function () {
-    const m = document.getElementById('meal-modal');
-    if (m) m.style.display = 'none';
-  };
-
-  // Compatibilité avec les appels directs depuis ancien HTML
-  window.showMeal = function (mealName, type = currentType()) {
-    Renderer.mealModal(mealName, type);
-  };
-
-  // Exposer buildBoitesTab pour compatibilité avec l'onclick du tab HTML
-  window.buildBoitesTab = function () {
-    Renderer.boites();
-  };
-
-  /* ═══════════════════════════════════════════════
-     DATA LOADER — CHARGEMENT DES JSON
-  ═══════════════════════════════════════════════ */
-  async function loadData() {
-    // Chemin relatif compatible GitHub Pages
-    const BASE = 'data/';
-    const [recipes, extras, index, nutrition] = await Promise.all([
-      fetch(`${BASE}recettes.json`).then((r) => {
-        if (!r.ok) throw new Error(`Erreur chargement recettes.json (${r.status})`);
-        return r.json();
-      }),
-      fetch(`${BASE}repas_hors_diners.json`).then((r) => {
-        if (!r.ok) throw new Error(`Erreur chargement repas_hors_diners.json (${r.status})`);
-        return r.json();
-      }),
-      fetch(`${BASE}recettes_index.json`).then((r) => {
-        if (!r.ok) throw new Error(`Erreur chargement recettes_index.json (${r.status})`);
-        return r.json();
-      }),
-      fetch(`${BASE}nutrition_ingredients.json`).then((r) => {
-        if (!r.ok) throw new Error(`Erreur chargement nutrition_ingredients.json (${r.status})`);
-        return r.json();
-      }),
+  // ─── INIT ─────────────────────────────────────────────────────────────────
+  async function init(){
+    const [recipes,extras,index,nutrition]=await Promise.all([
+      fetch('data/recettes.json').then(r=>r.json()),
+      fetch('data/repas_hors_diners.json').then(r=>r.json()),
+      fetch('data/recettes_index.json').then(r=>r.json()),
+      fetch('data/nutrition_ingredients.json').then(r=>r.json())
     ]);
-    return { recipes, extras, index, nutrition };
+    state.recipes=recipes; state.extras=extras; state.index=index; state.nutrition=nutrition;
+    state.weekNum=window.getISOWeek(new Date());
+    state.mode=state.weekNum%2===0?'sans_enfants':'enfants';
+    disableLegacyInfluence();
+    renderMenuTable('sans');
+    renderMenuTable('avec');
+    renderGouters();
+    renderPrepTab();
+    renderBoites();
+    updateBanners();
+    patchWeekToggleDefault();
   }
 
-  /* ═══════════════════════════════════════════════
-     INITIALISATION
-  ═══════════════════════════════════════════════ */
-  async function init() {
-    // Afficher l'état de chargement
-    const loadingEl = document.getElementById('loading-state');
-    if (loadingEl) loadingEl.style.display = 'flex';
-
-    try {
-      const data = await loadData();
-      state.recipes = data.recipes;
-      state.extras = data.extras;
-      state.index = data.index;
-      state.nutrition = data.nutrition;
-      state.weekNum = window.getISOWeek(new Date());
-      // Règle : semaine impaire → avec enfants, semaine paire → sans enfants
-      state.mode = state.weekNum % 2 === 1 ? 'enfants' : 'sans_enfants';
-
-      // Masquer le chargement
-      if (loadingEl) loadingEl.style.display = 'none';
-
-      // Rendu initial
-      Renderer.menuTable('sans');
-      Renderer.menuTable('avec');
-      Renderer.gouters();
-      Renderer.prepTab();
-      Renderer.banners();
-      Renderer.weekToggle();
-
-    } catch (err) {
-      console.error('Erreur initialisation :', err);
-      if (loadingEl) {
-        loadingEl.innerHTML = `
-          <div style="text-align:center;color:var(--red);padding:40px;">
-            <div style="font-size:24px;margin-bottom:12px;">⚠️</div>
-            <div style="font-size:14px;font-weight:600;">Erreur de chargement</div>
-            <div style="font-size:12px;color:var(--muted);margin-top:8px;">${err.message}</div>
-            <div style="font-size:11px;color:var(--muted);margin-top:4px;">Vérifiez que les fichiers JSON sont présents dans /data/</div>
-          </div>
-        `;
-        loadingEl.style.display = 'flex';
-      }
-    }
-  }
-
-  window.addEventListener('load', init);
+  window.addEventListener('load',init);
 })();
