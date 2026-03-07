@@ -99,29 +99,33 @@
   }
 
   // ─── CALCUL MACROS ────────────────────────────────────────────────────────
+  // Calcule les macros d'UNE portion de base (recette ÷ portions_base)
   function calcMacrosRecette(recette){
     const nutri=state.nutrition;
+    const nb = recette.portions_base || 4; // diviser par le nombre de portions de base
     let kcal=0, prot=0, gluc=0, lip=0, fib=0;
     recette.ingredients.forEach(ing=>{
       const n=nutri[ing.ingredient];
       if(!n || ing.unite!=='g') return;
-      const f=ing.quantite/100;
+      const f=(ing.quantite/nb)/100; // quantité PAR portion de base
       kcal+=n.kcal*f; prot+=n.proteines*f; gluc+=n.glucides*f; lip+=n.lipides*f; fib+=(n.fibres||0)*f;
     });
     return {kcal:Math.round(kcal), prot:Math.round(prot), gluc:Math.round(gluc), lip:Math.round(lip), fib:Math.round(fib)};
   }
 
   // Calcule la portion d'un profil pour une recette
-  // Ratio = kcal_cible_profil / kcal_total_recette → appliqué à chaque ingrédient
+  // Base = quantité par portion (recette ÷ portions_base)
+  // Ratio = kcal_cible_profil / kcal_par_portion_base → ajuste les grammes
   function calcPortionProfil(recette, profilKey, isLunchbox){
     const profil=PROFILS[profilKey];
-    const macros=calcMacrosRecette(recette);
+    const nb = recette.portions_base || 4;
+    const macros=calcMacrosRecette(recette); // macros pour 1 portion de base
     if(macros.kcal===0) return null;
     const cible = isLunchbox ? profil.lb_kcal : profil.diner_kcal;
     const ratio = cible / macros.kcal;
     return {
       ingredients: recette.ingredients.map(ing=>({
-        ...ing, quantite: Math.round(ing.quantite * ratio * 10) / 10
+        ...ing, quantite: Math.round((ing.quantite / nb) * ratio * 10) / 10
       })),
       kcal: Math.round(macros.kcal * ratio),
       prot: Math.round(macros.prot * ratio),
@@ -372,17 +376,22 @@
     const recipe=week.find(r=>r.nom===mealName)||state.recipes.find(r=>r.nom===mealName);
     if(!recipe) return;
     const factor=recipeScale(type);
-    const macros=calcMacrosRecette(recipe);
+    const nb=recipe.portions_base||4;
+    const nbTotal=Math.round(nb*factor);
+    const macrosPortion=calcMacrosRecette(recipe); // macros pour 1 portion individuelle
     const title=document.getElementById('meal-title');
     const body=document.getElementById('meal-body');
     title.textContent=recipe.nom;
-    body.innerHTML=`<div style="font-size:11px;color:var(--muted);margin-bottom:10px;">${recipe.categorie} \u00b7 ${recipe.type_plat} \u00b7 ${recipe.conservation} \u00b7 ${type==='avec'?6:4} portions</div>`
+    body.innerHTML=
+      `<div style="font-size:11px;color:var(--amber);font-weight:700;margin-bottom:4px;">\u{1F4E6} Quantit\u00e9s totales \u00e0 pr\u00e9parer (${nbTotal} portions)</div>`
+      +`<div style="font-size:10px;color:var(--muted);margin-bottom:10px;">${recipe.categorie} \u00b7 ${recipe.type_plat} \u00b7 conservation ${recipe.conservation}</div>`
       +recipe.ingredients.map(it=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;">
           <span style="color:var(--text);">${humanIngredient(it.ingredient)}</span>
           <span style="color:var(--green);font-weight:700;">${displayQty({ingredient:it.ingredient,quantite:Math.round(it.quantite*factor*10)/10,unite:it.unite})}</span>
         </div>`).join('')
-      +`<div style="margin-top:10px;padding:8px;background:var(--s2);border-radius:4px;font-size:11px;color:var(--muted);">
-          Total recette \u00b7 ${macros.kcal} kcal \u00b7 P ${macros.prot}g \u00b7 G ${macros.gluc}g \u00b7 L ${macros.lip}g \u00b7 F ${macros.fib}g
+      +`<div style="margin-top:12px;padding:8px;background:var(--s2);border-radius:4px;font-size:11px;color:var(--muted);">
+          <div style="font-weight:700;color:var(--text);margin-bottom:4px;">Par portion individuelle</div>
+          ${macrosPortion.kcal} kcal \u00b7 P ${macrosPortion.prot}g \u00b7 G ${macrosPortion.gluc}g \u00b7 L ${macrosPortion.lip}g \u00b7 F ${macrosPortion.fib}g
         </div>`;
     document.getElementById('meal-modal').style.display='flex';
   };
