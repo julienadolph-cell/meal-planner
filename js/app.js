@@ -4,7 +4,7 @@
   const SHORT_DAYS=['Lun','Mar','Mer','Jeu','Ven'];
   const state={weekNum:null, mode:null, recipes:null, extras:null, index:null, nutrition:null, generated:{}};
 
-  // ─── PROFILS v3 ──────────────────────────────────────────────────────────────
+  // ─── PROFILS ──────────────────────────────────────────────────────────────
   // Portions fixes : recette ÷ portions_base → grammes réels par personne
   // Repas complet = plat + fromage 30g + dessert (yaourt/fruit) — non ajusté au ratio
   const PROFILS = {
@@ -111,24 +111,26 @@
   // Alias pour compatibilité showMeal
   function calcMacrosRecette(recette){ return calcMacrosPortion(recette); }
 
-  // Retourne la portion fixe d'un profil (grammes réels = recette ÷ portions_base)
-  // Pas de ratio calorique — on mange ce que la recette prévoit
+  // Retourne la portion d'un profil (grammes réels = recette ÷ portions_base × PORTION_FACTOR)
+  // PORTION_FACTOR = 2 : les recettes JSON sont sous-dosées, on double pour une assiette réaliste
+  const PORTION_FACTOR = 2;
   function calcPortionProfil(recette, profilKey, isLunchbox){
     const nb = recette.portions_base || 4;
     const macros = calcMacrosPortion(recette);
-    // Ingrédients du plat
+    // Ingrédients du plat × PORTION_FACTOR
     const ings = recette.ingredients.map(ing=>({
-      ...ing, quantite: Math.round((ing.quantite / nb) * 10) / 10
+      ...ing, quantite: Math.round((ing.quantite / nb) * PORTION_FACTOR * 10) / 10
     }));
     // Ajouter fromage + dessert seulement pour le dîner (pas lunchbox)
     const extras = isLunchbox ? [] : COMPLEMENT_REPAS.map(c=>({...c}));
+    // Macros ajustées au facteur
     return {
       ingredients: [...ings, ...extras],
-      kcal: macros.kcal,
-      prot: macros.prot,
-      gluc: macros.gluc,
-      lip:  macros.lip,
-      fib:  macros.fib,
+      kcal: Math.round(macros.kcal * PORTION_FACTOR),
+      prot: Math.round(macros.prot * PORTION_FACTOR),
+      gluc: Math.round(macros.gluc * PORTION_FACTOR),
+      lip:  Math.round(macros.lip  * PORTION_FACTOR),
+      fib:  Math.round(macros.fib  * PORTION_FACTOR),
     };
   }
 
@@ -510,3 +512,4 @@
 
   window.addEventListener('load',init);
 })();
+// v5 Sat Mar  7 23:50:42 UTC 2026
