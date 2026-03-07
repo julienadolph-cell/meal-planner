@@ -1,0 +1,475 @@
+{
+  "sans_enfants": {
+    "petits_dej_labels": [
+      "Yaourt nature + pomme",
+      "Fromage blanc + banane",
+      "Yaourt nature + kiwi",
+      "Fromage blanc + orange",
+      "Yaourt nature + poire",
+      "Fromage blanc + raisin"
+    ],
+    "petits_dej_items": [
+      {
+        "ingredient": "yaourt_nature",
+        "quantite": 7,
+        "unite": "pot"
+      },
+      {
+        "ingredient": "fromage_blanc",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "banane",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "kiwi",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "orange",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "poire",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "raisin",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pain_complet",
+        "quantite": 1,
+        "unite": "pain"
+      },
+      {
+        "ingredient": "beurre",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oeuf",
+        "quantite": 8,
+        "unite": "piece"
+      }
+    ],
+    "brunch_label": "Brunch dimanche — œufs, pain grillé, fruits, café",
+    "brunch_items": [
+      {
+        "ingredient": "oeuf",
+        "quantite": 6,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "pain_complet",
+        "quantite": 1,
+        "unite": "pain"
+      },
+      {
+        "ingredient": "pomme",
+        "quantite": 2,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "banane",
+        "quantite": 2,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "yaourt_nature",
+        "quantite": 2,
+        "unite": "pot"
+      }
+    ],
+    "gouters_labels": [],
+    "gouters_items": []
+  },
+  "enfants": {
+    "petits_dej_labels": [
+      "Yaourt nature + pomme",
+      "Fromage blanc + banane",
+      "Yaourt nature + kiwi",
+      "Fromage blanc + orange",
+      "Yaourt nature + poire",
+      "Fromage blanc + raisin"
+    ],
+    "petits_dej_items": [
+      {
+        "ingredient": "yaourt_nature",
+        "quantite": 14,
+        "unite": "pot"
+      },
+      {
+        "ingredient": "fromage_blanc",
+        "quantite": 1000,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme",
+        "quantite": 8,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "banane",
+        "quantite": 8,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "kiwi",
+        "quantite": 6,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "orange",
+        "quantite": 6,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "poire",
+        "quantite": 6,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "raisin",
+        "quantite": 800,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pain_complet",
+        "quantite": 2,
+        "unite": "pain"
+      },
+      {
+        "ingredient": "beurre",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oeuf",
+        "quantite": 14,
+        "unite": "piece"
+      }
+    ],
+    "brunch_label": "Brunch dimanche famille — œufs, pancakes, fruits, charcuterie",
+    "brunch_items": [
+      {
+        "ingredient": "oeuf",
+        "quantite": 10,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "farine_ble",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "lait_demi_ecreme",
+        "quantite": 500,
+        "unite": "ml"
+      },
+      {
+        "ingredient": "banane",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "pomme",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "jambon_blanc",
+        "quantite": 250,
+        "unite": "g"
+      }
+    ],
+    "gouters_rotations": [
+      {
+        "labels": [
+          "Gâteau yaourt maison",
+          "Compote + biscuits secs",
+          "Fruits frais + carré chocolat noir",
+          "Yaourts nature + miel",
+          "Pain + beurre + confiture"
+        ],
+        "items": [
+          {
+            "ingredient": "oeuf",
+            "quantite": 3,
+            "unite": "piece"
+          },
+          {
+            "ingredient": "farine_ble",
+            "quantite": 250,
+            "unite": "g"
+          },
+          {
+            "ingredient": "yaourt_nature",
+            "quantite": 1,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "sucre",
+            "quantite": 120,
+            "unite": "g"
+          },
+          {
+            "ingredient": "compote_pomme",
+            "quantite": 8,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "pain_complet",
+            "quantite": 1,
+            "unite": "pain"
+          },
+          {
+            "ingredient": "beurre",
+            "quantite": 125,
+            "unite": "g"
+          },
+          {
+            "ingredient": "confiture",
+            "quantite": 1,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "pomme",
+            "quantite": 6,
+            "unite": "piece"
+          },
+          {
+            "ingredient": "banane",
+            "quantite": 6,
+            "unite": "piece"
+          },
+          {
+            "ingredient": "yaourt_nature",
+            "quantite": 8,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "miel",
+            "quantite": 1,
+            "unite": "pot"
+          }
+        ]
+      },
+      {
+        "labels": [
+          "Cookies avoine-raisins",
+          "Fromage blanc + fruits rouges",
+          "Pain complet + houmous",
+          "Yaourts aux fruits + céréales",
+          "Pancakes mini + sirop érable"
+        ],
+        "items": [
+          {
+            "ingredient": "flocon_avoine",
+            "quantite": 300,
+            "unite": "g"
+          },
+          {
+            "ingredient": "raisin",
+            "quantite": 250,
+            "unite": "g"
+          },
+          {
+            "ingredient": "oeuf",
+            "quantite": 2,
+            "unite": "piece"
+          },
+          {
+            "ingredient": "fromage_blanc",
+            "quantite": 500,
+            "unite": "g"
+          },
+          {
+            "ingredient": "fruit_rouge_surgeles",
+            "quantite": 500,
+            "unite": "g"
+          },
+          {
+            "ingredient": "pain_complet",
+            "quantite": 1,
+            "unite": "pain"
+          },
+          {
+            "ingredient": "houmous",
+            "quantite": 250,
+            "unite": "g"
+          },
+          {
+            "ingredient": "yaourt",
+            "quantite": 8,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "flocon_avoine",
+            "quantite": 150,
+            "unite": "g"
+          },
+          {
+            "ingredient": "farine_ble",
+            "quantite": 250,
+            "unite": "g"
+          },
+          {
+            "ingredient": "lait_demi_ecreme",
+            "quantite": 400,
+            "unite": "ml"
+          },
+          {
+            "ingredient": "sirop_erable",
+            "quantite": 1,
+            "unite": "bouteille"
+          }
+        ]
+      },
+      {
+        "labels": [
+          "Cake aux carottes",
+          "Pommes + beurre de cacahuète",
+          "Compote maison + galettes riz",
+          "Pain + fromage + raisins secs",
+          "Brownie patate douce"
+        ],
+        "items": [
+          {
+            "ingredient": "carotte",
+            "quantite": 400,
+            "unite": "g"
+          },
+          {
+            "ingredient": "farine_ble",
+            "quantite": 250,
+            "unite": "g"
+          },
+          {
+            "ingredient": "oeuf",
+            "quantite": 3,
+            "unite": "piece"
+          },
+          {
+            "ingredient": "pomme",
+            "quantite": 8,
+            "unite": "piece"
+          },
+          {
+            "ingredient": "beurre_cacahuete",
+            "quantite": 1,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "compote_pomme",
+            "quantite": 8,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "galette_riz",
+            "quantite": 2,
+            "unite": "paquet"
+          },
+          {
+            "ingredient": "pain_complet",
+            "quantite": 1,
+            "unite": "pain"
+          },
+          {
+            "ingredient": "emmental",
+            "quantite": 200,
+            "unite": "g"
+          },
+          {
+            "ingredient": "raisin",
+            "quantite": 250,
+            "unite": "g"
+          },
+          {
+            "ingredient": "patate_douce",
+            "quantite": 300,
+            "unite": "g"
+          },
+          {
+            "ingredient": "chocolat_noir",
+            "quantite": 200,
+            "unite": "g"
+          }
+        ]
+      },
+      {
+        "labels": [
+          "Fruits frais + yaourt",
+          "Compote + biscuits",
+          "Pain + chocolat",
+          "Yaourt grec + miel",
+          "Banane + beurre de cacahuète"
+        ],
+        "items": [
+          {
+            "ingredient": "pomme",
+            "quantite": 6,
+            "unite": "piece"
+          },
+          {
+            "ingredient": "banane",
+            "quantite": 6,
+            "unite": "piece"
+          },
+          {
+            "ingredient": "yaourt_nature",
+            "quantite": 8,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "compote_pomme",
+            "quantite": 8,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "biscuit_sec",
+            "quantite": 2,
+            "unite": "paquet"
+          },
+          {
+            "ingredient": "pain_complet",
+            "quantite": 1,
+            "unite": "pain"
+          },
+          {
+            "ingredient": "chocolat_noir",
+            "quantite": 150,
+            "unite": "g"
+          },
+          {
+            "ingredient": "yaourt_grec",
+            "quantite": 6,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "miel",
+            "quantite": 1,
+            "unite": "pot"
+          },
+          {
+            "ingredient": "beurre_cacahuete",
+            "quantite": 1,
+            "unite": "pot"
+          }
+        ]
+      }
+    ]
+  }
+}

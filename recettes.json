@@ -1,0 +1,3867 @@
+[
+  {
+    "id": "R001",
+    "nom": "Saumon quinoa légumes",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "poisson",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "lundi",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "saumon",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "quinoa",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R002",
+    "nom": "Poulet riz légumes",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R003",
+    "nom": "Curry pois chiches légumes",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "legumineuse",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "pois_chiche",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "curry",
+        "quantite": 10,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R004",
+    "nom": "Wok poulet légumes",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "sauce_soja",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R005",
+    "nom": "Cabillaud riz brocoli",
+    "categorie": "quotidien",
+    "type_plat": "four",
+    "proteine_principale": "poisson",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "lundi",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "cabillaud",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R006",
+    "nom": "Lentilles légumes mijotées",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "legumineuse",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "lentilles",
+    "ingredients": [
+      {
+        "ingredient": "lentille_verte",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 300,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R007",
+    "nom": "Poulet curry coco",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "lait_vegetal",
+        "quantite": 200,
+        "unite": "ml"
+      },
+      {
+        "ingredient": "curry",
+        "quantite": 10,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R008",
+    "nom": "Boeuf riz légumes sautés",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R009",
+    "nom": "Quinoa légumes feta",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "quinoa",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "feta",
+        "quantite": 120,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R010",
+    "nom": "Poulet patate douce légumes",
+    "categorie": "quotidien",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "legumes_rotis",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "patate_douce",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courge",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R011",
+    "nom": "Colin curry légumes",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "poisson",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "lundi",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "colin",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "curry",
+        "quantite": 10,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R012",
+    "nom": "Saumon légumes rôtis",
+    "categorie": "quotidien",
+    "type_plat": "four",
+    "proteine_principale": "poisson",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "lundi",
+    "base_cuisson": "legumes_rotis",
+    "ingredients": [
+      {
+        "ingredient": "saumon",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courge",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "patate_douce",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R013",
+    "nom": "Poulet quinoa légumes",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "quinoa",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R014",
+    "nom": "Boeuf légumes sautés",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R015",
+    "nom": "Pois chiches quinoa légumes",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "legumineuse",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "pois_chiche",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "quinoa",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 300,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R016",
+    "nom": "Poulet brocoli riz",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 300,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R017",
+    "nom": "Lentilles curry légumes",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "legumineuse",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "lentilles",
+    "ingredients": [
+      {
+        "ingredient": "lentille_corail",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "curry",
+        "quantite": 10,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R018",
+    "nom": "Poulet légumes rôtis",
+    "categorie": "quotidien",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "legumes_rotis",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courge",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R019",
+    "nom": "Tofu légumes riz",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "tofu",
+        "quantite": 350,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R020",
+    "nom": "Velouté courge lentilles",
+    "categorie": "quotidien",
+    "type_plat": "soupe",
+    "proteine_principale": "legumineuse",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "courge",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "lentille_corail",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R021",
+    "nom": "Poulet légumes quinoa",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "quinoa",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R022",
+    "nom": "Boeuf quinoa légumes",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "quinoa",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R023",
+    "nom": "Curry lentilles coco",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "legumineuse",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "lentilles",
+    "ingredients": [
+      {
+        "ingredient": "lentille_corail",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "lait_vegetal",
+        "quantite": 200,
+        "unite": "ml"
+      },
+      {
+        "ingredient": "curry",
+        "quantite": 10,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R024",
+    "nom": "Poulet brocoli quinoa",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "quinoa",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 300,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R025",
+    "nom": "Sauté légumes tofu",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "tofu",
+        "quantite": 350,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R026",
+    "nom": "Poulet légumes curry",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "curry",
+        "quantite": 10,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R027",
+    "nom": "Boeuf légumes sauce tomate",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R028",
+    "nom": "Quinoa légumes rôtis",
+    "categorie": "quotidien",
+    "type_plat": "four",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "quinoa",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courge",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R029",
+    "nom": "Riz légumes pois chiches",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "legumineuse",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pois_chiche",
+        "quantite": 350,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R030",
+    "nom": "Velouté carotte gingembre",
+    "categorie": "quotidien",
+    "type_plat": "soupe",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "carotte",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "gingembre",
+        "quantite": 10,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R031",
+    "nom": "Poulet légumes tomate",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 15,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R032",
+    "nom": "Riz légumes brocoli",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 15,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R033",
+    "nom": "Quinoa légumes brocoli",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "quinoa",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 15,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R034",
+    "nom": "Lentilles légumes rôtis",
+    "categorie": "quotidien",
+    "type_plat": "four",
+    "proteine_principale": "legumineuse",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "legumes_rotis",
+    "ingredients": [
+      {
+        "ingredient": "lentille_verte",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courge",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon_rouge",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R035",
+    "nom": "Tofu curry légumes",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "tofu",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "curry",
+        "quantite": 10,
+        "unite": "g"
+      },
+      {
+        "ingredient": "lait_vegetal",
+        "quantite": 180,
+        "unite": "ml"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R036",
+    "nom": "Poulet patate douce brocoli",
+    "categorie": "quotidien",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "legumes_rotis",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "patate_douce",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      },
+      {
+        "ingredient": "paprika",
+        "quantite": 8,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R037",
+    "nom": "Riz tofu légumes",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "tofu",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "sauce_soja",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R038",
+    "nom": "Poulet légumes basilic",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pate_blanche",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "basilic",
+        "quantite": 10,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 15,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R039",
+    "nom": "Boeuf légumes paprika",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "paprika",
+        "quantite": 8,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R040",
+    "nom": "Quinoa légumes feta",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "quinoa",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "feta",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 15,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R041",
+    "nom": "Velouté brocoli",
+    "categorie": "quotidien",
+    "type_plat": "soupe",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "brocoli",
+        "quantite": 600,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 250,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R042",
+    "nom": "Velouté poireaux pommes de terre",
+    "categorie": "quotidien",
+    "type_plat": "soupe",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "poireau",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 120,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R043",
+    "nom": "Soupe lentilles carottes",
+    "categorie": "quotidien",
+    "type_plat": "soupe",
+    "proteine_principale": "legumineuse",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "lentilles",
+    "ingredients": [
+      {
+        "ingredient": "lentille_corail",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R044",
+    "nom": "Poulet légumes citron",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "citron",
+        "quantite": 80,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 15,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R045",
+    "nom": "Riz légumes sauce soja",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "sauce_soja",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R046",
+    "nom": "Quinoa légumes curry",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "quinoa",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "curry",
+        "quantite": 8,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 15,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R047",
+    "nom": "Tofu légumes gingembre",
+    "categorie": "quotidien",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "tofu",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "gingembre",
+        "quantite": 12,
+        "unite": "g"
+      },
+      {
+        "ingredient": "sauce_soja",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R048",
+    "nom": "Poulet légumes paprika",
+    "categorie": "quotidien",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "legumes_rotis",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "paprika",
+        "quantite": 8,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R049",
+    "nom": "Boeuf légumes curry",
+    "categorie": "quotidien",
+    "type_plat": "mijote",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 350,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "curry",
+        "quantite": 8,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R050",
+    "nom": "Velouté courgette",
+    "categorie": "quotidien",
+    "type_plat": "soupe",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "courgette",
+        "quantite": 700,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R051",
+    "nom": "Boeuf bourguignon",
+    "categorie": "familial",
+    "type_plat": "mijote",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_morceau",
+        "quantite": 700,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "champignon",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R052",
+    "nom": "Blanquette de veau",
+    "categorie": "familial",
+    "type_plat": "mijote",
+    "proteine_principale": "veau",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "veau",
+        "quantite": 650,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "champignon",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R053",
+    "nom": "Blanquette de poulet",
+    "categorie": "familial",
+    "type_plat": "mijote",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 650,
+        "unite": "g"
+      },
+      {
+        "ingredient": "champignon",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R054",
+    "nom": "Chili con carne",
+    "categorie": "familial",
+    "type_plat": "mijote",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "haricot_rouge",
+        "quantite": 350,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R055",
+    "nom": "Poulet basquaise",
+    "categorie": "familial",
+    "type_plat": "mijote",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 600,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 350,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R056",
+    "nom": "Hachis parmentier",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 700,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R057",
+    "nom": "Lasagnes bolognaise",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "lasagne",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R058",
+    "nom": "Poulet rôti légumes",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "legumes_rotis",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 700,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R059",
+    "nom": "Quiche légumes",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "oeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "oeuf",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "farine_ble",
+        "quantite": 180,
+        "unite": "g"
+      },
+      {
+        "ingredient": "creme_legere",
+        "quantite": 120,
+        "unite": "ml"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R060",
+    "nom": "Riz cantonais",
+    "categorie": "familial",
+    "type_plat": "poele",
+    "proteine_principale": "porc",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oeuf",
+        "quantite": 3,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "jambon_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "petit_pois",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R061",
+    "nom": "Pâtes bolognaise",
+    "categorie": "familial",
+    "type_plat": "mijote",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "pate_blanche",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R062",
+    "nom": "Pâtes pesto poulet",
+    "categorie": "familial",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "pate_blanche",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "basilic",
+        "quantite": 15,
+        "unite": "g"
+      },
+      {
+        "ingredient": "parmesan",
+        "quantite": 80,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R063",
+    "nom": "Gratin brocoli poulet",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "creme_legere",
+        "quantite": 120,
+        "unite": "ml"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R064",
+    "nom": "Gratin courgettes boeuf",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R065",
+    "nom": "Poulet curry riz",
+    "categorie": "familial",
+    "type_plat": "mijote",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 550,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "curry",
+        "quantite": 10,
+        "unite": "g"
+      },
+      {
+        "ingredient": "lait_vegetal",
+        "quantite": 180,
+        "unite": "ml"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R066",
+    "nom": "Riz poulet paprika",
+    "categorie": "familial",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 550,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "paprika",
+        "quantite": 8,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R067",
+    "nom": "Chili végétarien",
+    "categorie": "familial",
+    "type_plat": "mijote",
+    "proteine_principale": "legumineuse",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "haricot_rouge",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pois_chiche",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R068",
+    "nom": "Pâtes légumes mozzarella",
+    "categorie": "familial",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "pate_blanche",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "mozzarella",
+        "quantite": 150,
+        "unite": "g"
+      },
+      {
+        "ingredient": "basilic",
+        "quantite": 10,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R069",
+    "nom": "Poulet citron légumes",
+    "categorie": "familial",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 550,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "citron",
+        "quantite": 80,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R070",
+    "nom": "Quiche poulet légumes",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "oeuf",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "farine_ble",
+        "quantite": 180,
+        "unite": "g"
+      },
+      {
+        "ingredient": "creme_legere",
+        "quantite": 120,
+        "unite": "ml"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R071",
+    "nom": "Riz légumes chorizo",
+    "categorie": "familial",
+    "type_plat": "poele",
+    "proteine_principale": "porc",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "chorizo",
+        "quantite": 180,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R072",
+    "nom": "Pâtes légumes ricotta",
+    "categorie": "familial",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "pate_blanche",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "epinard",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "ricotta",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R073",
+    "nom": "Gratin patate douce poulet",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "patate_douce",
+        "quantite": 600,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 100,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R074",
+    "nom": "Poulet légumes thym",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "legumes_rotis",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 600,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "thym",
+        "quantite": 6,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R075",
+    "nom": "Riz légumes dinde",
+    "categorie": "familial",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "riz",
+    "ingredients": [
+      {
+        "ingredient": "dinde",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "riz_blanc",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R076",
+    "nom": "Pâtes légumes brocoli",
+    "categorie": "familial",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "pate_blanche",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 80,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R077",
+    "nom": "Chili poulet",
+    "categorie": "familial",
+    "type_plat": "mijote",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "haricot_rouge",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oignon",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R078",
+    "nom": "Gratin légumes quinoa",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "quinoa",
+    "ingredients": [
+      {
+        "ingredient": "quinoa",
+        "quantite": 220,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "brocoli",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 100,
+        "unite": "g"
+      },
+      {
+        "ingredient": "creme_legere",
+        "quantite": 100,
+        "unite": "ml"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R079",
+    "nom": "Poulet légumes paprika familial",
+    "categorie": "familial",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "legumes_rotis",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 600,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "carotte",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "paprika",
+        "quantite": 8,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R080",
+    "nom": "Pâtes tomate basilic",
+    "categorie": "familial",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "pate_blanche",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 350,
+        "unite": "g"
+      },
+      {
+        "ingredient": "basilic",
+        "quantite": 10,
+        "unite": "g"
+      },
+      {
+        "ingredient": "parmesan",
+        "quantite": 70,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R081",
+    "nom": "Pizza maison",
+    "categorie": "plaisir",
+    "type_plat": "four",
+    "proteine_principale": "mix",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "farine_ble",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "mozzarella",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 10,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R082",
+    "nom": "Burger maison",
+    "categorie": "plaisir",
+    "type_plat": "poele",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": false,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "steak_hache",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pain_burger",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R083",
+    "nom": "Tacos maison",
+    "categorie": "plaisir",
+    "type_plat": "poele",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": false,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tortilla_ble",
+        "quantite": 6,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R084",
+    "nom": "Raclette",
+    "categorie": "plaisir",
+    "type_plat": "table",
+    "proteine_principale": "porc",
+    "portions_base": 4,
+    "compatible_lunchbox": false,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "fromage_raclette",
+        "quantite": 600,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 800,
+        "unite": "g"
+      },
+      {
+        "ingredient": "jambon_cru",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R085",
+    "nom": "Pâtes carbonara",
+    "categorie": "plaisir",
+    "type_plat": "poele",
+    "proteine_principale": "porc",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "pate_blanche",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "lardons",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "oeuf",
+        "quantite": 3,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "parmesan",
+        "quantite": 80,
+        "unite": "g"
+      },
+      {
+        "ingredient": "creme_legere",
+        "quantite": 100,
+        "unite": "ml"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R086",
+    "nom": "Pizza chèvre miel",
+    "categorie": "plaisir",
+    "type_plat": "four",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "farine_ble",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "chevre",
+        "quantite": 180,
+        "unite": "g"
+      },
+      {
+        "ingredient": "miel",
+        "quantite": 30,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 180,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R087",
+    "nom": "Pizza pepperoni",
+    "categorie": "plaisir",
+    "type_plat": "four",
+    "proteine_principale": "porc",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "farine_ble",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "mozzarella",
+        "quantite": 180,
+        "unite": "g"
+      },
+      {
+        "ingredient": "chorizo",
+        "quantite": 120,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R088",
+    "nom": "Pizza quatre fromages",
+    "categorie": "plaisir",
+    "type_plat": "four",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "farine_ble",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "mozzarella",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 80,
+        "unite": "g"
+      },
+      {
+        "ingredient": "chevre",
+        "quantite": 80,
+        "unite": "g"
+      },
+      {
+        "ingredient": "parmesan",
+        "quantite": 40,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R089",
+    "nom": "Burger poulet",
+    "categorie": "plaisir",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": false,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 500,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pain_burger",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R090",
+    "nom": "Burger bacon",
+    "categorie": "plaisir",
+    "type_plat": "poele",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": false,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "steak_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pain_burger",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "bacon",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R091",
+    "nom": "Tacos poulet",
+    "categorie": "plaisir",
+    "type_plat": "poele",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": false,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tortilla_ble",
+        "quantite": 6,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R092",
+    "nom": "Tacos boeuf",
+    "categorie": "plaisir",
+    "type_plat": "poele",
+    "proteine_principale": "boeuf",
+    "portions_base": 4,
+    "compatible_lunchbox": false,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "boeuf_hache",
+        "quantite": 450,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tortilla_ble",
+        "quantite": 6,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 200,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R093",
+    "nom": "Croque monsieur",
+    "categorie": "plaisir",
+    "type_plat": "four",
+    "proteine_principale": "porc",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "pain_mie",
+        "quantite": 240,
+        "unite": "g"
+      },
+      {
+        "ingredient": "jambon_blanc",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 140,
+        "unite": "g"
+      },
+      {
+        "ingredient": "beurre",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R094",
+    "nom": "Croque poulet",
+    "categorie": "plaisir",
+    "type_plat": "four",
+    "proteine_principale": "volaille",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "pain_mie",
+        "quantite": 240,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poulet_cru",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 140,
+        "unite": "g"
+      },
+      {
+        "ingredient": "beurre",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R095",
+    "nom": "Gratin dauphinois jambon",
+    "categorie": "plaisir",
+    "type_plat": "four",
+    "proteine_principale": "porc",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "les_deux",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "pomme_de_terre",
+        "quantite": 900,
+        "unite": "g"
+      },
+      {
+        "ingredient": "jambon_blanc",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "creme_legere",
+        "quantite": 200,
+        "unite": "ml"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 120,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R096",
+    "nom": "Pâtes crème champignons",
+    "categorie": "plaisir",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "pate_blanche",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "champignon",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "creme_legere",
+        "quantite": 180,
+        "unite": "ml"
+      },
+      {
+        "ingredient": "parmesan",
+        "quantite": 70,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R097",
+    "nom": "Burger végétarien",
+    "categorie": "plaisir",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": false,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "falafel",
+        "quantite": 400,
+        "unite": "g"
+      },
+      {
+        "ingredient": "pain_burger",
+        "quantite": 4,
+        "unite": "piece"
+      },
+      {
+        "ingredient": "tomate",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "emmental",
+        "quantite": 100,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R098",
+    "nom": "Pizza légumes mozzarella",
+    "categorie": "plaisir",
+    "type_plat": "four",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "farine_ble",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "mozzarella",
+        "quantite": 180,
+        "unite": "g"
+      },
+      {
+        "ingredient": "courgette",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "poivron_rouge",
+        "quantite": 150,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R099",
+    "nom": "Pâtes pesto parmesan",
+    "categorie": "plaisir",
+    "type_plat": "poele",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "pate",
+    "ingredients": [
+      {
+        "ingredient": "pate_blanche",
+        "quantite": 250,
+        "unite": "g"
+      },
+      {
+        "ingredient": "basilic",
+        "quantite": 15,
+        "unite": "g"
+      },
+      {
+        "ingredient": "parmesan",
+        "quantite": 90,
+        "unite": "g"
+      },
+      {
+        "ingredient": "huile_olive",
+        "quantite": 20,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  },
+  {
+    "id": "R100",
+    "nom": "Pizza burrata",
+    "categorie": "plaisir",
+    "type_plat": "four",
+    "proteine_principale": "vegetarien",
+    "portions_base": 4,
+    "compatible_lunchbox": true,
+    "conservation": "frigo",
+    "jour_autorise": "tous",
+    "base_cuisson": "aucun",
+    "ingredients": [
+      {
+        "ingredient": "farine_ble",
+        "quantite": 300,
+        "unite": "g"
+      },
+      {
+        "ingredient": "tomate_concassee",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "burrata",
+        "quantite": 200,
+        "unite": "g"
+      },
+      {
+        "ingredient": "basilic",
+        "quantite": 10,
+        "unite": "g"
+      }
+    ],
+    "saisons": [
+      "toute_annee"
+    ]
+  }
+]

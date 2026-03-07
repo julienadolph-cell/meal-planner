@@ -1,0 +1,664 @@
+/* ═══════════════════════════════════════════════════════════════
+   main.css — Planificateur de repas familial
+   Design system : dark theme, typographie Bebas Neue + Karla
+═══════════════════════════════════════════════════════════════ */
+
+/* ─── RESET & VARIABLES ─────────────────────────────────────── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #111210;
+  --s1:      #191a18;
+  --s2:      #202120;
+  --border:  #2e2f2c;
+  --text:    #e8e6e0;
+  --muted:   #7a7870;
+  --amber:   #e8b84b;
+  --green:   #6ec97a;
+  --blue:    #5aafe0;
+  --orange:  #e8834b;
+  --purple:  #a07fe0;
+  --pink:    #e07fa0;
+  --teal:    #4bbfbf;
+  --red:     #e06060;
+  --lime:    #a0bf5a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Karla', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── LAYOUT ─────────────────────────────────────────────────── */
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* ─── HEADER ─────────────────────────────────────────────────── */
+header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(44px, 8vw, 76px);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+h1 span { color: var(--amber); }
+.sub { color: var(--muted); font-size: 13px; margin-top: 6px; }
+.badge {
+  background: var(--amber);
+  color: #111;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 2px;
+}
+
+/* ─── NAVIGATION TABS ────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.tab {
+  padding: 9px 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Karla', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all .2s;
+}
+.tab:hover { color: var(--text); border-color: var(--muted); }
+.tab.active {
+  background: var(--amber);
+  color: #111;
+  border-color: var(--amber);
+  font-weight: 700;
+}
+
+/* ─── SECTIONS ───────────────────────────────────────────────── */
+.section { display: none; animation: fadeUp .4s ease both; }
+.section.active { display: block; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── ÉTAT DE CHARGEMENT ─────────────────────────────────────── */
+#loading-state {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--amber);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── BANDEAU SEMAINE ────────────────────────────────────────── */
+.week-banner {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--blue);
+  border-radius: 4px;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.week-banner-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.week-banner-note {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* ─── SECTION TITRE ──────────────────────────────────────────── */
+.sec-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: var(--amber);
+  margin: 28px 0 14px;
+}
+
+/* ─── WEEK TOGGLE ────────────────────────────────────────────── */
+.week-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.week-header h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+}
+.week-toggle {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.wt-btn {
+  padding: 7px 16px;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Karla', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all .2s;
+}
+.wt-btn.active { background: var(--s2); color: var(--text); }
+
+/* ─── MENU TABLE ─────────────────────────────────────────────── */
+.meal-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.meal-table th {
+  text-align: left;
+  padding: 9px 13px;
+  background: var(--s2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+.meal-table td { padding: 10px 13px; font-size: 13px; border-bottom: 1px solid var(--border); }
+.meal-table tr:hover td { background: var(--s1); }
+.menu-day  { color: var(--amber); font-weight: 600; white-space: nowrap; font-size: 11px; }
+.menu-recette { cursor: pointer; color: var(--text); }
+.menu-recette:hover { color: var(--amber); }
+.menu-pdej { color: var(--muted); font-size: 11px; }
+.menu-lb   { font-size: 11px; color: var(--text); }
+.conserv-frigo  { color: var(--green) !important; white-space: nowrap; font-size: 11px; }
+.conserv-congel { color: var(--blue) !important;  white-space: nowrap; font-size: 11px; }
+
+/* ─── GOÛTERS ────────────────────────────────────────────────── */
+.gouter-row {
+  display: flex;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.gouter-day {
+  min-width: 28px;
+  font-weight: 600;
+  color: var(--orange);
+  font-size: 11px;
+}
+
+/* ─── BOUTONS ────────────────────────────────────────────────── */
+.btn {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: .5px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.btn:hover { opacity: .85; }
+.btn-primary  { background: var(--amber); color: #111; }
+.btn-secondary { background: var(--s2); color: var(--text); border: 1px solid var(--border); }
+.btn-success  { background: var(--green); color: #000; }
+
+/* ─── MODAL LISTE DE COURSES ──────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-box {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.modal-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: var(--amber);
+}
+.modal-subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.modal-close {
+  margin-left: auto;
+  background: var(--s2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 6px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.modal-body {
+  overflow-y: auto;
+  padding: 16px 20px;
+  flex: 1;
+}
+.modal-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ─── LISTE DE COURSES ───────────────────────────────────────── */
+.courses-rayon { margin-bottom: 16px; }
+.courses-rayon-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 6px 0;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+.courses-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0 5px 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  cursor: pointer;
+}
+.courses-row:hover { background: var(--s2); }
+.courses-check { accent-color: var(--green); width: 13px; height: 13px; flex-shrink: 0; cursor: pointer; }
+.courses-check:checked + .courses-item-name { text-decoration: line-through; opacity: .5; }
+.courses-item-name { flex: 1; color: var(--text); }
+.courses-item-qty  { color: var(--green); font-weight: 700; font-size: 12px; white-space: nowrap; }
+
+/* ─── MODAL REPAS ────────────────────────────────────────────── */
+.meal-meta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.meal-ingredient-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.meal-ingredient-name { color: var(--text); }
+.meal-ingredient-qty  { color: var(--green); font-weight: 700; }
+
+/* ─── SECTION PLANNING — SEMAINE TYPE ───────────────────────── */
+.day-grid { display: flex; flex-direction: column; gap: 3px; }
+.day-row  { display: grid; grid-template-columns: 100px 1fr; gap: 3px; }
+.day-label {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 3px 0 0 3px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.dname { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 1px; }
+.dtype { font-size: 10px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; }
+.day-label.free .dname { color: var(--green); }
+.day-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 0 3px 3px 0;
+  padding: 8px;
+}
+.slot {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 11px;
+  border-radius: 3px;
+  min-width: 110px;
+  flex: 1;
+}
+.stime  { font-size: 10px; font-weight: 600; letter-spacing: .5px; opacity: .65; margin-bottom: 2px; }
+.slabel { font-size: 12px; font-weight: 500; }
+.sdesc  { font-size: 11px; opacity: .6; margin-top: 2px; }
+
+/* Couleurs des créneaux */
+.s-wake   { background:#1c1f1a; border-left:3px solid #4a4a40; }
+.s-wake .stime, .s-wake .slabel { color: var(--muted); }
+.s-route  { background:#1a1e24; border-left:3px solid #3a4a5a; }
+.s-route .stime, .s-route .slabel { color: #5a7a9a; }
+.s-work   { background:#141c24; border-left:3px solid var(--blue); }
+.s-work .stime, .s-work .slabel { color: var(--blue); }
+.s-pause  { background:#1e2014; border-left:3px solid var(--amber); }
+.s-pause .stime, .s-pause .slabel { color: var(--amber); }
+.s-sport  { background:#141e17; border-left:3px solid var(--green); }
+.s-sport .stime, .s-sport .slabel { color: var(--green); }
+.s-meal   { background:#1e1c14; border-left:3px solid #c9a040; }
+.s-meal .stime, .s-meal .slabel { color: #c9a040; }
+.s-admin  { background:#1c1424; border-left:3px solid var(--purple); }
+.s-admin .stime, .s-admin .slabel { color: var(--purple); }
+.s-calm   { background:#141e1e; border-left:3px solid var(--teal); }
+.s-calm .stime, .s-calm .slabel { color: var(--teal); }
+.s-social { background:#1e1420; border-left:3px solid var(--pink); }
+.s-social .stime, .s-social .slabel { color: var(--pink); }
+.s-poker  { background:#1e1414; border-left:3px solid var(--red); }
+.s-poker .stime, .s-poker .slabel { color: var(--red); }
+.s-kids   { background:#1e1a14; border-left:3px solid var(--orange); }
+.s-kids .stime, .s-kids .slabel { color: var(--orange); }
+.s-sleep  { background:#141416; border-left:3px solid #5a5a7a; }
+.s-sleep .stime, .s-sleep .slabel { color: #8888aa; }
+.s-prep   { background:#1a1c14; border-left:3px solid var(--lime); }
+.s-prep .stime, .s-prep .slabel { color: var(--lime); }
+.s-range  { background:#181820; border-left:3px solid #7a7aaa; }
+.s-range .stime, .s-range .slabel { color: #9090cc; }
+
+/* Légende */
+.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.leg-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+.leg-dot { width: 9px; height: 9px; border-radius: 2px; }
+
+/* ─── NUTRITION ──────────────────────────────────────────────── */
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.profile-card {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+.macro-bar-wrap { margin-bottom: 10px; }
+.macro-bar-label { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.macro-bar-track { background: var(--border); border-radius: 4px; height: 6px; overflow: hidden; }
+.macro-bar-fill  { height: 100%; border-radius: 4px; }
+
+/* ─── SOMMEIL ────────────────────────────────────────────────── */
+.sleep-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.sleep-card { background: var(--s1); border: 1px solid var(--border); border-radius: 4px; padding: 18px 20px; }
+.sleep-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; color: var(--teal); margin-bottom: 10px; }
+.sleep-card ul { list-style: none; }
+.sleep-card ul li { font-size: 13px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
+.sleep-card ul li:last-child { border-bottom: none; }
+.rhythm-box { background: var(--s1); border: 1px solid var(--border); border-left: 3px solid #8888aa; border-radius: 4px; padding: 18px 22px; }
+.rhythm-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 1px; color: #aaaacc; margin-bottom: 14px; }
+.rhythm-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.rhythm-row:last-child { border-bottom: none; }
+.r-time  { font-size: 20px; font-family: 'Bebas Neue', sans-serif; color: var(--text); width: 65px; flex-shrink: 0; }
+.r-label { font-size: 13px; color: var(--muted); }
+.r-dot   { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-left: auto; }
+
+/* ─── SPORT ──────────────────────────────────────────────────── */
+.sport-week { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+.sport-card { background: var(--s1); border: 1px solid var(--border); border-top: 3px solid var(--green); border-radius: 4px; padding: 16px 18px; }
+.sport-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 1px; color: var(--green); }
+.s-day    { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+.s-type   { font-size: 13px; color: var(--text); font-weight: 500; }
+.s-detail { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+.s-dur {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--bg);
+  border: 1px solid var(--green);
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+.sport-tips { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tip-card { background: var(--s1); border: 1px solid var(--border); border-radius: 4px; padding: 16px 18px; }
+.tip-card h4 { font-size: 13px; font-weight: 600; color: var(--amber); margin-bottom: 8px; }
+.tip-card p  { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* ─── BUDGET ─────────────────────────────────────────────────── */
+.budget-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.budget-card { background: var(--s1); border: 1px solid var(--border); border-radius: 4px; padding: 20px 22px; }
+.budget-card.bad  { border-top: 3px solid var(--red); }
+.budget-card.good { border-top: 3px solid var(--green); }
+.budget-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 1px; margin-bottom: 6px; }
+.budget-card.bad h3  { color: var(--red); }
+.budget-card.good h3 { color: var(--green); }
+.amount { font-family: 'Bebas Neue', sans-serif; font-size: 46px; letter-spacing: 1px; }
+.budget-card.bad .amount  { color: var(--red); }
+.budget-card.good .amount { color: var(--green); }
+.amount span { font-size: 18px; opacity: .6; }
+.budget-card p   { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.budget-card ul  { list-style: none; margin-top: 10px; }
+.budget-card ul li { font-size: 13px; color: var(--muted); padding: 4px 0; border-bottom: 1px solid var(--border); }
+.savings-wrap { margin: 20px 0; }
+.savings-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.savings-bar   { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.savings-fill  {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--amber));
+  border-radius: 4px;
+  animation: growBar 1.2s .3s ease both;
+}
+@keyframes growBar { from { width: 0; } }
+
+/* ─── LUNDI PREP ─────────────────────────────────────────────── */
+.prep-banner {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--lime);
+  border-radius: 4px;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+}
+.prep-repas-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 6px;
+  background: var(--s2);
+  cursor: pointer;
+  transition: background .15s;
+}
+.prep-repas-row:hover { background: var(--s1); }
+.prep-repas-label { font-size: 13px; color: var(--text); font-weight: 500; }
+.prep-repas-hint  { font-size: 10px; color: var(--muted); }
+.prep-ordre-text {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px 18px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.gouter-prep-row {
+  display: flex;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.prep-section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.prep-checklist {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.prep-check-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.prep-check-label input { accent-color: var(--amber); width: 14px; height: 14px; flex-shrink: 0; }
+.conserv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.conserv-card { background: var(--s1); border: 1px solid var(--border); border-radius: 4px; padding: 14px 18px; }
+
+/* ─── BOÎTES ─────────────────────────────────────────────────── */
+.boite-card {
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.boite-card:hover { background: var(--s1); }
+.boite-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.boite-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.boite-day   { font-size: 11px; color: var(--muted); }
+.boite-ingredient-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border);
+}
+.boite-ingredient-name { color: var(--muted); }
+.boite-ingredient-qty  { color: var(--text); font-weight: 600; }
+
+/* ─── DIVIDER ────────────────────────────────────────────────── */
+.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* ─── CARDS ──────────────────────────────────────────────────── */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.card { background: var(--s1); border: 1px solid var(--border); border-radius: 4px; padding: 22px; }
+.card-icon { font-size: 26px; margin-bottom: 10px; }
+.card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 1px; margin-bottom: 8px; }
+.card p   { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+/* ─── PREP BOX ───────────────────────────────────────────────── */
+.prep-box { margin-top: 20px; background: var(--s1); border: 1px solid var(--border); border-left: 3px solid var(--green); border-radius: 4px; padding: 18px 22px; }
+.prep-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 1px; color: var(--green); margin-bottom: 10px; }
+.prep-box ul { list-style: none; }
+.prep-box ul li { font-size: 13px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; }
+.prep-box ul li::before { content: '→'; color: var(--green); flex-shrink: 0; }
+
+/* ─── LOCK SCREEN ────────────────────────────────────────────── */
+#lock-screen {
+  position: fixed;
+  inset: 0;
+  background: #0d0d1a;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lock-inner { text-align: center; padding: 40px; }
+.lock-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 3px;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+.lock-sub { font-size: 13px; color: #666; margin-bottom: 32px; }
+.lock-input {
+  background: #1a1a2e;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 220px;
+  outline: none;
+  text-align: center;
+}
+.lock-error { color: #ff4444; font-size: 12px; margin-top: 10px; display: none; }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .day-row { grid-template-columns: 70px 1fr; }
+  .day-slots { flex-direction: column; }
+  .slot { min-width: unset; }
+  .sleep-grid, .budget-compare, .sport-week, .sport-tips,
+  .conserv-grid { grid-template-columns: 1fr; }
+  header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .meal-table { font-size: 11px; }
+  .meal-table th, .meal-table td { padding: 7px 8px; }
+}

@@ -1,0 +1,350 @@
+[
+  {
+    "nom": "saumon",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "quinoa",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "courgette",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "huile_olive",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "poulet_cru",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "riz_blanc",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "carotte",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "pois_chiche",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "tomate_concassee",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "oignon",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "curry",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "poivron_rouge",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "brocoli",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "sauce_soja",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "cabillaud",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "lentille_verte",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "lait_vegetal",
+    "unite_defaut": "ml"
+  },
+  {
+    "nom": "boeuf_hache",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "feta",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "patate_douce",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "courge",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "colin",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "lentille_corail",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "tofu",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "gingembre",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "oignon_rouge",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "paprika",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "pate_blanche",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "tomate",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "basilic",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "pomme_de_terre",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "poireau",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "citron",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "boeuf_morceau",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "champignon",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "veau",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "haricot_rouge",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "lasagne",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "emmental",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "oeuf",
+    "unite_defaut": "piece"
+  },
+  {
+    "nom": "farine_ble",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "creme_legere",
+    "unite_defaut": "ml"
+  },
+  {
+    "nom": "jambon_blanc",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "petit_pois",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "parmesan",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "mozzarella",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "chorizo",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "epinard",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "ricotta",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "thym",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "dinde",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "steak_hache",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "pain_burger",
+    "unite_defaut": "piece"
+  },
+  {
+    "nom": "tortilla_ble",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "fromage_raclette",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "jambon_cru",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "lardons",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "chevre",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "miel",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "bacon",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "pain_mie",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "beurre",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "falafel",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "burrata",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "yaourt_nature",
+    "unite_defaut": "pot"
+  },
+  {
+    "nom": "fromage_blanc",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "pomme",
+    "unite_defaut": "piece"
+  },
+  {
+    "nom": "banane",
+    "unite_defaut": "piece"
+  },
+  {
+    "nom": "kiwi",
+    "unite_defaut": "piece"
+  },
+  {
+    "nom": "orange",
+    "unite_defaut": "piece"
+  },
+  {
+    "nom": "poire",
+    "unite_defaut": "piece"
+  },
+  {
+    "nom": "raisin",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "pain_complet",
+    "unite_defaut": "pain"
+  },
+  {
+    "nom": "lait_demi_ecreme",
+    "unite_defaut": "ml"
+  },
+  {
+    "nom": "sucre",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "compote_pomme",
+    "unite_defaut": "pot"
+  },
+  {
+    "nom": "confiture",
+    "unite_defaut": "pot"
+  },
+  {
+    "nom": "flocon_avoine",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "fruit_rouge_surgeles",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "houmous",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "yaourt",
+    "unite_defaut": "pot"
+  },
+  {
+    "nom": "sirop_erable",
+    "unite_defaut": "bouteille"
+  },
+  {
+    "nom": "beurre_cacahuete",
+    "unite_defaut": "pot"
+  },
+  {
+    "nom": "galette_riz",
+    "unite_defaut": "paquet"
+  },
+  {
+    "nom": "chocolat_noir",
+    "unite_defaut": "g"
+  },
+  {
+    "nom": "biscuit_sec",
+    "unite_defaut": "paquet"
+  },
+  {
+    "nom": "yaourt_grec",
+    "unite_defaut": "pot"
+  }
+]

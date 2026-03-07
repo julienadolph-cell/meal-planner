@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Organisation — Julien</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     ÉCRAN DE VERROUILLAGE
+     Hash simplifié côté client — protection de base.
+══════════════════════════════════════════════════════════ -->
+<div id="lock-screen">
+  <div class="lock-inner">
+    <div class="lock-title">MON PLANNING</div>
+    <div class="lock-sub">Accès privé</div>
+    <input
+      id="pwd-input"
+      type="password"
+      placeholder="Mot de passe"
+      class="lock-input"
+      autocomplete="current-password"
+      onkeydown="if(event.key==='Enter') checkPwd()"
+    >
+    <div id="pwd-error" class="lock-error">Mot de passe incorrect</div>
+    <br>
+    <button
+      onclick="checkPwd()"
+      class="btn btn-primary"
+      style="margin-top:16px; font-size:16px; padding:12px 32px;"
+    >ENTRER</button>
+  </div>
+</div>
+
+<script>
+/* Lock screen — inline obligatoire car doit s'exécuter avant le DOM */
+function checkPwd() {
+  const pwd = document.getElementById('pwd-input').value;
+  const hash = pwd.split('').reduce((a, b) => { a = ((a << 5) - a) + b.charCodeAt(0); return a & a; }, 0);
+  if (hash === 26188032) {
+    document.getElementById('lock-screen').style.display = 'none';
+    sessionStorage.setItem('auth', '1');
+  } else {
+    document.getElementById('pwd-error').style.display = 'block';
+    document.getElementById('pwd-input').value = '';
+  }
+}
+if (sessionStorage.getItem('auth') === '1') {
+  document.addEventListener('DOMContentLoaded', () => {
+    const ls = document.getElementById('lock-screen');
+    if (ls) ls.style.display = 'none';
+  });
+}
+</script>
+
+<!-- ══════════════════════════════════════════════════════════
+     CONTENU PRINCIPAL
+══════════════════════════════════════════════════════════ -->
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header>
+    <div>
+      <h1>MON <span>ORGANISATION</span></h1>
+      <p class="sub">Planning · Nutrition · Sommeil · Sport · Budget — Semaine type Julien</p>
+    </div>
+    <div class="badge" id="header-week-badge">Semaine —</div>
+  </header>
+
+  <!-- BANDEAU SEMAINE COURANTE -->
+  <div class="week-banner">
+    <div>
+      <div id="week-banner-text" style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;"></div>
+      <div id="week-banner-sub" style="font-size:12px;color:var(--muted);margin-top:3px;"></div>
+    </div>
+    <div class="week-banner-actions">
+      <button onclick="openShoppingList()" class="btn btn-primary">🛒 Liste de courses</button>
+      <div class="week-banner-note">Détection automatique<br>Semaines impaires = avec enfants</div>
+    </div>
+  </div>
+
+  <!-- ÉTAT DE CHARGEMENT -->
+  <div id="loading-state" style="display:flex;">
+    <div class="loading-spinner"></div>
+    <span style="color:var(--muted);font-size:14px;margin-left:12px;">Chargement des données…</span>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="tabs" id="main-nav" style="display:none;">
+    <button class="tab active" onclick="showSection('planning',this)">📅 Planning</button>
+    <button class="tab" onclick="showSection('nutrition',this)">🍽 Nutrition</button>
+    <button class="tab" onclick="showSection('sommeil',this)">😴 Sommeil</button>
+    <button class="tab" onclick="showSection('sport',this)">💪 Sport</button>
+    <button class="tab" onclick="showSection('budget',this)">💶 Budget</button>
+    <button class="tab" onclick="showSection('prep',this)">🍳 Lundi Prep</button>
+    <button class="tab" onclick="showSection('boites',this)">📦 Boîtes</button>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════
+       SECTION : PLANNING
+  ════════════════════════════════════════════════ -->
+  <div class="section active" id="planning">
+
+    <!-- Toggle Avec / Sans enfants -->
+    <div class="week-header">
+      <h2>MENUS DE LA SEMAINE</h2>
+      <div class="week-toggle">
+        <button class="wt-btn" onclick="showWeek('sans',this)">Sans enfants</button>
+        <button class="wt-btn" onclick="showWeek('avec',this)">Avec enfants</button>
+      </div>
+    </div>
+
+    <!-- Tableau sans enfants -->
+    <div id="week-sans">
+      <div id="week-label-sans" style="font-size:11px;color:var(--muted);margin-bottom:10px;"></div>
+      <table class="meal-table">
+        <thead>
+          <tr>
+            <th>Jour</th>
+            <th>Dîner</th>
+            <th>Petit-déj</th>
+            <th>Lunchbox</th>
+            <th>Conservation</th>
+          </tr>
+        </thead>
+        <tbody id="menu-sans-body"></tbody>
+      </table>
+      <div style="margin-top:12px;display:flex;gap:8px;">
+        <button onclick="openShoppingListFor('sans')" class="btn btn-secondary">🛒 Courses semaine sans enfants</button>
+      </div>
+    </div>
+
+    <!-- Tableau avec enfants -->
+    <div id="week-avec" style="display:none;">
+      <div id="week-label-avec" style="font-size:11px;color:var(--muted);margin-bottom:10px;"></div>
+      <table class="meal-table">
+        <thead>
+          <tr>
+            <th>Jour</th>
+            <th>Dîner</th>
+            <th>Petit-déj</th>
+            <th>Lunchbox</th>
+            <th>Conservation</th>
+          </tr>
+        </thead>
+        <tbody id="menu-avec-body"></tbody>
+      </table>
+
+      <!-- Goûters de la semaine -->
+      <div class="sec-title" style="margin-top:24px;">🍪 GOÛTERS DE LA SEMAINE</div>
+      <div style="background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:4px;padding:14px 18px;margin-bottom:16px;">
+        <div id="gouters-body"></div>
+      </div>
+
+      <!-- Brunch dimanche -->
+      <div class="sec-title">🥞 BRUNCH DU DIMANCHE</div>
+      <div style="background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:4px;padding:14px 18px;margin-bottom:16px;">
+        <div style="font-size:13px;color:var(--muted);">Œufs, pain grillé, fromage, fruits frais · Repas convivial en famille</div>
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;">
+        <button onclick="openShoppingListFor('avec')" class="btn btn-secondary">🛒 Courses semaine avec enfants</button>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Semaine type planning journalier -->
+    <div class="week-header" style="margin-top:8px;">
+      <h2>SEMAINE TYPE</h2>
+      <div class="week-toggle">
+        <button class="wt-btn active" onclick="showPlanningWeek('sans',this)">Sans enfants</button>
+        <button class="wt-btn" onclick="showPlanningWeek('avec',this)">Avec enfants</button>
+      </div>
+    </div>
+
+    <div id="planning-sans">
+      <div class="day-grid">
+        <div class="day-row">
+          <div class="day-label free"><div class="dname">DIM</div><div class="dtype">Libre</div></div>
+          <div class="day-slots">
+            <div class="slot s-sleep"><div class="stime">9H00</div><div class="slabel">☕ Lever tardif</div><div class="sdesc">Café tranquille</div></div>
+            <div class="slot s-sport"><div class="stime">10H00</div><div class="slabel">🚶 Marche — Séance 1</div><div class="sdesc">30–45 min · plaisir</div></div>
+            <div class="slot s-meal"><div class="stime">12H00</div><div class="slabel">🥞 Brunch solo</div><div class="sdesc">Œufs, pain, fromage, fruits</div></div>
+            <div class="slot s-calm"><div class="stime">15H00</div><div class="slabel">🛋 Temps libre</div><div class="sdesc">Lecture, musique, repos</div></div>
+            <div class="slot s-meal"><div class="stime">19H30</div><div class="slabel">🍽 Dîner</div></div>
+            <div class="slot s-sleep"><div class="stime">23H00</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label free"><div class="dname">LUN</div><div class="dtype">Libre</div></div>
+          <div class="day-slots">
+            <div class="slot s-sleep"><div class="stime">8H30</div><div class="slabel">☕ Lever + petit-déj</div><div class="sdesc">Café + yaourt + fruit</div></div>
+            <div class="slot s-sport"><div class="stime">9H00</div><div class="slabel">🚶 Marche — Séance 2</div><div class="sdesc">Sport doux · avant courses</div></div>
+            <div class="slot s-meal"><div class="stime">10H00</div><div class="slabel">🛒 Courses</div><div class="sdesc">Liste auto générée · ~40€</div></div>
+            <div class="slot s-prep"><div class="stime">12H00</div><div class="slabel">🍳 Meal prep 3h</div><div class="sdesc">Cuisine lun→sam × 4 · congélation incluse</div></div>
+            <div class="slot s-meal"><div class="stime">19H30</div><div class="slabel">🍽 Dîner</div></div>
+            <div class="slot s-calm"><div class="stime">21H00</div><div class="slabel">🛋 Temps pour toi</div></div>
+            <div class="slot s-sleep"><div class="stime">23H00</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label"><div class="dname">MAR</div><div class="dtype">Travail</div></div>
+          <div class="day-slots">
+            <div class="slot s-wake"><div class="stime">8H00</div><div class="slabel">☕ Lever + petit-déj</div><div class="sdesc">5 min</div></div>
+            <div class="slot s-route"><div class="stime">8H30</div><div class="slabel">🚗 Route 1h</div></div>
+            <div class="slot s-work"><div class="stime">9H30</div><div class="slabel">💼 Boutique</div></div>
+            <div class="slot s-pause"><div class="stime">13H00</div><div class="slabel">🍱 Lunchbox</div></div>
+            <div class="slot s-work"><div class="stime">14H–19H</div><div class="slabel">💼 Boutique suite</div></div>
+            <div class="slot s-route"><div class="stime">19H00</div><div class="slabel">🚗 Retour 30 min</div><div class="sdesc">Péage — 4€</div></div>
+            <div class="slot s-sleep"><div class="stime">23H00</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label"><div class="dname">MER</div><div class="dtype">Travail</div></div>
+          <div class="day-slots">
+            <div class="slot s-wake"><div class="stime">8H00</div><div class="slabel">☕ Lever + petit-déj</div></div>
+            <div class="slot s-route"><div class="stime">8H30</div><div class="slabel">🚗 Route 1h</div></div>
+            <div class="slot s-work"><div class="stime">9H30</div><div class="slabel">💼 Boutique</div></div>
+            <div class="slot s-pause"><div class="stime">13H00</div><div class="slabel">🍱 Lunchbox</div></div>
+            <div class="slot s-sport"><div class="stime">13H20</div><div class="slabel">🚶 Marche — Séance 3</div><div class="sdesc">30 min · pause midi</div></div>
+            <div class="slot s-work"><div class="stime">14H–19H</div><div class="slabel">💼 Boutique suite</div></div>
+            <div class="slot s-route"><div class="stime">19H00</div><div class="slabel">🚗 Retour 30 min</div><div class="sdesc">Péage — 4€</div></div>
+            <div class="slot s-sleep"><div class="stime">23H00</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label"><div class="dname">JEU</div><div class="dtype">Travail</div></div>
+          <div class="day-slots">
+            <div class="slot s-wake"><div class="stime">8H00</div><div class="slabel">☕ Lever + petit-déj</div></div>
+            <div class="slot s-route"><div class="stime">8H30</div><div class="slabel">🚗 Route 1h</div></div>
+            <div class="slot s-work"><div class="stime">9H30</div><div class="slabel">💼 Boutique</div></div>
+            <div class="slot s-pause"><div class="stime">13H00</div><div class="slabel">🍱 Lunchbox</div></div>
+            <div class="slot s-sport" style="opacity:.65"><div class="stime">13H20</div><div class="slabel">🚶 Marche optionnelle</div></div>
+            <div class="slot s-admin"><div class="stime">14H</div><div class="slabel">📋 Admin boutique</div></div>
+            <div class="slot s-work"><div class="stime">15H–19H</div><div class="slabel">💼 Boutique suite</div></div>
+            <div class="slot s-route"><div class="stime">19H00</div><div class="slabel">🚗 Retour 30 min</div></div>
+            <div class="slot s-sleep"><div class="stime">23H00</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label"><div class="dname">VEN</div><div class="dtype">Travail</div></div>
+          <div class="day-slots">
+            <div class="slot s-wake"><div class="stime">8H00</div><div class="slabel">☕ Lever + petit-déj</div></div>
+            <div class="slot s-route"><div class="stime">8H30</div><div class="slabel">🚗 Route 1h</div></div>
+            <div class="slot s-work"><div class="stime">9H30</div><div class="slabel">💼 Boutique</div></div>
+            <div class="slot s-pause"><div class="stime">13H00</div><div class="slabel">🍱 Lunchbox</div></div>
+            <div class="slot s-sport" style="opacity:.65"><div class="stime">13H20</div><div class="slabel">🚶 Marche optionnelle</div></div>
+            <div class="slot s-work"><div class="stime">14H–19H</div><div class="slabel">💼 Boutique suite</div></div>
+            <div class="slot s-route"><div class="stime">19H00</div><div class="slabel">🚗 Retour 30 min</div></div>
+            <div class="slot s-sleep"><div class="stime">23H00</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label"><div class="dname">SAM</div><div class="dtype">Travail</div></div>
+          <div class="day-slots">
+            <div class="slot s-wake"><div class="stime">8H00</div><div class="slabel">☕ Lever + petit-déj</div></div>
+            <div class="slot s-route"><div class="stime">9H00</div><div class="slabel">🚗 Route 30 min</div></div>
+            <div class="slot s-work"><div class="stime">10H–18H</div><div class="slabel">💼 Boutique</div></div>
+            <div class="slot s-pause"><div class="stime">13H00</div><div class="slabel">🍱 Lunchbox</div></div>
+            <div class="slot s-route"><div class="stime">18H00</div><div class="slabel">🚗 Retour 30 min</div></div>
+            <div class="slot s-calm"><div class="stime">19H00</div><div class="slabel">🛋 Soirée libre</div></div>
+            <div class="slot s-sleep"><div class="stime">23H00</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /planning-sans -->
+
+    <div id="planning-avec" style="display:none;">
+      <div class="day-grid">
+        <div class="day-row">
+          <div class="day-label free"><div class="dname">DIM</div><div class="dtype">Libre+Kids</div></div>
+          <div class="day-slots">
+            <div class="slot s-kids"><div class="stime">MATIN</div><div class="slabel">👨‍👧 Réveil doux</div></div>
+            <div class="slot s-social"><div class="stime">10H00</div><div class="slabel">🌳 Sortie famille</div><div class="sdesc">Parc, balade, activité</div></div>
+            <div class="slot s-meal"><div class="stime">11H00</div><div class="slabel">🥞 Brunch famille</div><div class="sdesc">Œufs, pancakes, fruits · ensemble</div></div>
+            <div class="slot s-kids"><div class="stime">14H30</div><div class="slabel">👨‍👧 Temps enfants</div></div>
+            <div class="slot s-meal"><div class="stime">19H00</div><div class="slabel">🍽 Dîner famille</div></div>
+            <div class="slot s-sleep"><div class="stime">22H30</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label free"><div class="dname">LUN</div><div class="dtype">Libre+Kids</div></div>
+          <div class="day-slots">
+            <div class="slot s-sleep"><div class="stime">8H30</div><div class="slabel">☕ Lever doux + petit-déj</div></div>
+            <div class="slot s-sport"><div class="stime">9H00</div><div class="slabel">🚶 Marche — Séance 2</div></div>
+            <div class="slot s-meal"><div class="stime">10H00</div><div class="slabel">🛒 Courses famille</div><div class="sdesc">Liste auto générée · ~65€</div></div>
+            <div class="slot s-prep"><div class="stime">12H00</div><div class="slabel">🍳 Meal prep 3h</div><div class="sdesc">Cuisine lun→sam × 6 · congélation incluse</div></div>
+            <div class="slot s-kids"><div class="stime">16H30</div><div class="slabel">👨‍👧 Retour école + goûter</div></div>
+            <div class="slot s-meal"><div class="stime">18H30</div><div class="slabel">🍽 Dîner famille</div></div>
+            <div class="slot s-sleep"><div class="stime">22H30</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label"><div class="dname">MAR</div><div class="dtype">Travail+Kids</div></div>
+          <div class="day-slots">
+            <div class="slot s-wake"><div class="stime">7H30</div><div class="slabel">☕ Lever + petit-déj</div></div>
+            <div class="slot s-kids"><div class="stime">8H00</div><div class="slabel">👨‍👧 Départ école</div></div>
+            <div class="slot s-route"><div class="stime">8H30</div><div class="slabel">🚗 Route 1h</div></div>
+            <div class="slot s-work"><div class="stime">9H30</div><div class="slabel">💼 Boutique</div></div>
+            <div class="slot s-pause"><div class="stime">13H00</div><div class="slabel">🍱 Lunchbox</div></div>
+            <div class="slot s-work"><div class="stime">14H–19H</div><div class="slabel">💼 Boutique suite</div></div>
+            <div class="slot s-kids"><div class="stime">16H30</div><div class="slabel">🍪 Goûter enfants</div><div class="sdesc">Autonomes</div></div>
+            <div class="slot s-route"><div class="stime">19H00</div><div class="slabel">🚗 Retour 30 min</div></div>
+            <div class="slot s-kids"><div class="stime">19H30</div><div class="slabel">👨‍👧 Soirée famille</div></div>
+            <div class="slot s-sleep"><div class="stime">22H30</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label"><div class="dname">MER</div><div class="dtype">Travail+Kids</div></div>
+          <div class="day-slots">
+            <div class="slot s-wake"><div class="stime">7H30</div><div class="slabel">☕ Lever + petit-déj</div></div>
+            <div class="slot s-kids"><div class="stime">8H00</div><div class="slabel">👨‍👧 École matin</div></div>
+            <div class="slot s-route"><div class="stime">8H30</div><div class="slabel">🚗 Route 1h</div></div>
+            <div class="slot s-work"><div class="stime">9H30</div><div class="slabel">💼 Boutique</div></div>
+            <div class="slot s-pause"><div class="stime">13H00</div><div class="slabel">🍱 Lunchbox</div></div>
+            <div class="slot s-sport"><div class="stime">13H20</div><div class="slabel">🚶 Marche — Séance 3</div></div>
+            <div class="slot s-work"><div class="stime">14H–19H</div><div class="slabel">💼 Boutique suite</div></div>
+            <div class="slot s-kids"><div class="stime">16H30</div><div class="slabel">🍪 Goûter + après-midi</div><div class="sdesc">Autonomes depuis midi</div></div>
+            <div class="slot s-route"><div class="stime">19H00</div><div class="slabel">🚗 Retour 30 min</div></div>
+            <div class="slot s-sleep"><div class="stime">22H30</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label"><div class="dname">JEU</div><div class="dtype">Travail+Kids</div></div>
+          <div class="day-slots">
+            <div class="slot s-wake"><div class="stime">7H30</div><div class="slabel">☕ Lever + petit-déj</div></div>
+            <div class="slot s-kids"><div class="stime">8H00</div><div class="slabel">👨‍👧 Départ école</div></div>
+            <div class="slot s-route"><div class="stime">8H30</div><div class="slabel">🚗 Route 1h</div></div>
+            <div class="slot s-work"><div class="stime">9H30</div><div class="slabel">💼 Boutique</div></div>
+            <div class="slot s-pause"><div class="stime">13H00</div><div class="slabel">🍱 Lunchbox</div></div>
+            <div class="slot s-admin"><div class="stime">14H</div><div class="slabel">📋 Admin boutique</div></div>
+            <div class="slot s-work"><div class="stime">15H–19H</div><div class="slabel">💼 Boutique suite</div></div>
+            <div class="slot s-kids"><div class="stime">16H30</div><div class="slabel">🍪 Goûter enfants</div></div>
+            <div class="slot s-route"><div class="stime">19H00</div><div class="slabel">🚗 Retour 30 min</div></div>
+            <div class="slot s-kids"><div class="stime">19H30</div><div class="slabel">👨‍👧 Soirée famille</div></div>
+            <div class="slot s-sleep"><div class="stime">22H30</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label"><div class="dname">VEN</div><div class="dtype">Travail+Kids</div></div>
+          <div class="day-slots">
+            <div class="slot s-wake"><div class="stime">7H30</div><div class="slabel">☕ Lever + petit-déj</div></div>
+            <div class="slot s-kids"><div class="stime">8H00</div><div class="slabel">👨‍👧 Départ école</div></div>
+            <div class="slot s-route"><div class="stime">8H30</div><div class="slabel">🚗 Route 1h</div></div>
+            <div class="slot s-work"><div class="stime">9H30</div><div class="slabel">💼 Boutique</div></div>
+            <div class="slot s-pause"><div class="stime">13H00</div><div class="slabel">🍱 Lunchbox</div></div>
+            <div class="slot s-work"><div class="stime">14H–19H</div><div class="slabel">💼 Boutique suite</div></div>
+            <div class="slot s-kids"><div class="stime">16H30</div><div class="slabel">🍪 Goûter enfants</div></div>
+            <div class="slot s-route"><div class="stime">19H00</div><div class="slabel">🚗 Retour 30 min</div></div>
+            <div class="slot s-kids"><div class="stime">19H30</div><div class="slabel">👨‍👧 Soirée famille</div></div>
+            <div class="slot s-sleep"><div class="stime">22H30</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-label"><div class="dname">SAM</div><div class="dtype">Travail+Kids</div></div>
+          <div class="day-slots">
+            <div class="slot s-wake"><div class="stime">8H00</div><div class="slabel">☕ Lever + petit-déj</div></div>
+            <div class="slot s-route"><div class="stime">9H00</div><div class="slabel">🚗 Route 30 min</div></div>
+            <div class="slot s-work"><div class="stime">10H–18H</div><div class="slabel">💼 Boutique</div></div>
+            <div class="slot s-pause"><div class="stime">13H00</div><div class="slabel">🍱 Lunchbox</div></div>
+            <div class="slot s-route"><div class="stime">18H00</div><div class="slabel">🚗 Retour 30 min</div></div>
+            <div class="slot s-kids"><div class="stime">18H30</div><div class="slabel">👨‍👧 Soirée famille</div><div class="sdesc">Film, jeux — weekend !</div></div>
+            <div class="slot s-sleep"><div class="stime">22H30</div><div class="slabel">😴 Coucher</div></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /planning-avec -->
+
+  </div><!-- /section planning -->
+
+  <!-- ════════════════════════════════════════════════
+       SECTION : NUTRITION
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="nutrition">
+
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--amber);margin-bottom:6px;">👥 Profils Nutritionnels Famille</h2>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:20px;">Objectifs journaliers personnalisés · Recalés sur besoins réels</p>
+
+    <div class="profiles-grid">
+
+      <!-- Julien -->
+      <div class="profile-card" style="border-top:3px solid var(--amber);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:52px;height:52px;background:var(--s2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:2px solid var(--amber);">👨</div>
+          <div style="flex:1;">
+            <div style="font-size:18px;font-weight:700;">Julien</div>
+            <div style="font-size:12px;color:var(--muted);">40 ans · 180 cm · 74 kg · Sédentaire</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:22px;font-weight:700;color:var(--amber);">2150</div>
+            <div style="font-size:10px;color:var(--muted);">kcal/jour</div>
+          </div>
+        </div>
+        <span style="background:var(--amber);color:#111;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:12px;">🎯 Maintien poids</span>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Protéines</span><span style="font-size:12px;font-weight:700;color:var(--green);">100g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:40%;background:var(--green);"></div></div></div>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Glucides</span><span style="font-size:12px;font-weight:700;color:var(--amber);">260g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:65%;background:var(--amber);"></div></div></div>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Lipides</span><span style="font-size:12px;font-weight:700;color:var(--orange);">70g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:70%;background:var(--orange);"></div></div></div>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Fibres</span><span style="font-size:12px;font-weight:700;color:var(--teal);">30g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:60%;background:var(--teal);"></div></div></div>
+      </div>
+
+      <!-- AC -->
+      <div class="profile-card" style="border-top:3px solid var(--pink);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:52px;height:52px;background:var(--s2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:2px solid var(--pink);">👩</div>
+          <div style="flex:1;">
+            <div style="font-size:18px;font-weight:700;">AC</div>
+            <div style="font-size:12px;color:var(--muted);">38 ans · 165 cm · 58 kg · Actif</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:22px;font-weight:700;color:var(--pink);">1850</div>
+            <div style="font-size:10px;color:var(--muted);">kcal/jour</div>
+          </div>
+        </div>
+        <span style="background:var(--pink);color:#111;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:12px;">🎯 Maintien poids</span>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Protéines</span><span style="font-size:12px;font-weight:700;color:var(--green);">90g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:36%;background:var(--green);"></div></div></div>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Glucides</span><span style="font-size:12px;font-weight:700;color:var(--amber);">240g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:60%;background:var(--amber);"></div></div></div>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Lipides</span><span style="font-size:12px;font-weight:700;color:var(--orange);">60g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:60%;background:var(--orange);"></div></div></div>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Fibres</span><span style="font-size:12px;font-weight:700;color:var(--teal);">28g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:56%;background:var(--teal);"></div></div></div>
+      </div>
+
+      <!-- Lucas -->
+      <div class="profile-card" style="border-top:3px solid var(--blue);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:52px;height:52px;background:var(--s2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:2px solid var(--blue);">👦</div>
+          <div style="flex:1;">
+            <div style="font-size:18px;font-weight:700;">Lucas</div>
+            <div style="font-size:12px;color:var(--muted);">14 ans · 177 cm · 92 kg · Léger</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:22px;font-weight:700;color:var(--blue);">2350</div>
+            <div style="font-size:10px;color:var(--muted);">kcal/jour</div>
+          </div>
+        </div>
+        <span style="background:var(--blue);color:#111;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:12px;">🎯 Perte douce -300 kcal</span>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Protéines</span><span style="font-size:12px;font-weight:700;color:var(--green);">120g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:48%;background:var(--green);"></div></div></div>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Glucides</span><span style="font-size:12px;font-weight:700;color:var(--amber);">270g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:67%;background:var(--amber);"></div></div></div>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Lipides</span><span style="font-size:12px;font-weight:700;color:var(--orange);">75g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:75%;background:var(--orange);"></div></div></div>
+      </div>
+
+      <!-- Tim -->
+      <div class="profile-card" style="border-top:3px solid var(--orange);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:52px;height:52px;background:var(--s2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:2px solid var(--orange);">👦</div>
+          <div style="flex:1;">
+            <div style="font-size:18px;font-weight:700;">Tim</div>
+            <div style="font-size:12px;color:var(--muted);">11 ans · 145 cm · 36 kg · Actif</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:22px;font-weight:700;color:var(--orange);">1800</div>
+            <div style="font-size:10px;color:var(--muted);">kcal/jour</div>
+          </div>
+        </div>
+        <span style="background:var(--orange);color:#111;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:12px;">🎯 Croissance & énergie</span>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Protéines</span><span style="font-size:12px;font-weight:700;color:var(--green);">75g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:40%;background:var(--green);"></div></div></div>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Glucides</span><span style="font-size:12px;font-weight:700;color:var(--amber);">220g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:55%;background:var(--amber);"></div></div></div>
+        <div class="macro-bar-wrap"><div class="macro-bar-label"><span style="font-size:11px;color:var(--muted);">Lipides</span><span style="font-size:12px;font-weight:700;color:var(--orange);">55g</span></div><div class="macro-bar-track"><div class="macro-bar-fill" style="width:55%;background:var(--orange);"></div></div></div>
+      </div>
+
+    </div><!-- /profiles-grid -->
+  </div><!-- /nutrition -->
+
+  <!-- ════════════════════════════════════════════════
+       SECTION : SOMMEIL
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="sommeil">
+    <div class="sleep-grid">
+      <div class="sleep-card">
+        <h3>😴 Durée cible</h3>
+        <ul>
+          <li>7h minimum — non négociable</li>
+          <li>Coucher cible : 23h00</li>
+          <li>Lever : 8h00 les jours de travail</li>
+          <li>Semaine avec enfants : coucher 22h30 max</li>
+        </ul>
+      </div>
+      <div class="sleep-card">
+        <h3 style="color:var(--amber)">🃏 Poker & sommeil</h3>
+        <ul>
+          <li>Max 2 sessions/semaine (mardi + vendredi)</li>
+          <li>Terminer à 1h30 max — alarme si besoin</li>
+          <li>Semaine avec enfants : pas de poker en semaine</li>
+          <li>Après poker : pas de lever contraint</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rhythm-box">
+      <h3>⏰ RITUEL SOIRÉE — 60 MIN AVANT LE LIT</h3>
+      <div class="rhythm-row"><div class="r-time">22H00</div><div class="r-label">Coupure écrans — téléphone en charge loin du lit</div><div class="r-dot" style="background:var(--red)"></div></div>
+      <div class="rhythm-row"><div class="r-time">22H10</div><div class="r-label">Douche tiède — signal physiologique de descente en température</div><div class="r-dot" style="background:var(--amber)"></div></div>
+      <div class="rhythm-row"><div class="r-time">22H20</div><div class="r-label">Lecture physique OU podcast calme OU musique douce</div><div class="r-dot" style="background:var(--teal)"></div></div>
+      <div class="rhythm-row"><div class="r-time">22H50</div><div class="r-label">Chambre fraîche (18–19°), obscurité totale, pas de Netflix au lit</div><div class="r-dot" style="background:var(--purple)"></div></div>
+      <div class="rhythm-row"><div class="r-time">23H00</div><div class="r-label">😴 Extinction — même heure chaque soir, week-end compris</div><div class="r-dot" style="background:var(--green)"></div></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       SECTION : SPORT
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="sport">
+    <p style="color:var(--muted);font-size:13px;margin-bottom:20px;">3 séances fixes · Sport doux adapté aux articulations · 2 créneaux optionnels</p>
+    <div style="background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:4px;padding:14px 18px;margin-bottom:20px;font-size:13px;">
+      <strong style="color:var(--green)">3 séances fixes :</strong>
+      <span style="color:var(--muted)"> Dimanche matin · Lundi matin · Mercredi midi</span>
+      &nbsp;·&nbsp;
+      <strong style="color:var(--muted)">2 optionnelles :</strong>
+      <span style="color:var(--muted)"> Jeudi midi · Vendredi midi (si énergie)</span>
+    </div>
+    <div class="sport-week">
+      <div class="sport-card">
+        <h3>SÉANCE 1 — FIXE</h3>
+        <div class="s-day">Dimanche — 10h · Journée libre</div>
+        <div class="s-type">Marche plaisir / mobilité douce</div>
+        <div class="s-detail">Marche en extérieur 30–45 min. Séance de démarrage — légère et agréable.</div>
+        <div class="s-dur">⏱ 30–45 min · 10h00</div>
+      </div>
+      <div class="sport-card">
+        <h3>SÉANCE 2 — FIXE</h3>
+        <div class="s-day">Lundi — 9h · Journée libre</div>
+        <div class="s-type">Marche active</div>
+        <div class="s-detail">Marche dynamique avant les courses. 30 min, pas de transpiration excessive.</div>
+        <div class="s-dur">⏱ 30 min · 9h00</div>
+      </div>
+      <div class="sport-card">
+        <h3>SÉANCE 3 — FIXE</h3>
+        <div class="s-day">Mercredi — pause midi 13h–14h</div>
+        <div class="s-type">Marche active · pause boutique</div>
+        <div class="s-detail">Tu manges en 20 min, tu marches 30 min. Séance zéro excuse.</div>
+        <div class="s-dur">⏱ 30 min · 13h20</div>
+      </div>
+    </div>
+    <div class="sport-tips">
+      <div class="tip-card">
+        <h4>💡 Dim + Lun : séances plaisir</h4>
+        <p>Pas de contrainte d'heure. La marche du dimanche lance la semaine sur une bonne énergie.</p>
+      </div>
+      <div class="tip-card">
+        <h4>💡 Mercredi midi : séance la plus fiable</h4>
+        <p>Tu es obligé de faire une pause à 13h. 20 min repas, 30 min marche. Zéro excuse.</p>
+      </div>
+      <div class="tip-card">
+        <h4>💡 Jeu + Ven : bonus uniquement</h4>
+        <p>3 séances fixes déjà faites. Si tu te sens bien, c'est un bonus. Jamais forcer.</p>
+      </div>
+      <div class="tip-card">
+        <h4>💡 Sport + articulations</h4>
+        <p>La marche régulière réduit l'inflammation sur le long terme. En 3 semaines, différence notable.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       SECTION : BUDGET
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="budget">
+    <p class="sec-title">ANALYSE ALIMENTATION MENSUELLE</p>
+    <div class="budget-compare">
+      <div class="budget-card bad">
+        <h3>AVANT MEAL PREP</h3>
+        <div class="amount">~420<span>€/mois</span></div>
+        <p>Courses + sandwichs du midi</p>
+        <ul>
+          <li>Courses actuelles : <strong>350€</strong></li>
+          <li>Sandwichs 3,50€ × 20 jours : <strong>70€</strong></li>
+        </ul>
+      </div>
+      <div class="budget-card good">
+        <h3>AVEC MEAL PREP</h3>
+        <div class="amount">~295<span>€/mois</span></div>
+        <p>Courses organisées + lunchbox + goûters</p>
+        <ul>
+          <li>Sem. sans enfants (~2 sem) : <strong>~80€</strong></li>
+          <li>Sem. avec enfants (~2 sem) : <strong>~130€</strong></li>
+          <li>Goûters enfants : <strong>~30€</strong></li>
+          <li>Sandwichs : <strong>0€</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="savings-wrap">
+      <div class="savings-label">
+        <span>Économie alimentation / mois</span>
+        <span style="color:var(--green);font-weight:600">~125€ économisés</span>
+      </div>
+      <div class="savings-bar"><div class="savings-fill" style="width:42%"></div></div>
+    </div>
+    <div style="background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:4px;padding:20px 22px;margin-top:16px;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--green);margin-bottom:12px;">ÉCONOMIE NETTE MENSUELLE</div>
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);"><span style="color:var(--muted)">Optimisation courses (350€ → ~245€)</span><span style="color:var(--green);font-weight:600">+105€</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);"><span style="color:var(--muted)">Suppression sandwichs midi (3,50€ × 20j)</span><span style="color:var(--green);font-weight:600">+70€</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);"><span style="color:var(--muted)">Transport optimisé</span><span style="color:var(--green);font-weight:600">+119€</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);"><span style="color:var(--muted)">Péage semaine avec enfants</span><span style="color:var(--red);font-weight:600">-40€</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:15px;padding:12px 0 0;">
+          <span style="color:var(--text);font-weight:600">ÉCONOMIE NETTE MENSUELLE</span>
+          <span style="color:var(--green);font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;">254€</span>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:6px;">Soit ~3 050€ récupérés sur l'année</div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       SECTION : LUNDI PREP
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="prep">
+
+    <div class="prep-banner">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--lime);" id="prep-title">LUNDI — MEAL PREP SEMAINE</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px;" id="prep-subtitle"></div>
+    </div>
+
+    <div class="prep-section-title" style="color:var(--amber);">☀️ MATIN — COURSES & ORGANISATION</div>
+    <div class="prep-checklist">
+      <label class="prep-check-label"><input type="checkbox"><span>Ouvrir la liste de courses (bouton 🛒 en haut)</span></label>
+      <label class="prep-check-label"><input type="checkbox"><span>Faire les courses (~30 min)</span></label>
+      <label class="prep-check-label"><input type="checkbox"><span>Sortir tous les ingrédients + ustensiles avant de commencer</span></label>
+      <label class="prep-check-label"><input type="checkbox"><span>Préparer les contenants (boîtes lunchbox + plats congélation)</span></label>
+    </div>
+
+    <div class="prep-section-title" style="color:var(--lime);">🍳 APRÈS-MIDI — REPAS LUN→SAM</div>
+    <div id="prep-repas" style="margin-bottom:24px;"></div>
+
+    <!-- Goûters (visible si avec enfants) -->
+    <div id="prep-gouters-section" style="display:none;">
+      <div class="prep-section-title" style="color:var(--orange);">🍪 GOÛTERS SEMAINE — À PRÉPARER AUSSI</div>
+      <div style="background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:4px;padding:16px 20px;margin-bottom:24px;">
+        <div id="prep-gouters"></div>
+      </div>
+    </div>
+
+    <div class="prep-section-title" style="color:var(--teal);">💡 ORDRE DE PRÉPARATION</div>
+    <div id="prep-ordre-cuisson" style="margin-bottom:24px;"></div>
+
+    <div class="prep-section-title" style="color:var(--teal);">📦 PORTIONNAGE APRÈS CUISSON</div>
+    <div class="prep-checklist">
+      <label class="prep-check-label"><input type="checkbox"><span>Portionner <strong>immédiatement</strong> après cuisson</span></label>
+      <label class="prep-check-label"><input type="checkbox"><span>Séparer <strong>lunchbox</strong> / <strong>dîner</strong> / <strong>congélation</strong> (sac étiqueté)</span></label>
+      <label class="prep-check-label"><input type="checkbox"><span>Étiqueter les boîtes congélation avec le <strong>jour de destination</strong></span></label>
+      <label class="prep-check-label"><input type="checkbox"><span>Mettre <strong>jeu + ven + sam</strong> au congélateur · les autres au frigo</span></label>
+      <div id="prep-gouters-ordre" style="display:none;">
+        <label class="prep-check-label" style="margin-top:4px;"><input type="checkbox"><span>🍪 Préparer le <strong>goûter maison</strong> pendant que les plats refroidissent</span></label>
+      </div>
+    </div>
+
+    <div class="prep-section-title" style="color:var(--muted);margin-top:24px;">📦 CONSERVATION</div>
+    <div class="conserv-grid">
+      <div class="conserv-card" style="border-left:3px solid var(--blue);">
+        <div style="font-size:13px;font-weight:600;color:var(--blue);margin-bottom:8px;">❄️ Frigo — 3 à 4 jours</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">Repas lun · mar · mer<br>Lunchbox du lendemain toujours au frigo<br>Boîtes hermétiques obligatoires</div>
+      </div>
+      <div class="conserv-card" style="border-left:3px solid var(--teal);">
+        <div style="font-size:13px;font-weight:600;color:var(--teal);margin-bottom:8px;">🧊 Congélateur — jusqu'au soir J</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">Repas jeu · ven · sam<br>Décongeler au frigo la veille au soir<br>Ne jamais recongeler</div>
+      </div>
+    </div>
+
+  </div><!-- /prep -->
+
+  <!-- ════════════════════════════════════════════════
+       SECTION : BOÎTES
+  ════════════════════════════════════════════════ -->
+  <div class="section" id="boites">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--amber);letter-spacing:1px;margin-bottom:4px;">📦 Boîtes & Lunchboxes</div>
+    <div id="week-banner-boites" style="font-size:11px;color:var(--muted);margin-bottom:16px;"></div>
+    <div id="boites-container"></div>
+  </div>
+
+</div><!-- /wrap -->
+
+<!-- ════════════════════════════════════════════════
+     MODAL LISTE DE COURSES
+════════════════════════════════════════════════ -->
+<div id="courses-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">🛒 LISTE DE COURSES</div>
+        <div id="courses-title" class="modal-subtitle"></div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+        <a id="btn-gmail" href="#" target="_blank" class="btn btn-success" style="text-decoration:none;display:flex;align-items:center;gap:6px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.5px;padding:8px 14px;border-radius:3px;">
+          ✉️ Ouvrir dans Gmail
+        </a>
+        <button class="modal-close" onclick="closeShoppingList()">✕</button>
+      </div>
+    </div>
+    <div id="courses-content" class="modal-body"></div>
+    <div class="modal-footer">
+      <span style="font-size:11px;color:var(--muted);">☑ Coche au fur et à mesure · Dîners + Lunchboxes + Petits-déj + Goûters + Brunch · Semaines impaires = avec enfants</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     MODAL DÉTAIL REPAS
+════════════════════════════════════════════════ -->
+<div id="meal-modal" class="modal-overlay">
+  <div class="modal-box" style="max-width:420px;">
+    <div class="modal-header">
+      <div id="meal-title" class="modal-title" style="font-size:16px;"></div>
+      <button class="modal-close" onclick="closeMealModal()">✕</button>
+    </div>
+    <div id="meal-body" class="modal-body"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCRIPTS — dans l'ordre
+════════════════════════════════════════════════ -->
+<script src="js/menu_engine.js"></script>
+<script src="js/app.js"></script>
+
+<!-- Afficher la nav après chargement -->
+<script>
+window.addEventListener('load', function() {
+  // Afficher la nav une fois les données prêtes
+  // app.js masquera le loading-state et nous montrons la nav
+  var nav = document.getElementById('main-nav');
+  if (nav) {
+    // On attend que app.js ait fini l'init (il masque loading-state)
+    var observer = new MutationObserver(function() {
+      var ls = document.getElementById('loading-state');
+      if (ls && ls.style.display === 'none') {
+        nav.style.display = 'flex';
+        observer.disconnect();
+      }
+    });
+    var ls = document.getElementById('loading-state');
+    if (ls) observer.observe(ls, { attributes: true, attributeFilter: ['style'] });
+  }
+});
+
+// Planning toggle
+function showPlanningWeek(type, btn) {
+  document.querySelectorAll('#planning .wt-btn').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  var sans = document.getElementById('planning-sans');
+  var avec = document.getElementById('planning-avec');
+  if (sans) sans.style.display = type === 'sans' ? 'block' : 'none';
+  if (avec) avec.style.display = type === 'avec' ? 'block' : 'none';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,629 @@
+{
+  "saumon": {
+    "kcal": 208,
+    "proteines": 20,
+    "glucides": 0,
+    "lipides": 13,
+    "fibres": 0
+  },
+  "quinoa": {
+    "kcal": 120,
+    "proteines": 4.4,
+    "glucides": 21.3,
+    "lipides": 1.9,
+    "fibres": 2.8
+  },
+  "courgette": {
+    "kcal": 17,
+    "proteines": 1.2,
+    "glucides": 3.1,
+    "lipides": 0.3,
+    "fibres": 1
+  },
+  "huile_olive": {
+    "kcal": 884,
+    "proteines": 0,
+    "glucides": 0,
+    "lipides": 100,
+    "fibres": 0
+  },
+  "poulet_cru": {
+    "kcal": 120,
+    "proteines": 22.5,
+    "glucides": 0,
+    "lipides": 2.6,
+    "fibres": 0
+  },
+  "riz_blanc": {
+    "kcal": 130,
+    "proteines": 2.7,
+    "glucides": 28,
+    "lipides": 0.3,
+    "fibres": 0.4
+  },
+  "carotte": {
+    "kcal": 41,
+    "proteines": 0.9,
+    "glucides": 9.6,
+    "lipides": 0.2,
+    "fibres": 2.8
+  },
+  "pois_chiche": {
+    "kcal": 164,
+    "proteines": 9,
+    "glucides": 27,
+    "lipides": 2.6,
+    "fibres": 7.6
+  },
+  "tomate_concassee": {
+    "kcal": 30,
+    "proteines": 1.4,
+    "glucides": 5,
+    "lipides": 0.2,
+    "fibres": 1.5
+  },
+  "oignon": {
+    "kcal": 40,
+    "proteines": 1.1,
+    "glucides": 9.3,
+    "lipides": 0.1,
+    "fibres": 1.7
+  },
+  "curry": {
+    "kcal": 325,
+    "proteines": 12,
+    "glucides": 58,
+    "lipides": 14,
+    "fibres": 33
+  },
+  "poivron_rouge": {
+    "kcal": 31,
+    "proteines": 1,
+    "glucides": 6,
+    "lipides": 0.3,
+    "fibres": 2.1
+  },
+  "brocoli": {
+    "kcal": 34,
+    "proteines": 2.8,
+    "glucides": 7,
+    "lipides": 0.4,
+    "fibres": 2.6
+  },
+  "sauce_soja": {
+    "kcal": 53,
+    "proteines": 8,
+    "glucides": 5,
+    "lipides": 0.6,
+    "fibres": 0.8
+  },
+  "cabillaud": {
+    "kcal": 82,
+    "proteines": 18,
+    "glucides": 0,
+    "lipides": 0.7,
+    "fibres": 0
+  },
+  "lentille_verte": {
+    "kcal": 116,
+    "proteines": 9,
+    "glucides": 20,
+    "lipides": 0.4,
+    "fibres": 8
+  },
+  "lait_vegetal": {
+    "kcal": 40,
+    "proteines": 1,
+    "glucides": 6,
+    "lipides": 1.5,
+    "fibres": 0.3
+  },
+  "boeuf_hache": {
+    "kcal": 250,
+    "proteines": 26,
+    "glucides": 0,
+    "lipides": 17,
+    "fibres": 0
+  },
+  "feta": {
+    "kcal": 265,
+    "proteines": 14,
+    "glucides": 4,
+    "lipides": 21,
+    "fibres": 0
+  },
+  "patate_douce": {
+    "kcal": 86,
+    "proteines": 1.6,
+    "glucides": 20.1,
+    "lipides": 0.1,
+    "fibres": 3
+  },
+  "courge": {
+    "kcal": 34,
+    "proteines": 1,
+    "glucides": 7,
+    "lipides": 0.1,
+    "fibres": 1.1
+  },
+  "colin": {
+    "kcal": 90,
+    "proteines": 19,
+    "glucides": 0,
+    "lipides": 1,
+    "fibres": 0
+  },
+  "lentille_corail": {
+    "kcal": 116,
+    "proteines": 9,
+    "glucides": 20,
+    "lipides": 0.4,
+    "fibres": 7.9
+  },
+  "tofu": {
+    "kcal": 76,
+    "proteines": 8,
+    "glucides": 1.9,
+    "lipides": 4.8,
+    "fibres": 0.3
+  },
+  "gingembre": {
+    "kcal": 80,
+    "proteines": 1.8,
+    "glucides": 18,
+    "lipides": 0.8,
+    "fibres": 2
+  },
+  "oignon_rouge": {
+    "kcal": 40,
+    "proteines": 1.1,
+    "glucides": 9.3,
+    "lipides": 0.1,
+    "fibres": 1.7
+  },
+  "paprika": {
+    "kcal": 282,
+    "proteines": 14,
+    "glucides": 54,
+    "lipides": 13,
+    "fibres": 35
+  },
+  "pate_blanche": {
+    "kcal": 131,
+    "proteines": 5,
+    "glucides": 25,
+    "lipides": 1.1,
+    "fibres": 1.3
+  },
+  "tomate": {
+    "kcal": 18,
+    "proteines": 0.9,
+    "glucides": 3.9,
+    "lipides": 0.2,
+    "fibres": 1.2
+  },
+  "basilic": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "pomme_de_terre": {
+    "kcal": 77,
+    "proteines": 2,
+    "glucides": 17,
+    "lipides": 0.1,
+    "fibres": 2.2
+  },
+  "poireau": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "citron": {
+    "kcal": 29,
+    "proteines": 1.1,
+    "glucides": 9.3,
+    "lipides": 0.3,
+    "fibres": 2.8
+  },
+  "boeuf_morceau": {
+    "kcal": 200,
+    "proteines": 26,
+    "glucides": 0,
+    "lipides": 10,
+    "fibres": 0
+  },
+  "champignon": {
+    "kcal": 22,
+    "proteines": 3.1,
+    "glucides": 3.3,
+    "lipides": 0.3,
+    "fibres": 1
+  },
+  "veau": {
+    "kcal": 172,
+    "proteines": 24,
+    "glucides": 0,
+    "lipides": 8,
+    "fibres": 0
+  },
+  "haricot_rouge": {
+    "kcal": 127,
+    "proteines": 8.7,
+    "glucides": 22.8,
+    "lipides": 0.5,
+    "fibres": 6.4
+  },
+  "lasagne": {
+    "kcal": 350,
+    "proteines": 12,
+    "glucides": 70,
+    "lipides": 2,
+    "fibres": 3
+  },
+  "emmental": {
+    "kcal": 380,
+    "proteines": 27,
+    "glucides": 1.5,
+    "lipides": 30,
+    "fibres": 0
+  },
+  "oeuf": {
+    "kcal": 155,
+    "proteines": 13,
+    "glucides": 1.1,
+    "lipides": 11,
+    "fibres": 0,
+    "piece_grammes": 60
+  },
+  "farine_ble": {
+    "kcal": 364,
+    "proteines": 10,
+    "glucides": 76,
+    "lipides": 1,
+    "fibres": 3
+  },
+  "creme_legere": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "jambon_blanc": {
+    "kcal": 145,
+    "proteines": 21,
+    "glucides": 1.5,
+    "lipides": 6,
+    "fibres": 0
+  },
+  "petit_pois": {
+    "kcal": 81,
+    "proteines": 5.4,
+    "glucides": 14,
+    "lipides": 0.4,
+    "fibres": 5.7
+  },
+  "parmesan": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "mozzarella": {
+    "kcal": 280,
+    "proteines": 28,
+    "glucides": 3,
+    "lipides": 17,
+    "fibres": 0
+  },
+  "chorizo": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "epinard": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "ricotta": {
+    "kcal": 174,
+    "proteines": 11,
+    "glucides": 3,
+    "lipides": 13,
+    "fibres": 0
+  },
+  "thym": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "dinde": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "steak_hache": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "pain_burger": {
+    "kcal": 270,
+    "proteines": 9,
+    "glucides": 50,
+    "lipides": 3,
+    "fibres": 2,
+    "piece_grammes": 80
+  },
+  "tortilla_ble": {
+    "kcal": 310,
+    "proteines": 8,
+    "glucides": 52,
+    "lipides": 7,
+    "fibres": 3,
+    "piece_grammes": 60
+  },
+  "fromage_raclette": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "jambon_cru": {
+    "kcal": 250,
+    "proteines": 28,
+    "glucides": 0,
+    "lipides": 15,
+    "fibres": 0
+  },
+  "lardons": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "chevre": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "miel": {
+    "kcal": 304,
+    "proteines": 0.3,
+    "glucides": 82,
+    "lipides": 0,
+    "fibres": 0
+  },
+  "bacon": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "pain_mie": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "beurre": {
+    "kcal": 717,
+    "proteines": 0.9,
+    "glucides": 0.1,
+    "lipides": 81,
+    "fibres": 0
+  },
+  "falafel": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "burrata": {
+    "kcal": 300,
+    "proteines": 11,
+    "glucides": 2,
+    "lipides": 27,
+    "fibres": 0
+  },
+  "yaourt_nature": {
+    "kcal": 61,
+    "proteines": 3.5,
+    "glucides": 4.7,
+    "lipides": 3.3,
+    "fibres": 0,
+    "piece_grammes": 125
+  },
+  "fromage_blanc": {
+    "kcal": 98,
+    "proteines": 8,
+    "glucides": 3.4,
+    "lipides": 7,
+    "fibres": 0
+  },
+  "pomme": {
+    "kcal": 52,
+    "proteines": 0.3,
+    "glucides": 14,
+    "lipides": 0.2,
+    "fibres": 2.4,
+    "piece_grammes": 150
+  },
+  "banane": {
+    "kcal": 89,
+    "proteines": 1.1,
+    "glucides": 22.8,
+    "lipides": 0.3,
+    "fibres": 2.6,
+    "piece_grammes": 120
+  },
+  "kiwi": {
+    "kcal": 61,
+    "proteines": 1.1,
+    "glucides": 15,
+    "lipides": 0.5,
+    "fibres": 3,
+    "piece_grammes": 80
+  },
+  "orange": {
+    "kcal": 47,
+    "proteines": 0.9,
+    "glucides": 11.8,
+    "lipides": 0.1,
+    "fibres": 2.4,
+    "piece_grammes": 150
+  },
+  "poire": {
+    "kcal": 57,
+    "proteines": 0.4,
+    "glucides": 15.2,
+    "lipides": 0.1,
+    "fibres": 3.1,
+    "piece_grammes": 160
+  },
+  "raisin": {
+    "kcal": 69,
+    "proteines": 0.7,
+    "glucides": 18,
+    "lipides": 0.2,
+    "fibres": 0.9
+  },
+  "pain_complet": {
+    "kcal": 247,
+    "proteines": 13,
+    "glucides": 41,
+    "lipides": 4.2,
+    "fibres": 7,
+    "piece_grammes": 400
+  },
+  "lait_demi_ecreme": {
+    "kcal": 46,
+    "proteines": 3.4,
+    "glucides": 4.8,
+    "lipides": 1.6,
+    "fibres": 0
+  },
+  "sucre": {
+    "kcal": 387,
+    "proteines": 0,
+    "glucides": 100,
+    "lipides": 0,
+    "fibres": 0
+  },
+  "compote_pomme": {
+    "kcal": 68,
+    "proteines": 0.1,
+    "glucides": 16,
+    "lipides": 0.1,
+    "fibres": 1.5,
+    "piece_grammes": 100
+  },
+  "confiture": {
+    "kcal": 250,
+    "proteines": 0.4,
+    "glucides": 60,
+    "lipides": 0.1,
+    "fibres": 1,
+    "piece_grammes": 1
+  },
+  "flocon_avoine": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2
+  },
+  "fruit_rouge_surgeles": {
+    "kcal": 50,
+    "proteines": 1,
+    "glucides": 10,
+    "lipides": 0.4,
+    "fibres": 4
+  },
+  "houmous": {
+    "kcal": 166,
+    "proteines": 7.9,
+    "glucides": 14.3,
+    "lipides": 9.6,
+    "fibres": 6
+  },
+  "yaourt": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2,
+    "piece_grammes": 1
+  },
+  "sirop_erable": {
+    "kcal": 100,
+    "proteines": 2,
+    "glucides": 15,
+    "lipides": 2,
+    "fibres": 2,
+    "piece_grammes": 1
+  },
+  "beurre_cacahuete": {
+    "kcal": 588,
+    "proteines": 25,
+    "glucides": 20,
+    "lipides": 50,
+    "fibres": 6,
+    "piece_grammes": 1
+  },
+  "galette_riz": {
+    "kcal": 387,
+    "proteines": 8,
+    "glucides": 81,
+    "lipides": 3,
+    "fibres": 4,
+    "piece_grammes": 1
+  },
+  "chocolat_noir": {
+    "kcal": 598,
+    "proteines": 7.8,
+    "glucides": 46,
+    "lipides": 43,
+    "fibres": 11
+  },
+  "biscuit_sec": {
+    "kcal": 430,
+    "proteines": 7,
+    "glucides": 72,
+    "lipides": 12,
+    "fibres": 2,
+    "piece_grammes": 1
+  },
+  "yaourt_grec": {
+    "kcal": 115,
+    "proteines": 6,
+    "glucides": 4,
+    "lipides": 10,
+    "fibres": 0,
+    "piece_grammes": 150
+  }
+}
