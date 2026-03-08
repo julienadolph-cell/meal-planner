@@ -231,6 +231,22 @@
       totals[YK_G].unite = 'pot';
       totals[YK_G].quantite = Math.ceil(totals[YK_G].quantite / 125);
     }
+    // Convertir féculents cuits → crus pour la liste de courses
+    // Les recettes et portions sont calculées en poids cuit
+    // En rayon on achète du cru → on divise par le coefficient de gonflement
+    const FECULENT_COEFF = {
+      riz_blanc:3, quinoa:3, pate_blanche:2.5,
+      lentille_corail:2.5, lentille_verte:2.5,
+      pois_chiche:2.5, haricot_rouge:2.5,
+      // pomme_de_terre, patate_douce : pas de conversion (poids quasi stable)
+    };
+    Object.entries(FECULENT_COEFF).forEach(([ing, coeff]) => {
+      const key = ing + ':g';
+      if(totals[key]){
+        totals[key].quantite = Math.round(totals[key].quantite / coeff);
+        totals[key].label_cru = true;
+      }
+    });
     const byRayon={};
     Object.values(totals).forEach(item=>{
       const rayon=getRayon(item.ingredient);
@@ -252,10 +268,14 @@
       items.forEach(item=>{
         const label=humanIngredient(item.ingredient);
         const qty=displayQty(item);
-        txt += `□ ${label} — ${qty}\n`;
+        txt += `□ ${label}${item.label_cru?' (cru)':''} — ${qty}\n`;
         const row=document.createElement('div');
         row.style.cssText='display:flex;align-items:center;gap:8px;padding:4px 0 4px 10px;border-bottom:1px solid var(--border);font-size:12px;';
-        row.innerHTML=`<input type="checkbox" style="accent-color:var(--green);width:13px;height:13px;flex-shrink:0;"><span style="flex:1;color:var(--text);">${label}</span><span style="color:var(--green);font-weight:700;font-size:12px;">${qty}</span>`;
+        const isCru = item.label_cru;
+        const labelHtml = isCru
+          ? `${label} <span style="font-size:10px;color:var(--muted);font-weight:400;">(cru)</span>`
+          : label;
+        row.innerHTML=`<input type="checkbox" style="accent-color:var(--green);width:13px;height:13px;flex-shrink:0;"><span style="flex:1;color:var(--text);">${labelHtml}</span><span style="color:var(--green);font-weight:700;font-size:12px;">${qty}</span>`;
         wrap.appendChild(row);
       });
       content.appendChild(wrap);
@@ -543,4 +563,4 @@
   }
   window.addEventListener('load', init);
 })();
-// v15-macros-pct
+// v16-feculent-cru
