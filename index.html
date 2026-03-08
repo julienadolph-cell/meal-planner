@@ -384,7 +384,8 @@ if (sessionStorage.getItem('auth') === '1') {
   <button class="tab" onclick="showSection('sport',this)">💪 Sport</button>
   <button class="tab" onclick="showSection('budget',this)">💶 Budget</button>
   <button class="tab" onclick="showSection('prep',this)">🍳 Lundi Prep</button>
-  <button class="tab" onclick="showSection('boites',this)">📦 Boîtes</button>
+  <button class="tab" onclick="showSection('boites',this);buildBoitesTab()">📦 Boîtes</button>
+  <button class="tab" id="tab-btn-enfants" onclick="showSection('enfants',this)" style="display:none;">👶 Enfants</button>
 </nav>
 
 <!-- ===== PLANNING ===== -->
@@ -2535,6 +2536,12 @@ buildGouters();
 </script>
 
 <!-- ══ SECTION BOÎTES ══════════════════════════════════════════════════ -->
+<div class="section" id="enfants">
+  <div style="padding:16px;" id="enfants-container">
+    <!-- Rendu par app.js -->
+  </div>
+</div>
+
 <div class="section" id="boites">
   <div style="padding:16px;">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--amber);letter-spacing:1px;margin-bottom:4px;">📦 Boîtes de la semaine</div>
@@ -2571,6 +2578,6 @@ buildGouters();
 
 
 <script src="js/menu_engine.js"></script>
-<script src="js/app.js?v=16"></script>
+<script src="js/app_v2.js"></script>
 </body>
 </html>

@@ -542,6 +542,95 @@
   }
 
   // ─── INIT ───────────────────────────────────────────────────────────────
+
+  // ============================================================
+  // TÂCHES ENFANTS
+  // ============================================================
+  const TACHES_QUOTIDIEN = [
+    { id:'table_mettre',     label:'Mettre la table le soir',              emoji:'🍽️' },
+    { id:'table_debarasser', label:'Débarrasser la table',                 emoji:'🧹' },
+    { id:'lv_vider',         label:'Vider le lave-vaisselle',              emoji:'🫙' },
+    { id:'lv_remplir',       label:'Remplir le lave-vaisselle',            emoji:'🫧' },
+    { id:'poubelle',         label:'Descendre les poubelles',              emoji:'🗑️' },
+    { id:'cintres',          label:'Mettre les cintres vides en salle de bain', emoji:'👔' },
+    { id:'affaires_propres', label:'Récupérer & ranger les affaires propres dans leur chambre', emoji:'👕' },
+  ];
+  const TACHES_HEBDO = [
+    { id:'sdb',     label:'Laver la salle de bain (avant de partir)', emoji:'🚿' },
+    { id:'chambre', label:'Ranger & nettoyer la chambre (aspirateur + serpillère)', emoji:'🛏️' },
+  ];
+
+  function getEnfantsRotation(weekNum) {
+    const rang = Math.ceil(weekNum / 2);
+    return rang % 2 === 1 ? 'A' : 'B';
+  }
+
+  function getTachesPlanning(weekNum) {
+    const rotation = getEnfantsRotation(weekNum);
+    const DAYS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+    const planning = {};
+    DAYS.forEach((day, dayIdx) => {
+      planning[day] = TACHES_QUOTIDIEN.map((tache, tacheIdx) => {
+        const base = (tacheIdx + dayIdx) % 2;
+        const toLucas = rotation === 'A' ? base === 0 : base === 1;
+        return { ...tache, lucas: toLucas };
+      });
+    });
+    planning['Dimanche'] = TACHES_HEBDO.map((tache, i) => {
+      const toLucas = rotation === 'A' ? i === 0 : i === 1;
+      return { ...tache, lucas: toLucas };
+    });
+    return planning;
+  }
+
+  function renderEnfantsTab() {
+    const { weekNum, mode } = state;
+    const tabBtn = document.getElementById('tab-btn-enfants');
+    if(tabBtn) tabBtn.style.display = mode === 'enfants' ? '' : 'none';
+    const container = document.getElementById('enfants-container');
+    if(!container) return;
+    if(mode !== 'enfants'){ container.innerHTML = ''; return; }
+
+    const planning = getTachesPlanning(weekNum);
+    const rotation = getEnfantsRotation(weekNum);
+    const DAYS_ORDER = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+    const LUCAS = { label:'Lucas', emoji:'\u{1F9D2}', color:'#4EA8DE' };
+    const TIM   = { label:'Tim',   emoji:'\u{1F466}', color:'#4CAF50' };
+    const cardStyle = (color) =>
+      'background:var(--s2);border:1px solid '+color+'33;border-left:3px solid '+color+';border-radius:6px;padding:10px;flex:1;min-width:140px;';
+    const tacheRow = (t) =>
+      '<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #ffffff08;font-size:12px;">'
+      +'<span>'+t.emoji+'</span><span style="color:var(--text);">'+t.label+'</span></div>';
+
+    let h = '<div style="font-family:Bebas Neue,sans-serif;font-size:22px;color:var(--amber);letter-spacing:1px;margin-bottom:4px;">\u{1F476} Tâches des enfants</div>'
+      +'<div style="font-size:11px;color:var(--muted);margin-bottom:20px;">Semaine '+weekNum+' \u00b7 Rotation '+rotation+' \u00b7 S\u2019inverse chaque semaine</div>';
+
+    DAYS_ORDER.forEach(day => {
+      const taches = planning[day];
+      const lucasTaches = taches.filter(t => t.lucas);
+      const timTaches   = taches.filter(t => !t.lucas);
+      const isHebdo     = day === 'Dimanche';
+      h += '<div style="margin-bottom:14px;">'
+        +'<div style="font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1px;padding:5px 0;margin-bottom:8px;border-bottom:1px solid var(--border);">'
+        +(isHebdo ? '\u{1F9FD} ' : '\u{1F4C5} ')+day+(isHebdo ? ' \u2014 T\u00e2ches du dimanche (avant de partir)' : '')
+        +'</div>'
+        +'<div style="display:flex;gap:10px;flex-wrap:wrap;">'
+        +'<div style="'+cardStyle(LUCAS.color)+'">'
+        +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">'
+        +'<span style="font-size:15px;">'+LUCAS.emoji+'</span>'
+        +'<span style="font-size:12px;font-weight:700;color:'+LUCAS.color+';">'+LUCAS.label+'</span></div>'
+        +(lucasTaches.map(tacheRow).join('') || '<div style="font-size:11px;color:var(--muted);">\u2014</div>')
+        +'</div>'
+        +'<div style="'+cardStyle(TIM.color)+'">'
+        +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">'
+        +'<span style="font-size:15px;">'+TIM.emoji+'</span>'
+        +'<span style="font-size:12px;font-weight:700;color:'+TIM.color+';">'+TIM.label+'</span></div>'
+        +(timTaches.map(tacheRow).join('') || '<div style="font-size:11px;color:var(--muted);">\u2014</div>')
+        +'</div></div></div>';
+    });
+    container.innerHTML = h;
+  }
+
   async function init(){
     const [recipes, extras, index, nutrition] = await Promise.all([
       fetch('data/recettes.json').then(r=>r.json()),
@@ -558,9 +647,10 @@
     renderGouters();
     renderPrepTab();
     renderBoites();
+    renderEnfantsTab();
     updateBanners();
     patchWeekToggleDefault();
   }
   window.addEventListener('load', init);
 })();
-// v16-feculent-cru
+// v17-taches-enfants
