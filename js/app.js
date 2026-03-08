@@ -329,18 +329,47 @@
         <span style="color:var(--muted);">${humanIngredient(it.ingredient)}</span>
         <span style="color:var(--text);font-weight:600;">${displayQty(it)}</span>
       </div>`).join('');
+
+    // % par rapport aux cibles journalières
+    const pKcal = Math.round(portion.kcal / profil.kcal_jour * 100);
+    const pProt = Math.round(portion.prot / profil.prot_jour * 100);
+    const pGluc = Math.round(portion.gluc / profil.gluc_jour * 100);
+    const pLip  = Math.round(portion.lip  / profil.lip_jour  * 100);
+
+    const bar = (pct, color) => {
+      const w = Math.min(pct, 100);
+      const over = pct > 100;
+      return `<div style="height:3px;background:#ffffff12;border-radius:2px;margin-top:2px;">
+        <div style="height:3px;width:${w}%;background:${over?'#ff4444':color};border-radius:2px;transition:width .3s;"></div>
+      </div>`;
+    };
+    const macro = (label, val, cible, pct, color) =>
+      `<div style="flex:1;min-width:0;">
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--muted);">
+          <span>${label}</span>
+          <span style="color:${pct>100?'#ff6b6b':color};font-weight:700;">${pct}%</span>
+        </div>
+        <div style="font-size:10px;color:var(--text);font-weight:600;">${val}g <span style="color:var(--muted);font-weight:400;">/ ${cible}g</span></div>
+        ${bar(pct, color)}
+      </div>`;
+
     return `<div style="background:var(--s2);border:1px solid ${c}33;border-left:3px solid ${c};border-radius:6px;padding:10px;">
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
         <span style="font-size:15px;">${profil.emoji}</span>
         <span style="font-size:12px;font-weight:700;color:${c};">${profil.label}</span>
         ${isLunchbox ? '<span style="font-size:10px;color:var(--muted);margin-left:auto;">🥡 lunch</span>' : ''}
       </div>
-      <div style="margin-bottom:6px;">${ings}</div>
-      <div style="background:var(--bg);border-radius:4px;padding:6px;margin-top:6px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
+      <div style="margin-bottom:8px;">${ings}</div>
+      <div style="background:var(--bg);border-radius:4px;padding:8px;margin-top:6px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <span style="font-size:10px;color:var(--muted);">Énergie</span>
           <span style="font-size:13px;font-weight:700;color:${c};">${portion.kcal} kcal</span>
-          <span style="font-size:10px;color:var(--muted);">P${portion.prot}g G${portion.gluc}g L${portion.lip}g</span>
+          <span style="font-size:10px;color:${pKcal>100?'#ff6b6b':c};font-weight:600;">${pKcal}% <span style="color:var(--muted);font-weight:400;">/ ${profil.kcal_jour}</span></span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          ${macro('Prot.', portion.prot, profil.prot_jour, pProt, '#4CAF50')}
+          ${macro('Gluc.', portion.gluc, profil.gluc_jour, pGluc, '#FF9800')}
+          ${macro('Lip.', portion.lip, profil.lip_jour, pLip, '#9C27B0')}
         </div>
       </div>
     </div>`;
@@ -514,4 +543,4 @@
   }
   window.addEventListener('load', init);
 })();
-// v14-audit-fixes
+// v15-macros-pct
