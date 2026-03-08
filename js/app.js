@@ -48,7 +48,7 @@
     feculent: ['riz_blanc','quinoa','pate_blanche','lentille_corail','lentille_verte',
                'pois_chiche','haricot_rouge','pomme_de_terre','patate_douce'],
     proteine: ['poulet_cru','cabillaud','saumon','colin','boeuf_hache',
-               'boeuf_morceau','veau','tofu'],
+               'boeuf_morceau','veau','tofu','oeuf','steak_hache','dinde','falafel'],
     legume:   ['brocoli','carotte','courgette','tomate','tomate_concassee','oignon',
                'oignon_rouge','champignon','poivron_rouge','epinard','courge',
                'poireau','petit_pois','haricot_vert','chou_fleur','chou','celeri'],
@@ -120,7 +120,6 @@
   function currentType(){return state.mode==='enfants'?'avec':'sans';}
   function clone(o){return JSON.parse(JSON.stringify(o));}
   function getRotationIndex(){return ((state.weekNum||1)-1)%4;}
-  function recipeScale(type){return type==='avec'?1.5:1;}
   function escapeHtml(str){return String(str).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
   function displayQty(item){
     const q=item.quantite;
@@ -144,6 +143,7 @@
     if(/saumon|cabillaud|colin/.test(n)) return '🐟 Poissons';
     // Produits frais
     if(/yaourt|fromage|lait|feta|mozzarella|emmental|ricotta|burrata|beurre/.test(n)) return '🥛 Produits frais';
+    if(/^oeuf/.test(n)) return '🥚 Œufs & Laitiers';
     // Légumes AVANT fruits (poireau, pomme_de_terre, tomate avant pomme)
     if(/courgette|carotte|brocoli|oignon|tomate|champignon|courge|poivron|citron|poireau|pomme_de_terre|patate_douce|epinard|haricot_vert|chou|celeri|fenouil|aubergine|courgette|betterave/.test(n)) return '🥕 Légumes';
     // Fruits
@@ -221,12 +221,22 @@
   }
   function renderCoursesModal(type){
     const totals=computeCourses(type);
+    // Fusionner yaourt_nature: convertir g → pots et additionner
+    const YK_G = 'yaourt_nature:g', YK_P = 'yaourt_nature:pot';
+    if(totals[YK_G] && totals[YK_P]){
+      const extra_pots = Math.ceil(totals[YK_G].quantite / 125);
+      totals[YK_P].quantite += extra_pots;
+      delete totals[YK_G];
+    } else if(totals[YK_G]){
+      totals[YK_G].unite = 'pot';
+      totals[YK_G].quantite = Math.ceil(totals[YK_G].quantite / 125);
+    }
     const byRayon={};
     Object.values(totals).forEach(item=>{
       const rayon=getRayon(item.ingredient);
       (byRayon[rayon]||(byRayon[rayon]=[])).push(item);
     });
-    const order=['🥕 Légumes','🍎 Fruits','🥩 Viandes','🐟 Poissons','🥛 Produits frais','🌾 Féculents','🥫 Épicerie salée','🍯 Épicerie sucrée','🧂 Assaisonnements','🧺 Divers'];
+    const order=['🥕 Légumes','🍎 Fruits','🥩 Viandes','🐟 Poissons','🥛 Produits frais','🥚 Œufs & Laitiers','🌾 Féculents','🥫 Épicerie salée','🍯 Épicerie sucrée','🧂 Assaisonnements','🧺 Divers'];
     const modal=document.getElementById('courses-modal');
     document.getElementById('courses-title').textContent=`🛒 Courses Semaine ${state.weekNum} — ${prettyMode(type)}`;
     const content=document.getElementById('courses-content');
@@ -301,6 +311,12 @@
     const ordre=document.getElementById('prep-ordre-cuisson');
     if(ordre){
       ordre.innerHTML='<div style="font-size:12px;color:var(--muted);line-height:1.6;">1. Sors tous les ingrédients et contenants.<br>2. Lance d\'abord les féculents mutualisables (riz, quinoa, pâtes).<br>3. Enchaîne les plats du frigo (lun→mer), puis les plats à congeler (jeu→sam).<br>4. Portionne immédiatement dîner / lunchbox / congélation.</div>';
+    }
+    // Masquer la section goûters si vide (mode sans enfants)
+    const gSection=document.getElementById('prep-gouters-section');
+    if(gSection){
+      const extras=getExtras(currentType());
+      gSection.style.display = (extras.gouters_labels && extras.gouters_labels.length>0) ? '' : 'none';
     }
   }
 
@@ -498,4 +514,4 @@
   }
   window.addEventListener('load', init);
 })();
-// v13-showmeal-totaux
+// v14-audit-fixes
