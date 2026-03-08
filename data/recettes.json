@@ -13,12 +13,12 @@
     "ingredients": [
       {
         "ingredient": "saumon",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "quinoa",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -34,7 +34,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R002",
@@ -50,12 +51,12 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -76,7 +77,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R003",
@@ -107,7 +109,7 @@
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -118,7 +120,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R004",
@@ -134,7 +137,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -149,7 +152,7 @@
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -160,7 +163,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R005",
@@ -176,12 +180,12 @@
     "ingredients": [
       {
         "ingredient": "cabillaud",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -197,7 +201,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R006",
@@ -234,7 +239,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R007",
@@ -250,7 +256,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -265,7 +271,7 @@
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -276,7 +282,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R008",
@@ -292,12 +299,12 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -313,7 +320,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R009",
@@ -329,7 +337,7 @@
     "ingredients": [
       {
         "ingredient": "quinoa",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -350,7 +358,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R010",
@@ -366,7 +375,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -387,7 +396,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R011",
@@ -403,12 +413,12 @@
     "ingredients": [
       {
         "ingredient": "colin",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -429,7 +439,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R012",
@@ -445,7 +456,7 @@
     "ingredients": [
       {
         "ingredient": "saumon",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -466,7 +477,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R013",
@@ -482,12 +494,12 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "quinoa",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -503,7 +515,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R014",
@@ -519,7 +532,7 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -540,7 +553,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R015",
@@ -561,7 +575,7 @@
       },
       {
         "ingredient": "quinoa",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -577,7 +591,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R016",
@@ -593,12 +608,12 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -609,7 +624,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R017",
@@ -646,7 +662,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R018",
@@ -662,7 +679,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -683,7 +700,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R019",
@@ -699,12 +717,12 @@
     "ingredients": [
       {
         "ingredient": "tofu",
-        "quantite": 350,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -720,7 +738,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R020",
@@ -752,7 +771,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R021",
@@ -768,12 +788,12 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "quinoa",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -789,7 +809,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R022",
@@ -805,12 +826,12 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "quinoa",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -826,7 +847,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R023",
@@ -863,7 +885,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R024",
@@ -879,12 +902,12 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "quinoa",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -895,7 +918,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R025",
@@ -911,7 +935,7 @@
     "ingredients": [
       {
         "ingredient": "tofu",
-        "quantite": 350,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -932,7 +956,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R026",
@@ -948,7 +973,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -969,7 +994,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R027",
@@ -985,7 +1011,7 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1006,7 +1032,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R028",
@@ -1022,7 +1049,7 @@
     "ingredients": [
       {
         "ingredient": "quinoa",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1043,7 +1070,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R029",
@@ -1059,7 +1087,7 @@
     "ingredients": [
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1080,7 +1108,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R030",
@@ -1112,7 +1141,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R031",
@@ -1128,7 +1158,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1154,7 +1184,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R032",
@@ -1170,7 +1201,7 @@
     "ingredients": [
       {
         "ingredient": "riz_blanc",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1196,7 +1227,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R033",
@@ -1212,7 +1244,7 @@
     "ingredients": [
       {
         "ingredient": "quinoa",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1238,7 +1270,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R034",
@@ -1280,7 +1313,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R035",
@@ -1296,12 +1330,12 @@
     "ingredients": [
       {
         "ingredient": "tofu",
-        "quantite": 400,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1327,7 +1361,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R036",
@@ -1343,7 +1378,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1369,7 +1404,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R037",
@@ -1385,12 +1421,12 @@
     "ingredients": [
       {
         "ingredient": "tofu",
-        "quantite": 400,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1411,7 +1447,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R038",
@@ -1427,12 +1464,12 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "pate_blanche",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1458,7 +1495,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R039",
@@ -1474,12 +1512,12 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1500,7 +1538,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R040",
@@ -1516,7 +1555,7 @@
     "ingredients": [
       {
         "ingredient": "quinoa",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1542,7 +1581,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R041",
@@ -1574,7 +1614,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R042",
@@ -1606,7 +1647,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R043",
@@ -1638,7 +1680,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R044",
@@ -1654,12 +1697,12 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1680,7 +1723,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R045",
@@ -1696,7 +1740,7 @@
     "ingredients": [
       {
         "ingredient": "riz_blanc",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1722,7 +1766,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R046",
@@ -1738,7 +1783,7 @@
     "ingredients": [
       {
         "ingredient": "quinoa",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1764,7 +1809,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R047",
@@ -1780,12 +1826,12 @@
     "ingredients": [
       {
         "ingredient": "tofu",
-        "quantite": 400,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1806,7 +1852,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R048",
@@ -1822,7 +1869,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1848,7 +1895,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R049",
@@ -1864,12 +1912,12 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1890,7 +1938,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R050",
@@ -1922,7 +1971,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R051",
@@ -1938,7 +1988,7 @@
     "ingredients": [
       {
         "ingredient": "boeuf_morceau",
-        "quantite": 700,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -1964,7 +2014,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R052",
@@ -1980,7 +2031,7 @@
     "ingredients": [
       {
         "ingredient": "veau",
-        "quantite": 650,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2000,13 +2051,14 @@
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       }
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R053",
@@ -2022,7 +2074,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 650,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2042,13 +2094,14 @@
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       }
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R054",
@@ -2064,7 +2117,7 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2085,7 +2138,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R055",
@@ -2122,7 +2176,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R056",
@@ -2138,7 +2193,7 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2159,7 +2214,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R057",
@@ -2175,7 +2231,7 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2201,7 +2257,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R058",
@@ -2217,7 +2274,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 700,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2238,7 +2295,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R059",
@@ -2280,7 +2338,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R060",
@@ -2296,7 +2355,7 @@
     "ingredients": [
       {
         "ingredient": "riz_blanc",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2317,7 +2376,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R061",
@@ -2333,12 +2393,12 @@
     "ingredients": [
       {
         "ingredient": "pate_blanche",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2354,7 +2414,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R062",
@@ -2370,12 +2431,12 @@
     "ingredients": [
       {
         "ingredient": "pate_blanche",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "poulet_cru",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2396,7 +2457,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R063",
@@ -2412,7 +2474,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2438,7 +2500,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R064",
@@ -2454,7 +2517,7 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2475,7 +2538,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R065",
@@ -2491,12 +2555,12 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 550,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2517,7 +2581,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R066",
@@ -2533,12 +2598,12 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 550,
+        "quantite": 600,
         "unite": "g"
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2554,7 +2619,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R067",
@@ -2596,7 +2662,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R068",
@@ -2612,7 +2679,7 @@
     "ingredients": [
       {
         "ingredient": "pate_blanche",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2638,7 +2705,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R069",
@@ -2654,7 +2722,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 550,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2674,13 +2742,14 @@
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 200,
+        "quantite": 600,
         "unite": "g"
       }
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R070",
@@ -2701,7 +2770,7 @@
       },
       {
         "ingredient": "poulet_cru",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2727,7 +2796,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R071",
@@ -2743,7 +2813,7 @@
     "ingredients": [
       {
         "ingredient": "riz_blanc",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2764,7 +2834,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R072",
@@ -2780,7 +2851,7 @@
     "ingredients": [
       {
         "ingredient": "pate_blanche",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2801,7 +2872,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R073",
@@ -2817,7 +2889,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2838,7 +2910,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R074",
@@ -2880,7 +2953,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R075",
@@ -2901,7 +2975,7 @@
       },
       {
         "ingredient": "riz_blanc",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2917,7 +2991,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R076",
@@ -2933,7 +3008,7 @@
     "ingredients": [
       {
         "ingredient": "pate_blanche",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2954,7 +3029,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R077",
@@ -2970,7 +3046,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -2991,7 +3067,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R078",
@@ -3007,7 +3084,7 @@
     "ingredients": [
       {
         "ingredient": "quinoa",
-        "quantite": 220,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -3033,7 +3110,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R079",
@@ -3075,7 +3153,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R080",
@@ -3091,7 +3170,7 @@
     "ingredients": [
       {
         "ingredient": "pate_blanche",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -3112,7 +3191,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R081",
@@ -3149,7 +3229,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R082",
@@ -3186,7 +3267,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R083",
@@ -3202,7 +3284,7 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -3223,7 +3305,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R084",
@@ -3255,7 +3338,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R085",
@@ -3271,7 +3355,7 @@
     "ingredients": [
       {
         "ingredient": "pate_blanche",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -3297,7 +3381,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R086",
@@ -3334,7 +3419,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R087",
@@ -3371,7 +3457,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R088",
@@ -3413,7 +3500,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R089",
@@ -3429,7 +3517,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 500,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -3450,7 +3538,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R090",
@@ -3487,7 +3576,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R091",
@@ -3503,7 +3593,7 @@
     "ingredients": [
       {
         "ingredient": "poulet_cru",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -3524,7 +3614,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R092",
@@ -3540,7 +3631,7 @@
     "ingredients": [
       {
         "ingredient": "boeuf_hache",
-        "quantite": 450,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -3561,7 +3652,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R093",
@@ -3598,7 +3690,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R094",
@@ -3619,7 +3712,7 @@
       },
       {
         "ingredient": "poulet_cru",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -3635,7 +3728,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R095",
@@ -3672,7 +3766,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R096",
@@ -3688,7 +3783,7 @@
     "ingredients": [
       {
         "ingredient": "pate_blanche",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -3709,7 +3804,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R097",
@@ -3746,7 +3842,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R098",
@@ -3788,7 +3885,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R099",
@@ -3804,7 +3902,7 @@
     "ingredients": [
       {
         "ingredient": "pate_blanche",
-        "quantite": 250,
+        "quantite": 600,
         "unite": "g"
       },
       {
@@ -3825,7 +3923,8 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   },
   {
     "id": "R100",
@@ -3862,6 +3961,7 @@
     ],
     "saisons": [
       "toute_annee"
-    ]
+    ],
+    "_v": 7
   }
 ]
