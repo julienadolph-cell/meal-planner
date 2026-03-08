@@ -111,26 +111,24 @@
   // Alias pour compatibilité showMeal
   function calcMacrosRecette(recette){ return calcMacrosPortion(recette); }
 
-  // Retourne la portion d'un profil (grammes réels = recette ÷ portions_base × PORTION_FACTOR)
-  // PORTION_FACTOR = 2 : les recettes JSON sont sous-dosées, on double pour une assiette réaliste
-  const PORTION_FACTOR = 2;
+  // Retourne la portion d'un profil (grammes réels = recette ÷ portions_base)
+  // Quantités fixées directement dans recettes.json : féculents 150g/pers, protéines 150g/pers
   function calcPortionProfil(recette, profilKey, isLunchbox){
     const nb = recette.portions_base || 4;
     const macros = calcMacrosPortion(recette);
-    // Ingrédients du plat × PORTION_FACTOR
+    // Ingrédients du plat — division simple par portions_base
     const ings = recette.ingredients.map(ing=>({
-      ...ing, quantite: Math.round((ing.quantite / nb) * PORTION_FACTOR * 10) / 10
+      ...ing, quantite: Math.round((ing.quantite / nb) * 10) / 10
     }));
-    // Ajouter fromage + dessert seulement pour le dîner (pas lunchbox)
+    // Ajouter fromage + yaourt seulement pour le dîner (pas lunchbox)
     const extras = isLunchbox ? [] : COMPLEMENT_REPAS.map(c=>({...c}));
-    // Macros ajustées au facteur
     return {
       ingredients: [...ings, ...extras],
-      kcal: Math.round(macros.kcal * PORTION_FACTOR),
-      prot: Math.round(macros.prot * PORTION_FACTOR),
-      gluc: Math.round(macros.gluc * PORTION_FACTOR),
-      lip:  Math.round(macros.lip  * PORTION_FACTOR),
-      fib:  Math.round(macros.fib  * PORTION_FACTOR),
+      kcal: macros.kcal,
+      prot: macros.prot,
+      gluc: macros.gluc,
+      lip:  macros.lip,
+      fib:  macros.fib,
     };
   }
 
@@ -512,4 +510,4 @@
 
   window.addEventListener('load',init);
 })();
-// v5 Sat Mar  7 23:50:42 UTC 2026
+// v7-1772928655
