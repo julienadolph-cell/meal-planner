@@ -156,8 +156,9 @@
   }
   function aggregateItems(items, map, factor=1){
     items.forEach(item=>{
-      const key=item.ingredient;
-      if(!map[key]) map[key]={ingredient:key, quantite:0, unite:item.unite};
+      // Clé = ingredient + unite pour éviter les mélanges d'unités (ex: yaourt en pot + en g)
+      const key = item.ingredient + ':' + item.unite;
+      if(!map[key]) map[key]={ingredient:item.ingredient, quantite:0, unite:item.unite};
       map[key].quantite += item.quantite * factor;
     });
   }
@@ -186,16 +187,32 @@
   function computeCourses(type){
     const week=getGeneratedWeek(type);
     const totals={};
-    const factor=recipeScale(type);
-    week.forEach(r=> aggregateItems(r.ingredients, totals, factor));
-    // Ajouter laitage dîner (fromage 30g + yaourt 125g) × 6 dîners × nb personnes
     const isEnfants=(type==='avec');
-    const nbPersonnes=isEnfants?4:2;
-    const nbDiners=6;
-    COMPLEMENT_REPAS.forEach(c=>{
-      if(!totals[c.ingredient]) totals[c.ingredient]={ingredient:c.ingredient, quantite:0, unite:c.unite};
-      totals[c.ingredient].quantite += c.quantite * nbPersonnes * nbDiners;
+    // Profils actifs selon semaine
+    const profilsActifs = isEnfants ? ['julien','ac','lucas','tim'] : ['julien','ac'];
+
+    week.forEach((recette, idx) => {
+      const isSam = idx === 5;
+      profilsActifs.forEach(pk => {
+        // Dîner
+        const diner = calcPortionProfil(recette, pk, false);
+        if(diner) aggregateItems(diner.ingredients.filter(i=>!COMPLEMENT_REPAS.find(c=>c.ingredient===i.ingredient)), totals, 1);
+        // Lunchbox (pas samedi, pas lucas/tim)
+        if(!isSam && PROFILS[pk].lunchbox) {
+          const lb = calcPortionProfil(recette, pk, true);
+          if(lb) aggregateItems(lb.ingredients, totals, 1);
+        }
+      });
     });
+
+    // Laitage dîner (fromage + yaourt) × 6 dîners × nb profils actifs
+    const nbDiners = 6;
+    COMPLEMENT_REPAS.forEach(c=>{
+      const key = c.ingredient + ':' + c.unite;
+      if(!totals[key]) totals[key]={ingredient:c.ingredient, quantite:0, unite:c.unite};
+      totals[key].quantite += c.quantite * profilsActifs.length * nbDiners;
+    });
+
     const extras=getExtras(type);
     aggregateItems(extras.petits_dej_items, totals, 1);
     aggregateItems(extras.brunch_items,     totals, 1);
@@ -413,4 +430,4 @@
   }
   window.addEventListener('load', init);
 })();
-// v10-courses-fix
+// v12-courses-from-portions
