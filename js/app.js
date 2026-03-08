@@ -383,12 +383,80 @@
     const week=getGeneratedWeek(type);
     const recipe=week.find(r=>r.nom===mealName) || state.recipes.find(r=>r.nom===mealName);
     if(!recipe) return;
-    const factor=recipeScale(type);
+    const isEnfants=(type==='avec');
+    const profilsActifs = isEnfants ? ['julien','ac','lucas','tim'] : ['julien','ac'];
+    const idx_rec = week.findIndex(r=>r.nom===mealName);
+    const isSam = idx_rec === 5;
     const body=document.getElementById('meal-body');
     const title=document.getElementById('meal-title');
     title.textContent=recipe.nom;
-    body.innerHTML=`<div style="font-size:11px;color:var(--muted);margin-bottom:10px;">${recipe.categorie} · ${recipe.type_plat} · ${recipe.conservation} · portions ${type==='avec'?6:4}</div>`
-      + recipe.ingredients.map(it=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;"><span style="color:var(--text);">${humanIngredient(it.ingredient)}</span><span style="color:var(--green);font-weight:700;">${displayQty({ingredient:it.ingredient,quantite:Math.round(it.quantite*factor*10)/10,unite:it.unite})}</span></div>`).join('');
+
+    // Calculer les totaux à cuisiner (somme de toutes les portions)
+    const totaux = {};
+    const addPortion = (portion) => {
+      if(!portion) return;
+      portion.ingredients.forEach(ing => {
+        // Exclure fromage/yaourt du total de cuisson (servis à part)
+        if(COMPLEMENT_REPAS.find(c=>c.ingredient===ing.ingredient)) return;
+        const key = ing.ingredient + ':' + ing.unite;
+        if(!totaux[key]) totaux[key] = {ingredient:ing.ingredient, quantite:0, unite:ing.unite};
+        totaux[key].quantite += ing.quantite;
+      });
+    };
+
+    // Dîner tous les profils actifs
+    profilsActifs.forEach(pk => addPortion(calcPortionProfil(recipe, pk, false)));
+    // Lunchboxes Julien + AC (sauf SAM)
+    if(!isSam){
+      ['julien','ac'].forEach(pk => addPortion(calcPortionProfil(recipe, pk, true)));
+    }
+
+    // Calculer kcal total dîner
+    let kcal_total = 0;
+    profilsActifs.forEach(pk => {
+      const p = calcPortionProfil(recipe, pk, false);
+      if(p) kcal_total += p.kcal;
+    });
+
+    // Nombre de repas générés
+    const nb_diners = profilsActifs.length;
+    const nb_lb = isSam ? 0 : 2; // Julien + AC
+    const desc_repas = isSam
+      ? `${nb_diners} dîners`
+      : `${nb_diners} dîners + ${nb_lb} lunchboxes`;
+
+    let html = `<div style="font-size:11px;color:var(--muted);margin-bottom:12px;">
+      ${recipe.categorie} · ${recipe.type_plat} · ${recipe.conservation}
+      <span style="color:var(--amber);margin-left:8px;">📦 ${desc_repas}</span>
+    </div>`;
+
+    // Titre section
+    html += `<div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">🧑‍🍳 Quantités à cuisiner</div>`;
+
+    // Liste des ingrédients avec totaux
+    html += `<div style="margin-bottom:14px;">`;
+    Object.values(totaux)
+      .sort((a,b) => b.quantite - a.quantite)
+      .forEach(ing => {
+        html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;">
+          <span style="color:var(--text);">${humanIngredient(ing.ingredient)}</span>
+          <span style="color:var(--green);font-weight:700;font-size:14px;">${displayQty(ing)}</span>
+        </div>`;
+      });
+    // Laitage servi à part
+    html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;opacity:0.6;">
+      <span style="color:var(--muted);">🧀 Fromage + Yaourt <span style="font-size:10px;">(servis à part)</span></span>
+      <span style="color:var(--muted);font-size:12px;">30g + 125g / pers</span>
+    </div>`;
+    html += `</div>`;
+
+    // Résumé kcal dîner total
+    html += `<div style="background:var(--s2);border-radius:6px;padding:8px 12px;font-size:11px;color:var(--muted);">
+      ⚡ Dîner total famille : <strong style="color:var(--amber);">${kcal_total} kcal</strong>
+      &nbsp;·&nbsp; ${profilsActifs.map(pk=>PROFILS[pk].emoji+' '+PROFILS[pk].label).join(' ')}
+    </div>`;
+
+    body.innerHTML = html;
     document.getElementById('meal-modal').style.display='flex';
   };
   window.openShoppingList=function(){ renderCoursesModal(currentType()); };
@@ -430,4 +498,4 @@
   }
   window.addEventListener('load', init);
 })();
-// v12-courses-from-portions
+// v13-showmeal-totaux
