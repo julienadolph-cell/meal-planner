@@ -1,10 +1,10 @@
 {
   "saumon": {
-    "kcal": 208,
-    "proteines": 20,
-    "glucides": 0,
-    "lipides": 13,
-    "fibres": 0
+    "kcal": 220,
+    "proteines": 25.0,
+    "glucides": 0.0,
+    "lipides": 13.0,
+    "fibres": 0.0
   },
   "quinoa": {
     "kcal": 120,
@@ -22,22 +22,22 @@
   },
   "huile_olive": {
     "kcal": 884,
-    "proteines": 0,
-    "glucides": 0,
-    "lipides": 100,
-    "fibres": 0
+    "proteines": 0.0,
+    "glucides": 0.0,
+    "lipides": 100.0,
+    "fibres": 0.0
   },
   "poulet_cru": {
-    "kcal": 120,
-    "proteines": 22.5,
-    "glucides": 0,
-    "lipides": 2.6,
-    "fibres": 0
+    "kcal": 165,
+    "proteines": 31.0,
+    "glucides": 0.0,
+    "lipides": 3.6,
+    "fibres": 0.0
   },
   "riz_blanc": {
-    "kcal": 130,
+    "kcal": 150,
     "proteines": 2.7,
-    "glucides": 28,
+    "glucides": 32.0,
     "lipides": 0.3,
     "fibres": 0.4
   },
@@ -50,8 +50,8 @@
   },
   "pois_chiche": {
     "kcal": 164,
-    "proteines": 9,
-    "glucides": 27,
+    "proteines": 8.9,
+    "glucides": 27.4,
     "lipides": 2.6,
     "fibres": 7.6
   },
@@ -98,18 +98,18 @@
     "fibres": 0.8
   },
   "cabillaud": {
-    "kcal": 82,
-    "proteines": 18,
-    "glucides": 0,
-    "lipides": 0.7,
-    "fibres": 0
+    "kcal": 96,
+    "proteines": 22.0,
+    "glucides": 0.0,
+    "lipides": 0.9,
+    "fibres": 0.0
   },
   "lentille_verte": {
-    "kcal": 116,
-    "proteines": 9,
-    "glucides": 20,
-    "lipides": 0.4,
-    "fibres": 8
+    "kcal": 112,
+    "proteines": 9.1,
+    "glucides": 17.5,
+    "lipides": 0.6,
+    "fibres": 5.0
   },
   "lait_vegetal": {
     "kcal": 40,
@@ -119,11 +119,11 @@
     "fibres": 0.3
   },
   "boeuf_hache": {
-    "kcal": 250,
-    "proteines": 26,
-    "glucides": 0,
-    "lipides": 17,
-    "fibres": 0
+    "kcal": 243,
+    "proteines": 27.0,
+    "glucides": 0.0,
+    "lipides": 15.0,
+    "fibres": 0.0
   },
   "feta": {
     "kcal": 265,
@@ -137,7 +137,7 @@
     "proteines": 1.6,
     "glucides": 20.1,
     "lipides": 0.1,
-    "fibres": 3
+    "fibres": 3.0
   },
   "courge": {
     "kcal": 34,
@@ -147,24 +147,24 @@
     "fibres": 1.1
   },
   "colin": {
-    "kcal": 90,
-    "proteines": 19,
-    "glucides": 0,
-    "lipides": 1,
-    "fibres": 0
+    "kcal": 88,
+    "proteines": 19.0,
+    "glucides": 0.0,
+    "lipides": 1.2,
+    "fibres": 0.0
   },
   "lentille_corail": {
     "kcal": 116,
-    "proteines": 9,
-    "glucides": 20,
+    "proteines": 9.0,
+    "glucides": 20.1,
     "lipides": 0.4,
-    "fibres": 7.9
+    "fibres": 4.9
   },
   "tofu": {
-    "kcal": 76,
-    "proteines": 8,
+    "kcal": 144,
+    "proteines": 17.0,
     "glucides": 1.9,
-    "lipides": 4.8,
+    "lipides": 8.7,
     "fibres": 0.3
   },
   "gingembre": {
@@ -189,11 +189,11 @@
     "fibres": 35
   },
   "pate_blanche": {
-    "kcal": 131,
-    "proteines": 5,
-    "glucides": 25,
-    "lipides": 1.1,
-    "fibres": 1.3
+    "kcal": 158,
+    "proteines": 5.8,
+    "glucides": 30.9,
+    "lipides": 0.9,
+    "fibres": 1.8
   },
   "tomate": {
     "kcal": 18,
@@ -211,10 +211,10 @@
   },
   "pomme_de_terre": {
     "kcal": 77,
-    "proteines": 2,
-    "glucides": 17,
+    "proteines": 2.0,
+    "glucides": 17.0,
     "lipides": 0.1,
-    "fibres": 2.2
+    "fibres": 1.8
   },
   "poireau": {
     "kcal": 100,
@@ -231,11 +231,11 @@
     "fibres": 2.8
   },
   "boeuf_morceau": {
-    "kcal": 200,
-    "proteines": 26,
-    "glucides": 0,
-    "lipides": 10,
-    "fibres": 0
+    "kcal": 215,
+    "proteines": 28.0,
+    "glucides": 0.0,
+    "lipides": 11.0,
+    "fibres": 0.0
   },
   "champignon": {
     "kcal": 22,
@@ -245,11 +245,11 @@
     "fibres": 1
   },
   "veau": {
-    "kcal": 172,
-    "proteines": 24,
-    "glucides": 0,
-    "lipides": 8,
-    "fibres": 0
+    "kcal": 175,
+    "proteines": 29.0,
+    "glucides": 0.0,
+    "lipides": 6.0,
+    "fibres": 0.0
   },
   "haricot_rouge": {
     "kcal": 127,
@@ -273,11 +273,11 @@
     "fibres": 0
   },
   "oeuf": {
-    "kcal": 155,
-    "proteines": 13,
-    "glucides": 1.1,
-    "lipides": 11,
-    "fibres": 0,
+    "kcal": 143,
+    "proteines": 12.5,
+    "glucides": 0.7,
+    "lipides": 9.9,
+    "fibres": 0.0,
     "piece_grammes": 60
   },
   "farine_ble": {
@@ -452,10 +452,10 @@
   },
   "yaourt_nature": {
     "kcal": 61,
-    "proteines": 3.5,
+    "proteines": 3.8,
     "glucides": 4.7,
-    "lipides": 3.3,
-    "fibres": 0,
+    "lipides": 3.2,
+    "fibres": 0.0,
     "piece_grammes": 125
   },
   "fromage_blanc": {
@@ -625,5 +625,26 @@
     "lipides": 10,
     "fibres": 0,
     "piece_grammes": 150
+  },
+  "fromage": {
+    "kcal": 350,
+    "proteines": 22.0,
+    "glucides": 2.0,
+    "lipides": 28.0,
+    "fibres": 0.0
+  },
+  "huile_sesame": {
+    "kcal": 884,
+    "proteines": 0.0,
+    "glucides": 0.0,
+    "lipides": 100.0,
+    "fibres": 0.0
+  },
+  "huile_coco": {
+    "kcal": 862,
+    "proteines": 0.0,
+    "glucides": 0.0,
+    "lipides": 100.0,
+    "fibres": 0.0
   }
 }
