@@ -139,15 +139,19 @@
   }
   function getRayon(name){
     const n=name.toLowerCase();
+    // Viandes & poissons en premier
     if(/poulet|boeuf|veau|jambon|chorizo/.test(n)) return '🥩 Viandes';
     if(/saumon|cabillaud|colin/.test(n)) return '🐟 Poissons';
+    // Produits frais
     if(/yaourt|fromage|lait|feta|mozzarella|emmental|ricotta|burrata|beurre/.test(n)) return '🥛 Produits frais';
-    if(/pomme|banane|kiwi|orange|poire|raisin|fruit/.test(n)) return '🍎 Fruits';
-    if(/courgette|carotte|brocoli|oignon|tomate|champignon|courge|patate|poivron|citron/.test(n)) return '🥕 Légumes';
+    // Légumes AVANT fruits (poireau, pomme_de_terre, tomate avant pomme)
+    if(/courgette|carotte|brocoli|oignon|tomate|champignon|courge|poivron|citron|poireau|pomme_de_terre|patate_douce|epinard|haricot_vert|chou|celeri|fenouil|aubergine|courgette|betterave/.test(n)) return '🥕 Légumes';
+    // Fruits
+    if(/^pomme$|banane|kiwi|orange|poire|raisin|fruit|mangue|ananas|fraise|framboise|cerise|peche|abricot|melon|pastèque/.test(n)) return '🍎 Fruits';
     if(/riz|quinoa|pate|farine|pain|galette/.test(n)) return '🌾 Féculents';
-    if(/lentille|pois|haricot|tofu|houmous/.test(n)) return '🥫 Épicerie salée';
+    if(/lentille|pois_chiche|haricot|tofu|houmous/.test(n)) return '🥫 Épicerie salée';
     if(/miel|sucre|confiture|chocolat|compote|biscuit|sirop/.test(n)) return '🍯 Épicerie sucrée';
-    if(/huile|sauce|curry|paprika|gingembre/.test(n)) return '🧂 Assaisonnements';
+    if(/huile|sauce|curry|paprika|gingembre|cumin|curcuma|cannelle|poivre|sel|vinaigre|moutarde|soja|tahini|coriandre|basilic|persil|thym|laurier/.test(n)) return '🧂 Assaisonnements';
     return '🧺 Divers';
   }
   function aggregateItems(items, map, factor=1){
@@ -184,6 +188,14 @@
     const totals={};
     const factor=recipeScale(type);
     week.forEach(r=> aggregateItems(r.ingredients, totals, factor));
+    // Ajouter laitage dîner (fromage 30g + yaourt 125g) × 6 dîners × nb personnes
+    const isEnfants=(type==='avec');
+    const nbPersonnes=isEnfants?4:2;
+    const nbDiners=6;
+    COMPLEMENT_REPAS.forEach(c=>{
+      if(!totals[c.ingredient]) totals[c.ingredient]={ingredient:c.ingredient, quantite:0, unite:c.unite};
+      totals[c.ingredient].quantite += c.quantite * nbPersonnes * nbDiners;
+    });
     const extras=getExtras(type);
     aggregateItems(extras.petits_dej_items, totals, 1);
     aggregateItems(extras.brunch_items,     totals, 1);
@@ -401,4 +413,4 @@
   }
   window.addEventListener('load', init);
 })();
-// v9-portions-par-profil
+// v10-courses-fix
